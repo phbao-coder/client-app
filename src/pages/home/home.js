@@ -1,29 +1,16 @@
-import classNames from 'classnames';
+import SliderHomePage from '~/components/slider/slider';
+
+import classNames from 'classnames/bind';
 import style from './Home.module.css';
 
 const cx = classNames.bind(style);
 
 function Home() {
     return (
-        <div>
-            <div>
-                <section className={cx('tranding')}>
-                    <div className={cx('container')}>
-                        <h3 className={cx('text-center section-subheading')}>Iphone</h3>
-                        <h1 className={cx()}>Series 14</h1>
-                    </div>
-                    <div className={cx('container')}>
-                        <div className={cx('swiper tranding-slider')}>
-                            <div className={cx('swiper-wraper')}>
-                                <div className={cx('swiper-slide tranding-slide')}>
-                                    <div className={cx('tranding-slide-img')}>
-                                        <img src="" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <div className={cx('container')}>
+            <div className={cx('container-slider')}>
+                <h2 className={cx('heading')}>Iphone 14 series</h2>
+                <SliderHomePage />
             </div>
         </div>
     );
