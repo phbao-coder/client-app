@@ -1,15 +1,7 @@
-.heading {
-    text-align: center;
-}
-
-.slider {
-    margin-top: 40px;
-}
-
 /* CSS UNIT */
 .unit-one {
     top: 0px;
-    height: 595px;
+    height: 640px;
     position: relative;
     display: flex;
     flex-direction: column;

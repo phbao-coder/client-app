@@ -42,21 +42,21 @@ function SliderHomePage() {
             <SwiperSlide>
                 <div className="slide-item" style={{ backgroundImage: `url(${iphone14})` }}>
                     <h1>Iphone 14</h1>
-                    <h2>1999$</h2>
+                    <p>1999$</p>
                     <button>Buy</button>
                 </div>
             </SwiperSlide>
             <SwiperSlide>
                 <div className="slide-item" style={{ backgroundImage: `url(${iphone14plus})` }}>
                     <h1>Iphone 14</h1>
-                    <h2>1999$</h2>
+                    <p>1999$</p>
                     <button>Buy</button>
                 </div>
             </SwiperSlide>
             <SwiperSlide>
                 <div className="slide-item" style={{ backgroundImage: `url(${iphone14pro})` }}>
                     <h1>Iphone 14</h1>
-                    <h2>1999$</h2>
+                    <p>1999$</p>
                     <button>Buy</button>
                 </div>
             </SwiperSlide>

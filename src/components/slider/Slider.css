@@ -23,11 +23,6 @@
 
 .swiper-slide .slide-item button {
     margin-top: 15rem;
-    width: 100px;
-    height: 30px;
-    border: none;
-    border-radius: 8px;
-    color: var(--text-color);
     font-size: 1.1rem;
     background-color: var(--main-color);
     cursor: pointer;
