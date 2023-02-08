@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import routers from './routes';
 
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 import classNames from 'classnames/bind';
 import style from './Globle.module.css';

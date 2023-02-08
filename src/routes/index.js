@@ -1,13 +1,13 @@
 import routes from '../config/routes';
 
-import Home from '../pages/home/home';
-import Login from '../pages/login/login';
-import Register from '../pages/register/register';
-import Product from '../pages/products/products';
-import Cart from '../pages/cart/cart';
-import About from '../pages/about/about';
-import DetailProduct from '../pages/detailProduct/detailProduct';
-import Profile from '../pages/profile/profile';
+import Home from '~/pages/Home/Home';
+import Login from '~/pages/Login/Login';
+import Register from '~/pages/Register/Register';
+import Products from '~/pages/Products/Products';
+import Cart from '~/pages/Cart/Cart';
+import About from '~/pages/About/About';
+import DetailProduct from '~/pages/DetaiProduct/DetailProduct';
+import Profile from '~/pages/Profile/Profile';
 
 const routers = [
     {
@@ -24,7 +24,7 @@ const routers = [
     },
     {
         path: routes.product,
-        component: <Product />,
+        component: <Products />,
     },
     {
         path: routes.about,
