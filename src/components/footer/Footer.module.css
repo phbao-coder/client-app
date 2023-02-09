@@ -1,0 +1,56 @@
+.footer {
+    margin-top: 7%;
+    padding: 6% 0 2%;
+    background-color: #fff;
+}
+
+.social {
+    text-align: center;
+    padding-bottom: 25px;
+    color: #4b4c4d;
+}
+.social a {
+    font-size: 29px;
+    color: inherit;
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 8px;
+    opacity: 0.7;
+}
+
+.social a:hover {
+    opacity: 1;
+}
+
+.list {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.list li {
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.list a {
+    color: #4b4c4d;
+    opacity: 0.8;
+}
+
+.list a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    margin-top: 3%;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #4b4c4d;
+    opacity: 0.4;
+}
