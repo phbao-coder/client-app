@@ -1,9 +1,10 @@
+import Unit from '~/components/Unit/Unit';
 import SliderHomePage from '~/components/Slider/Slider';
 import Cards from '~/components/Cards/Cards';
+import FeatureProduct from '~/components/FeatureProduct/FeatureProduct';
 
 import classNames from 'classnames/bind';
 import style from './Home.module.css';
-import Unit from '~/components/Unit/Unit';
 
 const cx = classNames.bind(style);
 
@@ -23,6 +24,9 @@ function Home() {
             <div className={cx('cards')}>
                 <h2 className={cx('heading')}>Samsung series</h2>
                 <Cards />
+            </div>
+            <div className={cx('feature-product')}>
+                <FeatureProduct />
             </div>
         </div>
     );
