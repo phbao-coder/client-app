@@ -16,29 +16,6 @@
     font-weight: 600;
 }
 
-/* CSS NAVBAR */
-.navbar {
-    display: flex;
-}
-
-.navbar a {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 5px 0;
-    margin: 0 30px;
-    transition: all 0.5s ease;
-}
-
-.navbar a:hover {
-    color: var(--main-color);
-}
-
-/* this part will process after */
-.navbar a.active {
-    color: var(--main-color);
-}
-
 /* CSS MAIN ABOUT LOGIN, REGISTER AND BUTTON MENU */
 .main {
     display: flex;
@@ -81,23 +58,24 @@
 
 /* FLEXIBLE FOR MOBILE AND TABLET */
 @media (max-width: 1280px) {
-    .navbar a {
+    .menu a {
         padding: 5px 0;
         margin: 0 20px;
     }
 }
 
 @media (max-width: 1090px) {
+    .navbar {
+        display: none;
+    }
+
     .menu-icon {
         display: block;
     }
 
-    .navbar {
-        position: absolute;
-        top: 100%;
-        right: -100%;
+    .menu {
         width: 270px;
-        height: 29vh;
+        height: auto;
         background-color: var(--main-color);
         display: flex;
         flex-direction: column;
@@ -106,23 +84,19 @@
         transition: all 0.5s ease;
     }
 
-    .navbar.open {
-        right: 2%;
-    }
-
-    .navbar a {
+    .menu a {
         display: block;
         margin: 12px 0;
         padding: 0px 25px;
         transition: all 0.5s ease;
     }
 
-    .navbar a:hover {
+    .menu a:hover {
         color: var(--text-color);
         transform: translateX(10px);
     }
 
-    .navbar a.active {
+    .menu a.active {
         color: var(--text-color);
     }
 }

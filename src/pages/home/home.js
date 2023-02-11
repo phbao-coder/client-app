@@ -26,6 +26,7 @@ function Home() {
                 <Cards />
             </div>
             <div className={cx('feature-product')}>
+                <h2 className={cx('heading')}>Feature product</h2>
                 <FeatureProduct />
             </div>
         </div>

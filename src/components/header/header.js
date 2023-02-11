@@ -5,13 +5,14 @@ import classNames from 'classnames/bind';
 import style from './Header.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBagShopping, faBars, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { faBagShopping, faBars, faUser } from '@fortawesome/free-solid-svg-icons';
+
+import Tippy from '@tippyjs/react/headless';
+import NavBar from '../Navbar/Navbar';
 
 const cx = classNames.bind(style);
 
 function Header() {
-    const [menuActive, setMenuActive] = useState({ open: false });
     return (
         <header>
             <Link to={routes.home} className={cx('logo')}>
@@ -19,17 +20,9 @@ function Header() {
                 <span>didong</span>
             </Link>
 
-            <ul className={cx('navbar', menuActive)}>
-                <li>
-                    <Link to={routes.product}>Product</Link>
-                </li>
-                <li>
-                    <Link to={routes.cart}>Cart</Link>
-                </li>
-                <li>
-                    <Link to={routes.about}>About</Link>
-                </li>
-            </ul>
+            <div className={cx('navbar')}>
+                <NavBar />
+            </div>
 
             <div className={cx('main')}>
                 <Link to={routes.login} className={cx('user')}>
@@ -37,18 +30,34 @@ function Header() {
                     Login
                 </Link>
                 <Link to={routes.register}>Register</Link>
-                <div
-                    className={cx('menu-icon')}
-                    onClick={() =>
-                        setMenuActive((prev) => {
-                            return {
-                                open: !prev.open,
-                            };
-                        })
-                    }
+                <Tippy
+                    trigger="click"
+                    placement="bottom-end"
+                    delay={100}
+                    interactive={true}
+                    render={(attrs) => (
+                        <div tabIndex="-1" {...attrs}>
+                            <ul className={cx('menu')}>
+                                <li>
+                                    <Link to={routes.home}>Home</Link>
+                                </li>
+                                <li>
+                                    <Link to={routes.product}>Product</Link>
+                                </li>
+                                <li>
+                                    <Link to={routes.cart}>Cart</Link>
+                                </li>
+                                <li>
+                                    <Link to={routes.about}>About</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 >
-                    <FontAwesomeIcon icon={menuActive.open ? faXmark : faBars} />
-                </div>
+                    <div className={cx('menu-icon')}>
+                        <FontAwesomeIcon icon={faBars} />
+                    </div>
+                </Tippy>
             </div>
         </header>
     );
