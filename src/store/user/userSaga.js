@@ -1,6 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { loginUserRequest } from '~/services/user.service';
-import { userLogin, userLoginSuccess, userLoginFailed } from './userState';
+import { loginUserRequest, registerUserRequest } from '~/services/user.service';
+import {
+    userLogin,
+    userLoginSuccess,
+    userLoginFailed,
+    registerUser,
+    registerUserFailed,
+} from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
 function* workUserLogin(action) {
@@ -14,8 +20,19 @@ function* workUserLogin(action) {
     }
 }
 
+function* workUserRegister(action) {
+    const { payload } = action;
+    try {
+        yield call(registerUserRequest, payload);
+    } catch (error) {
+        console.log(error);
+        yield put(registerUserFailed());
+    }
+}
+
 function* userSaga() {
     yield takeLatest(userLogin.type, workUserLogin);
+    yield takeLatest(registerUser.type, workUserRegister);
 }
 
 export default userSaga;

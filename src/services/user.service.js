@@ -8,4 +8,10 @@ export const loginUserRequest = async (user) => {
         console.log(err);
     }
 };
-export const registerUser = (user) => {};
+export const registerUserRequest = async (user) => {
+    try {
+        await instance.post('/api/auth/signup', user);
+    } catch (err) {
+        console.log(err);
+    }
+};
