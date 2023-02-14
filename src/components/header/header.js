@@ -1,18 +1,30 @@
-import { Link } from 'react-router-dom';
-import routes from '../../config/routes';
-
-import classNames from 'classnames/bind';
-import style from './Header.module.css';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Tippy from '@tippyjs/react/headless';
-import NavBar from '../Navbar/Navbar';
 
+import { Link, useNavigate } from 'react-router-dom';
+
+import NavBar from '../Navbar/Navbar';
+import routes from '../../config/routes';
+
+import classNames from 'classnames/bind';
+import style from './Header.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '~/store/user/userState';
 const cx = classNames.bind(style);
 
 function Header() {
+    const user = useSelector((state) => state.user.user);
+    const isUser = useSelector((state) => state.user.isUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(userLogout());
+        navigate('/login');
+    };
+
     return (
         <header>
             <Link to={routes.home} className={cx('logo')}>
@@ -25,11 +37,20 @@ function Header() {
             </div>
 
             <div className={cx('main')}>
-                <Link to={routes.login} className={cx('user')}>
-                    <FontAwesomeIcon icon={faUser} className={cx('user-icon')} />
-                    Login
-                </Link>
-                <Link to={routes.register}>Register</Link>
+                {isUser ? (
+                    <Link to={routes.profile} className={cx('user')}>
+                        <FontAwesomeIcon icon={faUser} className={cx('user-icon')} /> {user.username}
+                    </Link>
+                ) : (
+                    <Link to={routes.login} className={cx('user')}>
+                        <FontAwesomeIcon icon={faUser} className={cx('user-icon')} /> Login
+                    </Link>
+                )}
+                {isUser ? (
+                    <button onClick={handleLogout}>Logout</button>
+                ) : (
+                    <Link to={routes.register}>Register</Link>
+                )}
                 <Tippy
                     trigger="click"
                     placement="bottom-end"

@@ -1,3 +1,5 @@
+import imageHomepages from '~/assets/images';
+
 import Unit from '~/components/Unit/Unit';
 import SliderHomePage from '~/components/Slider/Slider';
 import Cards from '~/components/Cards/Cards';
@@ -12,14 +14,20 @@ function Home() {
     return (
         <div className={cx('container')}>
             <div>
-                <Unit />
+                <Unit
+                    image={imageHomepages.iphoneHomepage.image}
+                    title={imageHomepages.iphoneHomepage.title}
+                />
             </div>
             <div className={cx('slider')}>
                 <h2 className={cx('heading')}>Iphone 14 series</h2>
                 <SliderHomePage />
             </div>
             <div>
-                <Unit />
+                <Unit
+                    image={imageHomepages.samsungHomepage.image}
+                    title={imageHomepages.samsungHomepage.title}
+                />
             </div>
             <div className={cx('cards')}>
                 <h2 className={cx('heading')}>Samsung series</h2>

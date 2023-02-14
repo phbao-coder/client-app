@@ -18,9 +18,6 @@ function NavBar() {
             <li>
                 <Link to={routes.about}>About</Link>
             </li>
-            <li>
-                <Link to={routes.profile}>Profile</Link>
-            </li>
         </ul>
     );
 }

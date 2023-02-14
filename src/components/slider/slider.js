@@ -1,14 +1,6 @@
-// image
-import iphone14 from './images/iphone14_homage_slider.jpg';
-import iphone14plus from './images/iphone14plus_homage_slider.jpg';
-import iphone14pro from './images/iphone14pro_homepage_slider.jpg';
-
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, EffectCoverflow } from 'swiper';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -40,27 +32,12 @@ function SliderHomePage() {
             className="swiper_container"
         >
             <SwiperSlide>
-                <div className="slide-item" style={{ backgroundImage: `url(${iphone14})` }}>
+                <div className="slide-item" style={{ backgroundImage: `url(${''})` }}>
                     <h1>Iphone 14</h1>
                     <p>1999$</p>
                     <button>Buy</button>
                 </div>
             </SwiperSlide>
-            <SwiperSlide>
-                <div className="slide-item" style={{ backgroundImage: `url(${iphone14plus})` }}>
-                    <h1>Iphone 14</h1>
-                    <p>1999$</p>
-                    <button>Buy</button>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className="slide-item" style={{ backgroundImage: `url(${iphone14pro})` }}>
-                    <h1>Iphone 14</h1>
-                    <p>1999$</p>
-                    <button>Buy</button>
-                </div>
-            </SwiperSlide>
-
             <div className="slider-controler">
                 <div className="swiper-pagination"></div>
             </div>
