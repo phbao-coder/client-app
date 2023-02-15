@@ -17,8 +17,13 @@ function Products() {
         dispatch(getProducts());
     }, [dispatch]);
 
-    console.log(products);
-    return <div className={cx('container')}></div>;
+    return (
+        <div className={cx('products')}>
+            {products?.map((product) => (
+                <Product product={product} key={product._id} />
+            ))}
+        </div>
+    );
 }
 
 export default Products;
