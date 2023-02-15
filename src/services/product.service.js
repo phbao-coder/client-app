@@ -1,10 +1,10 @@
 import instance from './instance';
 
-export const getProduct = (url) => {
-    const data = instance
-        .get(url)
-        .then((res) => res.json())
-        .then((json) => JSON.parse(json))
-        .catch((err) => console.log(err));
-    return data;
+export const getProductRequest = () => {
+    try {
+        const res = instance.get('/api/products/');
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
 };

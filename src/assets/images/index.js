@@ -4,7 +4,7 @@ const imageHomepages = {
         title: 'Iphone 14 Pro Max',
     },
     samsungHomepage: {
-        image: 'https://www.howtogeek.com/wp-content/uploads/2022/08/spigen-tough-armor-2.jpg?height=200p&trim=2,2,2,2',
+        image: 'https://images.samsung.com/vn/smartphones/galaxy-z-fold4/images/galaxy-z-fold4_highlights_kv.jpg',
         title: 'Samsung Galaxy Z Fold 4',
     },
 };
