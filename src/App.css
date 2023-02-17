@@ -1,0 +1,82 @@
+:root {
+    /* color main */
+    --dark: #343a40;
+    --light: #f8f9fa;
+    --white: #fff;
+    --black: #000;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+
+    /* color others */
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+
+    /* color */
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+
+    /* font size*/
+    --font-size-header-logo: 1.6rem;
+    --font-size-header-a: 1.2rem;
+
+    --font-size-heading-one: 2rem;
+    --font-size-heading-two: 1.8rem;
+    --font-size-heading-three: 1.6rem;
+    --font-size-heading-four: 1.4rem;
+
+    --font-size-tag-a: 1.2rem;
+    --font-size-tag-p: 1.2rem;
+
+    /* font weight */
+    --font-weight-header-logo: 600;
+
+    --font-weight-heading-one: 600;
+    --font-weight-heading-two: 600;
+    --font-weight-heading-three: 300;
+    --font-weight-heading-four: 300;
+
+    --font-weight-tag-a: 300;
+
+    /* scrollbar */
+    --width-scrollbar: 0.3rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: var(--width-scrollbar);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-scrollbar);
+    background-color: var(--dark);
+    transition: all 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}

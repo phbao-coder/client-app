@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom';
 import { faFacebook, faInstagram, faTiktok, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
-
 import classNames from 'classnames/bind';
 import style from './Footer.module.css';
 
