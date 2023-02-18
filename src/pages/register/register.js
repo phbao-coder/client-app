@@ -7,7 +7,7 @@ import {
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 
 import { useForm } from 'react-hook-form';
@@ -30,13 +30,14 @@ function Register() {
     const schema = yup.object().shape({
         username: yup.string().required('Username is require'),
         email: yup.string().email().required('Email is require'),
-        password: yup.string().required('Password is require'),
+        name: yup.string().required('Name is require'),
         phone: yup
             .string()
             .matches(phoneRegExp, 'Phone number is not valid')
             .min(10)
             .required('Phone number is require'),
         address: yup.string().required('Address is require'),
+        password: yup.string().required('Password is require'),
     });
 
     const {
@@ -79,6 +80,18 @@ function Register() {
                             {...register('email')}
                         />
                         {errors.email && <span>{errors.email.message}</span>}
+                    </div>
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your name..."
+                            spellCheck={false}
+                            {...register('name')}
+                        />
+                        {errors.name && <span>{errors.name.message}</span>}
                     </div>
                     <div className={cx('row')}>
                         <div className={cx('icon')}>

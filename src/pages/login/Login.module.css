@@ -63,6 +63,7 @@
     color: var(--white);
     font-size: var(--font-size-heading-four);
     background-color: var(--gray);
+    cursor: pointer;
 }
 
 .row button:hover {

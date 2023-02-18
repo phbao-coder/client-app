@@ -63,6 +63,7 @@
     color: var(--white);
     font-size: var(--font-size-heading-four);
     background-color: var(--gray);
+    cursor: pointer;
 }
 
 .row button:hover {
@@ -76,7 +77,14 @@
     gap: 10px;
 }
 
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 900px) {
+    .container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+@media only screen and (max-height: 700px) {
     .container {
         margin-top: 80px;
         margin-bottom: 50px;

@@ -6,7 +6,7 @@ const routes = {
     cart: '/cart',
     about: '/about',
     detailProduct: '/product/:id',
-    profile: '/profile/:id',
+    profile: '/profile',
 };
 
 export default routes;
