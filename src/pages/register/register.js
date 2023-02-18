@@ -1,3 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faEnvelope,
+    faLocationDot,
+    faLock,
+    faPhone,
+    faUser,
+} from '@fortawesome/free-solid-svg-icons';
+
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 
@@ -20,11 +29,15 @@ function Register() {
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const schema = yup.object().shape({
-        username: yup.string().required(),
-        email: yup.string().email().required(),
-        password: yup.string().required(),
-        phone: yup.string().matches(phoneRegExp, 'Phone number is not valid').min(10).required(),
-        address: yup.string().required(),
+        username: yup.string().required('Username is require'),
+        email: yup.string().email().required('Email is require'),
+        password: yup.string().required('Password is require'),
+        phone: yup
+            .string()
+            .matches(phoneRegExp, 'Phone number is not valid')
+            .min(10)
+            .required('Phone number is require'),
+        address: yup.string().required('Address is require'),
     });
 
     const {
@@ -40,37 +53,76 @@ function Register() {
 
     return (
         <div className={cx('container')}>
-            <div className={cx('center')}>
-                <h1>Register</h1>
+            <div className={cx('wrapper')}>
+                <div className={cx('title')}>
+                    <span>Register From</span>
+                </div>
                 <form onSubmit={handleSubmit(handleRegisterUser)}>
-                    <div className={cx('txt-field')}>
-                        <label>Username</label>
-                        <input type="text" {...register('username')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your username..."
+                            spellCheck={false}
+                            {...register('username')}
+                        />
                         {errors.username && <span>{errors.username.message}</span>}
                     </div>
-                    <div className={cx('txt-field')}>
-                        <label>Email</label>
-                        <input type="text" {...register('email')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your email..."
+                            spellCheck={false}
+                            {...register('email')}
+                        />
                         {errors.email && <span>{errors.email.message}</span>}
                     </div>
-                    <div className={cx('txt-field')}>
-                        <label>Password</label>
-                        <input type="password" {...register('password')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faLock} />
+                        </div>
+                        <input
+                            type="password"
+                            placeholder="Your password..."
+                            spellCheck={false}
+                            {...register('password')}
+                        />
                         {errors.password && <span>{errors.password.message}</span>}
                     </div>
-                    <div className={cx('txt-field')}>
-                        <label>Phone</label>
-                        <input type="number" {...register('phone')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faPhone} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your phone..."
+                            spellCheck={false}
+                            {...register('phone')}
+                        />
                         {errors.phone && <span>{errors.phone.message}</span>}
                     </div>
-                    <div className={cx('txt-field')}>
-                        <label>Address</label>
-                        <input type="text" {...register('address')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faLocationDot} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your address..."
+                            spellCheck={false}
+                            {...register('address')}
+                        />
                         {errors.address && <span>{errors.address.message}</span>}
                     </div>
-                    <button type="submit">Register</button>
-                    <div className={cx('signup-link')}>
-                        Don't you have an account? <Link to={routes.login}>Login</Link>
+                    <div className={cx('row')}>
+                        <button type="submit">Register</button>
+                        <div className={cx('signup-link')}>
+                            <p>Your are member?</p> <Link to={routes.login}>Login now</Link>
+                        </div>
                     </div>
                 </form>
             </div>

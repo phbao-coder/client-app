@@ -58,6 +58,7 @@ function Login() {
                         <input
                             type="text"
                             placeholder="Your username..."
+                            spellCheck={false}
                             {...register('username')}
                         />
                         {errors.username && <span>{errors.username.message}</span>}
@@ -69,6 +70,7 @@ function Login() {
                         <input
                             type="password"
                             placeholder="Your password..."
+                            spellCheck={false}
                             {...register('password')}
                         />
                         {errors.password && <span>{errors.password.message}</span>}
