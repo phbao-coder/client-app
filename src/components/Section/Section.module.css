@@ -1,15 +1,17 @@
 /* section */
 .home {
     height: 100vh;
-    margin: 0 5%;
-    padding: 0 13%;
-    background-image: url('https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-vang-3-1.jpg');
-    background-position: right;
+    margin: 0 10%;
     background-size: contain;
     background-repeat: no-repeat;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     align-items: center;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
 }
 
 .text h4 {
@@ -40,6 +42,8 @@
 }
 
 .btn {
+    text-align: center;
+    width: 200px;
     margin-top: 10px;
     padding: 12px 40px;
     display: inline-block;
@@ -58,8 +62,9 @@
 
 @media only screen and (max-width: 1100px) {
     .home {
-        margin: 70px 0 0 0;
+        margin: 60px 4% 0 4%;
         background-position: top;
+        height: 85vh;
     }
 
     .text h4 {

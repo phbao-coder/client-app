@@ -1,3 +1,4 @@
+import homepage from '~/assets/images';
 import Section from '~/components/Section/Section';
 
 import classNames from 'classnames/bind';
@@ -8,7 +9,18 @@ const cx = classNames.bind(style);
 function Home() {
     return (
         <div className={cx('container')}>
-            <Section />
+            <Section
+                contents={homepage.iphone}
+                backgroundPosition="right"
+                alignItems="start"
+                textAlign="start"
+            />
+            <Section
+                contents={homepage.samsung}
+                backgroundPosition="left"
+                alignItems="end"
+                textAlign="end"
+            />
         </div>
     );
 }
