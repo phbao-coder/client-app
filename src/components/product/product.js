@@ -1,6 +1,6 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
+import routes from '~/config/routes';
 import style from './Product.module.css';
 
 const cx = classNames.bind(style);
@@ -12,16 +12,15 @@ function Product({ product }) {
                 <img src={product.images} alt={product.name} />
             </div>
             <div className={cx('name-price')}>
-                <h3>{product.name}</h3>
-                <span>{product.price} $</span>
+                <Link to={routes.detailProduct}>{product.name}</Link>
+                <span>{product.price}$</span>
             </div>
-            <p>Description</p>
-            <div className={cx('stars')}>
-                <FontAwesomeIcon icon={faStar} className={cx('star')} />
-                <FontAwesomeIcon icon={faStar} className={cx('star')} />
-                <FontAwesomeIcon icon={faStar} className={cx('star')} />
-                <FontAwesomeIcon icon={faStar} className={cx('star')} />
-                <FontAwesomeIcon icon={faStar} className={cx('star')} />
+            <div className={cx('information')}>
+                <p>{product.description}</p>
+                <p>{product.os}</p>
+                <p>{product.ram}GB Ram</p>
+                <p>{product.memory}GB Rom</p>
+                <p>{product.color}</p>
             </div>
             <div className={cx('buy')}>
                 <button>Add to cart</button>
