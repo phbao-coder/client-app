@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,8 +24,8 @@ function Login() {
     const isUser = useSelector((state) => state.user.isUser);
 
     const schema = yup.object().shape({
-        username: yup.string().required(),
-        password: yup.string().required(),
+        username: yup.string().required('Username is require'),
+        password: yup.string().required('Password is require'),
     });
 
     const {
@@ -31,7 +34,7 @@ function Login() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const onHandleLogin = (user) => {
+    const handleLogin = (user) => {
         dispatch(userLogin(user));
     };
 
@@ -43,22 +46,38 @@ function Login() {
 
     return (
         <div className={cx('container')}>
-            <div className={cx('center')}>
-                <h1>Login</h1>
-                <form onSubmit={handleSubmit(onHandleLogin)}>
-                    <div className={cx('txt-field')}>
-                        <label>Username</label>
-                        <input type="text" {...register('username')} />
+            <div className={cx('wrapper')}>
+                <div className={cx('title')}>
+                    <span>Login From</span>
+                </div>
+                <form onSubmit={handleSubmit(handleLogin)}>
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Your username..."
+                            {...register('username')}
+                        />
                         {errors.username && <span>{errors.username.message}</span>}
                     </div>
-                    <div className={cx('txt-field')}>
-                        <label>Password</label>
-                        <input type="password" {...register('password')} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faLock} />
+                        </div>
+                        <input
+                            type="password"
+                            placeholder="Your password..."
+                            {...register('password')}
+                        />
                         {errors.password && <span>{errors.password.message}</span>}
                     </div>
-                    <button type="submit">Login</button>
-                    <div className={cx('signup-link')}>
-                        Don't you have an account? <Link to={routes.register}>Register</Link>
+                    <div className={cx('row')}>
+                        <button type="submit">Login</button>
+                        <div className={cx('signup-link')}>
+                            <p>Not a member?</p> <Link to={routes.register}>Signup now</Link>
+                        </div>
                     </div>
                 </form>
             </div>
