@@ -1,6 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getProductRequest } from '~/services/product.service';
-import { getProducts, getProductsSuccess, getProductsFailed } from './productsState';
+import { getProductIdRequest, getProductRequest } from '~/services/product.service';
+import {
+    getProducts,
+    getProductsSuccess,
+    getProductsFailed,
+    getProductIdFailed,
+    getProductId,
+    getProductIdSuccess,
+} from './productsState';
 
 function* workGetProducts() {
     try {
@@ -12,8 +19,19 @@ function* workGetProducts() {
     }
 }
 
+function* workGetProductId({ payload }) {
+    try {
+        const res = yield call(getProductIdRequest, payload);
+        yield put(getProductIdSuccess(res.data));
+    } catch (error) {
+        console.log(error);
+        yield put(getProductIdFailed());
+    }
+}
+
 function* productsSaga() {
     yield takeLatest(getProducts.type, workGetProducts);
+    yield takeLatest(getProductId.type, workGetProductId);
 }
 
 export default productsSaga;

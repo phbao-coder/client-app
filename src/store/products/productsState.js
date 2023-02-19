@@ -4,6 +4,7 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: {
         products: [],
+        product: {},
         isLoading: false,
     },
     reducers: {
@@ -17,8 +18,25 @@ const productsSlice = createSlice({
         getProductsFailed: (state) => {
             state.isLoading = false;
         },
+        getProductId: (state) => {
+            state.isLoading = true;
+        },
+        getProductIdSuccess: (state, { payload }) => {
+            state.product = payload;
+            state.isLoading = false;
+        },
+        getProductIdFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
-export const { getProducts, getProductsSuccess, getProductsFailed } = productsSlice.actions;
+export const {
+    getProducts,
+    getProductsSuccess,
+    getProductsFailed,
+    getProductId,
+    getProductIdSuccess,
+    getProductIdFailed,
+} = productsSlice.actions;
 export default productsSlice.reducer;
