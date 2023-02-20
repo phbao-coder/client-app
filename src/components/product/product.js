@@ -16,9 +16,13 @@ function Product({ product }) {
             </div>
             <div className={cx('information')}>
                 <p>{product.description}</p>
-                <p>{product.os}</p>
-                <p>{product.ram}GB Ram</p>
-                <p>{product.memory}GB Rom</p>
+                {product.category === 'mobile' && (
+                    <>
+                        <p>{product.os}</p>
+                        <p>{product.ram}GB Ram</p>
+                        <p>{product.memory}GB Rom</p>
+                    </>
+                )}
                 <p>{product.color}</p>
             </div>
             <div className={cx('buy')}>

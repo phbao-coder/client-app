@@ -14,9 +14,9 @@ function DetailProductCard({
     memory,
     os,
     pin,
+    color,
     ...others
 }) {
-    console.log(others._id);
     return (
         <div className={cx('container', 'flex')}>
             <div className={cx('left')}>
@@ -27,17 +27,24 @@ function DetailProductCard({
             <div className={cx('right')}>
                 <h3>{name}</h3>
                 <h4>{price} $</h4>
-                <p>
-                    Screen: {description} <br />
-                    Camera Back: {camBack} <br />
-                    Camera Front: {camFront} <br />
-                    Ram: {ram} GB
-                    <br />
-                    Rom: {memory} GB <br />
-                    OS: {os} <br />
-                    Pin: {pin} mAh
-                    <br />
-                </p>
+                {others.category === 'accessories' && (
+                    <p>
+                        {description} <br />
+                    </p>
+                )}
+                {others.category === 'mobile' && (
+                    <p>
+                        Screen: {description} <br />
+                        Camera Back: {camBack} <br />
+                        Camera Front: {camFront} <br />
+                        Ram: {ram} GB
+                        <br />
+                        Rom: {memory} GB <br />
+                        OS: {os} <br />
+                        Pin: {pin} mAh
+                        <br />
+                    </p>
+                )}
                 <button>Add to cart</button>
             </div>
         </div>

@@ -40,6 +40,7 @@
 }
 
 .right p {
+    font-size: var(--font-size-tag-p);
     color: var(--gray);
     margin: 20px 0 50px 0;
     line-height: 25px;
@@ -59,8 +60,21 @@
     background-color: var(--gray-dark);
 }
 
+@media only screen and (max-width: 1500px) {
+    .container {
+        margin-top: 6%;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .container {
+        margin-top: 7%;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     .container {
+        margin-top: 80px;
         width: 100%;
     }
 }
