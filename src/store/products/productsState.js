@@ -23,6 +23,9 @@ const productsSlice = createSlice({
         getProductsByNameAndPrice: (state) => {
             state.isLoading = true;
         },
+        getProductsByNameAndCategoryAndPrice: (state) => {
+            state.isLoading = true;
+        },
         getProductsSuccess: (state, { payload }) => {
             state.isLoading = false;
             state.products = payload;
@@ -49,6 +52,7 @@ export const {
     getProductsByName,
     getProductsByPrice,
     getProductsByNameAndPrice,
+    getProductsByNameAndCategoryAndPrice,
     getProductsSuccess,
     getProductsFailed,
     getProductId,

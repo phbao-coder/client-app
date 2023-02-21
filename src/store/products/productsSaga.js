@@ -3,6 +3,7 @@ import {
     getProductIdRequest,
     getProductRequest,
     getProductsByCategoryRequest,
+    getProductsByNameAndCategoryAndPriceRequest,
     getProductsByNameAndPriceRequest,
     getProductsByNameRequest,
     getProductsByPriceRequest,
@@ -18,6 +19,7 @@ import {
     getProductsByName,
     getProductsByPrice,
     getProductsByNameAndPrice,
+    getProductsByNameAndCategoryAndPrice,
 } from './productsState';
 
 function* workGetProducts() {
@@ -79,6 +81,16 @@ function* workGetProductsByNameAndPrice({ payload }) {
     }
 }
 
+function* workGetProductsByNameAndCategoryAndPrice({ payload }) {
+    try {
+        console.log(payload);
+        const res = yield call(getProductsByNameAndCategoryAndPriceRequest, payload);
+        yield put(getProductsSuccess(res.data));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function* productsSaga() {
     yield takeLatest(getProducts.type, workGetProducts);
     yield takeLatest(getProductId.type, workGetProductId);
@@ -86,6 +98,10 @@ function* productsSaga() {
     yield takeLatest(getProductsByName.type, workGetProductsByName);
     yield takeLatest(getProductsByPrice.type, workGetProductsByPrice);
     yield takeLatest(getProductsByNameAndPrice.type, workGetProductsByNameAndPrice);
+    yield takeLatest(
+        getProductsByNameAndCategoryAndPrice.type,
+        workGetProductsByNameAndCategoryAndPrice,
+    );
 }
 
 export default productsSaga;
