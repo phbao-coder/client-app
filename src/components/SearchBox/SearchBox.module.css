@@ -1,0 +1,128 @@
+.container {
+    width: 500px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: 0.2s;
+}
+
+.container input {
+    width: 100%;
+    height: 100%;
+    padding: 0 45px 0 15px;
+    font-size: var(--font-size-tag-p);
+    outline: none;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.container span {
+    font-size: 1.3rem;
+    color: var(--gray-dark);
+    position: absolute;
+    right: 20px;
+}
+
+/* BOX ITEM SEARCH */
+.box-items {
+    width: 500px;
+    height: 400px;
+    position: relative;
+    background-color: var(--white);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-items::-webkit-scrollbar {
+    display: none;
+}
+
+.box-items h2 {
+    color: var(--gray);
+    font-size: 1.3rem;
+    font-weight: 300;
+    width: 100%;
+    position: fixed;
+    padding: 2px 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: var(--light);
+}
+
+.box-items ul {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px 5px 20px;
+}
+
+.item-search {
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray);
+    gap: 20px;
+}
+
+.item-search .left img {
+    width: 75px;
+    height: 50px;
+}
+
+.item-search .right .name {
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: var(--gray);
+    font-size: var(--font-size-header-a);
+    font-weight: calc(var(--font-weight-tag-a) + 300);
+    transition: 0.2s;
+    border-radius: 0;
+}
+
+.item-search .right .name:hover {
+    background-color: transparent;
+    color: var(--gray-dark);
+}
+
+.item-search .right .price {
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 1550px) {
+    .container {
+        width: 450px;
+    }
+
+    .box-items {
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .container {
+        width: 300px;
+    }
+
+    .box-items {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    .container {
+        width: 400px;
+        margin-right: 10px;
+    }
+
+    .box-items {
+        width: 400px;
+    }
+}

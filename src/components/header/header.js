@@ -5,6 +5,8 @@ import { userLogout } from '~/store/user/userState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMobile, faUser } from '@fortawesome/free-solid-svg-icons';
 
+import SearchBox from '../SearchBox/SearchBox';
+
 import routes from '~/config/routes';
 import classNames from 'classnames/bind';
 import style from './Header.module.css';
@@ -36,9 +38,10 @@ function Header() {
         <header className={cx('header')}>
             <div className={cx('logo')}>
                 <Link to={routes.home}>
-                    <FontAwesomeIcon icon={faMobile} /> Garden's phone
+                    <FontAwesomeIcon icon={faMobile} /> <span>Garden's phone</span>
                 </Link>
             </div>
+            <SearchBox />
             <nav className={cx('nav', activeMenu)}>
                 <div className={cx('logo')}>
                     <Link to={routes.home}>
