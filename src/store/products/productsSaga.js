@@ -20,6 +20,12 @@ import {
     getProductsByPrice,
     getProductsByNameAndPrice,
     getProductsByNameAndCategoryAndPrice,
+    getProductsSearch,
+    getProductsSearchSuccess,
+    getProductsSearchFailed,
+    getProductsFeature,
+    getProductsFeatureFailed,
+    getProductsFeatureSuccess,
 } from './productsState';
 
 function* workGetProducts() {
@@ -91,6 +97,26 @@ function* workGetProductsByNameAndCategoryAndPrice({ payload }) {
     }
 }
 
+function* workGetProductsSearch({ payload }) {
+    try {
+        const res = yield call(getProductsByNameRequest, payload);
+        yield put(getProductsSearchSuccess(res.data));
+    } catch (error) {
+        console.log(error);
+        yield put(getProductsSearchFailed());
+    }
+}
+
+function* workGetProductsFeature() {
+    try {
+        const res = call(getProductRequest);
+        yield put(getProductsFeatureSuccess(res.data));
+    } catch (error) {
+        console.log(error);
+        yield put(getProductsFeatureFailed());
+    }
+}
+
 function* productsSaga() {
     yield takeLatest(getProducts.type, workGetProducts);
     yield takeLatest(getProductId.type, workGetProductId);
@@ -102,6 +128,8 @@ function* productsSaga() {
         getProductsByNameAndCategoryAndPrice.type,
         workGetProductsByNameAndCategoryAndPrice,
     );
+    yield takeLatest(getProductsSearch.type, workGetProductsSearch);
+    yield takeLatest(getProductsFeature.type, workGetProductsFeature);
 }
 
 export default productsSaga;

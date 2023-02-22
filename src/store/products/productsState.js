@@ -3,11 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        products: [],
+        products: [], // for page products
+        productsFeature: [], // for products feature
+        productsSearch: [], // for products search
         product: {},
         isLoading: false,
     },
     reducers: {
+        // page products
         getProducts: (state) => {
             state.isLoading = true;
         },
@@ -43,6 +46,28 @@ const productsSlice = createSlice({
         getProductIdFailed: (state) => {
             state.isLoading = false;
         },
+        // search products
+        getProductsSearch: (state) => {
+            state.isLoading = true;
+        },
+        getProductsSearchSuccess: (state, { payload }) => {
+            state.isLoading = false;
+            state.productsSearch = payload;
+        },
+        getProductsSearchFailed: (state) => {
+            state.isLoading = false;
+        },
+        // feature products
+        getProductsFeature: (state) => {
+            state.isLoading = true;
+        },
+        getProductsFeatureSuccess: (state, { payload }) => {
+            state.isLoading = false;
+            state.productsFeature = payload;
+        },
+        getProductsFeatureFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -58,5 +83,11 @@ export const {
     getProductId,
     getProductIdSuccess,
     getProductIdFailed,
+    getProductsSearch,
+    getProductsSearchSuccess,
+    getProductsSearchFailed,
+    getProductsFeature,
+    getProductsFeatureSuccess,
+    getProductsFeatureFailed,
 } = productsSlice.actions;
 export default productsSlice.reducer;

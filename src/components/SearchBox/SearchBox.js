@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductsByName } from '~/store/products/productsState';
+import { getProductsSearch } from '~/store/products/productsState';
 
 import classNames from 'classnames/bind';
 import style from './SearchBox.module.css';
@@ -14,11 +14,11 @@ const cx = classNames.bind(style);
 
 function SearchBox() {
     const [value, setValue] = useState('');
-    const products = useSelector((state) => state.products.products);
+    const products = useSelector((state) => state.products.productsSearch);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProductsByName(value));
+        dispatch(getProductsSearch(value));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 

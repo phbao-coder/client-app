@@ -15,12 +15,16 @@
     font-size: var(--font-size-tag-p);
     outline: none;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid var(--gray);
+}
+
+.container input:focus {
+    border: 2px solid var(--gray);
 }
 
 .container span {
     font-size: 1.3rem;
-    color: var(--gray-dark);
+    color: var(--gray);
     position: absolute;
     right: 20px;
 }
@@ -108,18 +112,18 @@
 
 @media only screen and (max-width: 1400px) {
     .container {
-        width: 300px;
+        width: 350px;
     }
 
     .box-items {
-        width: 300px;
+        width: 350px;
     }
 }
 
+/* Fix for height device */
 @media only screen and (max-height: 500px) {
     .container {
         width: 400px;
-        margin-right: 10px;
     }
 
     .box-items {
