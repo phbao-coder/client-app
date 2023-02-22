@@ -4,8 +4,8 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: {
         products: [], // for page products
-        productsFeature: [], // for products feature
         productsSearch: [], // for products search
+        productsFeature: [], // for products feature
         product: {},
         isLoading: false,
     },

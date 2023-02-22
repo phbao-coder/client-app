@@ -109,7 +109,7 @@ function* workGetProductsSearch({ payload }) {
 
 function* workGetProductsFeature() {
     try {
-        const res = call(getProductRequest);
+        const res = yield call(getProductRequest);
         yield put(getProductsFeatureSuccess(res.data));
     } catch (error) {
         console.log(error);
