@@ -1,34 +1,39 @@
 import Glider from 'react-glider';
 import 'glider-js/glider.min.css';
 
-import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import routes from '~/config/routes';
-import style from './FeaturesProduct.module.css';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+import { Link } from 'react-router-dom';
+import routes from '~/config/routes';
+
+import classNames from 'classnames/bind';
+import style from './FeaturesProduct.module.css';
+
 const cx = classNames.bind(style);
 
-function FeatureProducts({ title, name, products }) {
+function FeatureProducts({ title, positionTitle = 'center', fontSizeTitle = 55, name, products }) {
     const productsFeature = products?.filter((product) => product.name.includes(name));
     return (
         <section className={cx('p-slider')}>
-            <h1 className={cx('product-slider-heading')}>{title}</h1>
+            <h1
+                className={cx('product-slider-heading')}
+                style={{ textAlign: positionTitle, fontSize: `${fontSizeTitle}px` }}
+            >
+                {title}
+            </h1>
             <Glider
                 hasArrows
                 hasDots
                 slidesToShow={3}
-                slidesToScroll={3}
                 responsive={[
                     {
                         breakpoint: 300,
                         settings: {
                             slidesToShow: 'auto',
-                            slidesToScroll: 1,
+                            slidesToScroll: 'auto',
                             itemWidth: 300,
-                            duration: 0.25,
+                            duration: 1,
                         },
                     },
                 ]}
