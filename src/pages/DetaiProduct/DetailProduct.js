@@ -18,6 +18,7 @@ function DetailProduct() {
 
     useEffect(() => {
         dispatch(getProductId(productID));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, productID]);
 
     return (

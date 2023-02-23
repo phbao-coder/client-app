@@ -80,3 +80,12 @@ body {
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
+/* Swipper */
+.swiper-button-prev,
+.swiper-button-next {
+    padding: 35px 25px;
+    background-color: var(--light);
+    color: var(--gray);
+    border-radius: 5px;
+}

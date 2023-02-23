@@ -1,47 +1,52 @@
-import Glider from 'react-glider';
-import 'glider-js/glider.min.css';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 import classNames from 'classnames/bind';
 import style from './FeaturesProduct.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
-function FeatureProducts({ title, positionTitle = 'center', fontSizeTitle = 55, name, products }) {
-    const productsFeature = products?.filter((product) => product.name.includes(name));
+function FeatureProducts({
+    title,
+    positionTitle = 'center',
+    fontSizeTitle = 55,
+    letterScpacing = 10,
+    wordScpacing = 20,
+    products,
+}) {
     return (
         <section className={cx('p-slider')}>
             <h1
                 className={cx('product-slider-heading')}
-                style={{ textAlign: positionTitle, fontSize: `${fontSizeTitle}px` }}
+                style={{
+                    textAlign: positionTitle,
+                    fontSize: `${fontSizeTitle}px`,
+                    letterSpacing: `${letterScpacing}px`,
+                    wordSpacing: `${wordScpacing}px`,
+                }}
             >
                 {title}
             </h1>
-            <Glider
-                hasArrows
-                hasDots
-                slidesToShow={3}
-                responsive={[
-                    {
-                        breakpoint: 300,
-                        settings: {
-                            slidesToShow: 'auto',
-                            slidesToScroll: 'auto',
-                            itemWidth: 300,
-                            duration: 1,
-                        },
-                    },
-                ]}
-                iconLeft={<FontAwesomeIcon icon={faArrowLeft} className={cx('icon')} />}
-                iconRight={<FontAwesomeIcon icon={faArrowRight} className={cx('icon')} />}
+            <Swiper
+                spaceBetween={20}
+                slidesPerView={'auto'}
+                navigation={true}
+                pagination={{
+                    clickable: true,
+                }}
+                modules={[Pagination, Navigation]}
+                className={cx('swiper')}
             >
-                {productsFeature?.map((product) => (
-                    <div className={cx('product-box')} key={product._id}>
+                {products?.map((product) => (
+                    <SwiperSlide className={cx('product-box')} key={product._id}>
                         <div className={cx('p-img-container')}>
                             <div className={cx('p-img')}>
                                 <Link to={`${routes.product}/${product._id}`}>
@@ -69,9 +74,9 @@ function FeatureProducts({ title, positionTitle = 'center', fontSizeTitle = 55, 
                                 </Link>
                             </div>
                         </div>
-                    </div>
+                    </SwiperSlide>
                 ))}
-            </Glider>
+            </Swiper>
         </section>
     );
 }

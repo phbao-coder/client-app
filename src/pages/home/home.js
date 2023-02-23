@@ -28,8 +28,7 @@ function Home() {
             />
             <FeatureProducts
                 title={'Iphone 14 Series'}
-                name={'Iphone 14'}
-                products={productsFeature}
+                products={productsFeature?.filter((product) => product.name.includes('Iphone 14'))}
             />
             <Section
                 contents={homepage.samsung}
@@ -39,8 +38,9 @@ function Home() {
             />
             <FeatureProducts
                 title={'Samsung Z Series'}
-                name={'Samsung Galaxy Z'}
-                products={productsFeature}
+                products={productsFeature?.filter((product) =>
+                    product.name.includes('Samsung Galaxy Z'),
+                )}
             />
         </div>
     );
