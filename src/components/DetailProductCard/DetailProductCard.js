@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import vnd from '~/config/vnd';
 import style from './DetailProductCard.module.css';
 
 const cx = classNames.bind(style);
@@ -26,7 +27,7 @@ function DetailProductCard({
             </div>
             <div className={cx('right')}>
                 <h3>{name}</h3>
-                <h4>{price} $</h4>
+                <h4>{vnd(price)} VND</h4>
                 {others.category === 'accessories' && (
                     <p>
                         {description} <br />

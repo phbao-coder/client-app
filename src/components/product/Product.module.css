@@ -30,19 +30,21 @@
     justify-content: space-between;
 }
 
-.name-price a {
+.name a {
+    font-weight: 300;
     font-size: var(--font-size-heading-three);
     text-transform: capitalize;
     color: var(--gray-dark);
 }
 
-.name-price span {
-    font-size: 1.2rem;
-    color: var(--red);
+.information {
+    height: 100%;
 }
 
-.information {
-    margin-top: 10px;
+.information span {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--red);
 }
 
 .product p {

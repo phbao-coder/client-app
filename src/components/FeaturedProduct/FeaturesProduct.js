@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 
 import classNames from 'classnames/bind';
 import style from './FeaturesProduct.module.css';
+import vnd from '~/config/vnd';
 
 const cx = classNames.bind(style);
 
@@ -63,7 +64,7 @@ function FeatureProducts({
                                 {product.name}
                             </Link>
                             <div className={cx('price-buy')}>
-                                <span>{product.price} $</span>
+                                <span>{vnd(product.price)} VND</span>
                                 <Link
                                     className={cx('p-buy-btn')}
                                     to={`${routes.product}/${product._id}`}

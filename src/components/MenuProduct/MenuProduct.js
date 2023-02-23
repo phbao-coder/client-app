@@ -12,15 +12,18 @@ import {
     getProductsByNameAndCategoryAndPrice,
 } from '~/store/products/productsState';
 import { useEffect, useState } from 'react';
+import vnd from '~/config/vnd';
 const cx = classNames.bind(style);
 
 const nameProductMobile = ['Samsung', 'Iphone', 'Oppo'];
 const priceProduct = [
-    { priceBigger: 0, priceLess: 500 },
-    { priceBigger: 500, priceLess: 1000 },
-    { priceBigger: 1000, priceLess: 1500 },
-    { priceBigger: 1500, priceLess: 2000 },
-    { priceBigger: 2000, priceLess: 9999 },
+    { priceBigger: 0, priceLess: 1000000 },
+    { priceBigger: 1000000, priceLess: 2000000 },
+    { priceBigger: 2000000, priceLess: 5000000 },
+    { priceBigger: 5000000, priceLess: 10000000 },
+    { priceBigger: 10000000, priceLess: 20000000 },
+    { priceBigger: 20000000, priceLess: 40000000 },
+    { priceBigger: 40000000, priceLess: 99000000 },
 ];
 
 function MenuProduct() {
@@ -28,7 +31,7 @@ function MenuProduct() {
     const [isDisplayAllProducts, setIsDisplayAllProducts] = useState(true);
     const [nameProduct, setNameProduct] = useState('');
     const [category, setCategory] = useState('');
-    const [price, setPrice] = useState({ priceBigger: 0, priceLess: 9999 });
+    const [price, setPrice] = useState({ priceBigger: 0, priceLess: 99000000 });
 
     useEffect(() => {
         if (isDisplayAllProducts) {
@@ -59,7 +62,7 @@ function MenuProduct() {
                         setPrice(() => {
                             return {
                                 priceBigger: 0,
-                                priceLess: 9999,
+                                priceLess: 99000000,
                             };
                         });
                     }}
@@ -119,14 +122,14 @@ function MenuProduct() {
                 </li>
                 <li className={cx('fillter-item')}>
                     <span>
-                        {price.priceBigger === 0 && price.priceLess === 9999 && 'Price'}
+                        {price.priceBigger === 0 && price.priceLess === 99000000 && 'Price'}
                         {price.priceBigger === 0 &&
-                            price.priceLess < 9999 &&
-                            `Dưới ${price.priceLess}`}
+                            price.priceLess < 99000000 &&
+                            `Dưới ${vnd(price.priceLess)} `}
                         {price.priceBigger !== 0 &&
-                            price.priceBigger < 2000 &&
-                            `${price.priceBigger}$ to ${price.priceLess}$`}
-                        {price.priceBigger === 2000 && `Trên ${price.priceBigger}$`}
+                            price.priceBigger < 40000000 &&
+                            `${vnd(price.priceBigger)}  đến ${vnd(price.priceLess)} `}
+                        {price.priceBigger === 40000000 && `Trên ${vnd(price.priceBigger)} `}
                     </span>
                     <Tippy
                         delay={[0, 0]}
@@ -151,12 +154,14 @@ function MenuProduct() {
                                         >
                                             <span>
                                                 {item.priceBigger === 0 &&
-                                                    `Dưới ${item.priceLess}$`}
+                                                    `Dưới ${vnd(item.priceLess)}`}
                                                 {item.priceBigger !== 0 &&
-                                                    item.priceBigger < 2000 &&
-                                                    `${item.priceBigger}$ to ${item.priceLess}$`}
-                                                {item.priceBigger === 2000 &&
-                                                    `Trên ${item.priceBigger}$`}
+                                                    item.priceBigger < 40000000 &&
+                                                    `${vnd(item.priceBigger)} đến ${vnd(
+                                                        item.priceLess,
+                                                    )}`}
+                                                {item.priceBigger === 40000000 &&
+                                                    `Trên ${vnd(item.priceBigger)}`}
                                             </span>
                                         </li>
                                     ))}

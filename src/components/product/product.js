@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+import vnd from '~/config/vnd';
 import style from './Product.module.css';
 
 const cx = classNames.bind(style);
@@ -10,19 +11,16 @@ function Product({ product }) {
             <div className={cx('image')}>
                 <img src={product.images} alt={product.name} />
             </div>
-            <div className={cx('name-price')}>
+            <div className={cx('name')}>
                 <Link to={product._id}>{product.name}</Link>
-                <span>{product.price}$</span>
             </div>
             <div className={cx('information')}>
-                <p>{product.description}</p>
-                {product.category === 'mobile' && (
-                    <>
-                        <p>{product.os}</p>
-                        <p>{product.ram}GB Ram</p>
-                        <p>{product.memory}GB Rom</p>
-                    </>
-                )}
+                <span>{vnd(product.price)} VND</span>
+                <p>
+                    {product.category === 'mobile'
+                        ? product.description
+                        : `Chức năng ${product.description}`}
+                </p>
                 <p>{product.color}</p>
             </div>
             <div className={cx('buy')}>
