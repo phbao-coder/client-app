@@ -50,7 +50,7 @@ function DetailProduct() {
 
     return (
         <div className={cx('main')}>
-            <DetailProductCard {...product} />
+            <DetailProductCard product={product} />
             <FeatureProducts
                 title={
                     product.category === 'mobile'

@@ -46,6 +46,10 @@
     line-height: 25px;
 }
 
+.right p span {
+    text-transform: capitalize;
+}
+
 .right {
     position: relative;
 }

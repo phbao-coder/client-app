@@ -1,52 +1,61 @@
-import classNames from 'classnames/bind';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, increaQuantityProduct } from '~/store/cart/cartState';
 import vnd from '~/config/vnd';
+
+import classNames from 'classnames/bind';
 import style from './DetailProductCard.module.css';
 
 const cx = classNames.bind(style);
 
-function DetailProductCard({
-    name,
-    images,
-    price,
-    description,
-    camBack,
-    camFront,
-    ram,
-    memory,
-    os,
-    pin,
-    color,
-    ...others
-}) {
+function DetailProductCard({ product }) {
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart.cart);
+
+    const handleAddToCart = (product) => {
+        const productsInCart = [...cart.products];
+        const isProductInCart = productsInCart.findIndex((item) => item.info.name === product.name);
+        if (isProductInCart === -1) {
+            // thêm sản phẩm mới
+            const addProductToCart = [...productsInCart, { info: product, quantity: 1 }];
+            // cập nhật tổng giá trị giỏ hàng
+            const newTotalCost = cart.totalCost + product.price;
+            dispatch(addToCart({ products: addProductToCart, totalCost: newTotalCost }));
+        } else {
+            // tăng số lượng nếu sản phẩm đã có trong giỏ hàng
+            dispatch(increaQuantityProduct(isProductInCart));
+        }
+    };
+
     return (
         <div className={cx('container', 'flex')}>
             <div className={cx('left')}>
                 <div className={cx('main-image')}>
-                    <img src={images} alt={name} className={cx('slide')} />
+                    <img src={product.images} alt={product.name} className={cx('slide')} />
                 </div>
             </div>
             <div className={cx('right')}>
-                <h3>{name}</h3>
-                <h4>{vnd(price)} VND</h4>
-                {others.category === 'accessories' && (
+                <h3>{product.name}</h3>
+                <h4>{vnd(product.price)} VND</h4>
+                {product.category === 'accessories' && (
                     <p>
-                        Chức năng: {description} <br />
+                        Chức năng: {product.description} <br />
                     </p>
                 )}
-                {others.category === 'mobile' && (
+                {product.category === 'mobile' && (
                     <p>
-                        Screen: {description} <br />
-                        Camera Back: {camBack} <br />
-                        Camera Front: {camFront} <br />
-                        Ram: {ram} GB
+                        Screen: {product.description} <br />
+                        Camera Back: {product.camBack} <br />
+                        Camera Front: {product.camFront} <br />
+                        Ram: {product.ram} GB
                         <br />
-                        Rom: {memory} GB <br />
-                        OS: {os} <br />
-                        Pin: {pin} mAh
+                        Rom: {product.memory} GB <br />
+                        OS: {product.os} <br />
+                        Pin: {product.pin} mAh
                         <br />
+                        <span>Color: {product.color}</span>
                     </p>
                 )}
-                <button>Add to cart</button>
+                <button onClick={() => handleAddToCart(product)}>Add to cart</button>
             </div>
         </div>
     );
