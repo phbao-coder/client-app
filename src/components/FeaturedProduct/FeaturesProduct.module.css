@@ -23,7 +23,7 @@
 }
 
 .product-box {
-    margin: 10px;
+    margin: 10px 0px 10px 10px;
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,10 @@
     padding: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     background-color: var(--white);
+}
+
+.product-box:last-child {
+    margin-right: 10px;
 }
 
 .p-img-container {

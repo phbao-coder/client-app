@@ -35,7 +35,6 @@ function FeatureProducts({
                 {title}
             </h1>
             <Swiper
-                spaceBetween={20}
                 slidesPerView={'auto'}
                 navigation={true}
                 pagination={{

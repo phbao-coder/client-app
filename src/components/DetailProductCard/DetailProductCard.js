@@ -30,7 +30,7 @@ function DetailProductCard({
                 <h4>{vnd(price)} VND</h4>
                 {others.category === 'accessories' && (
                     <p>
-                        {description} <br />
+                        Chức năng: {description} <br />
                     </p>
                 )}
                 {others.category === 'mobile' && (
