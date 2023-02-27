@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '~/store/user/userState';
@@ -14,12 +14,26 @@ import style from './Header.module.css';
 const cx = classNames.bind(style);
 
 function Header() {
-    const [activeMenu, setActiveMenu] = useState({ active: false });
-
     const user = useSelector((state) => state.user.user);
     const isUser = useSelector((state) => state.user.isUser);
+    const cart = useSelector((state) => state.cart.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [activeMenu, setActiveMenu] = useState({ active: false });
+    const [quantityCart, setQuantityCart] = useState(
+        cart.products
+            .map((item) => item.quantity)
+            .reduce((quantity, currQuantity) => quantity + currQuantity),
+    );
+
+    useEffect(() => {
+        setQuantityCart(
+            cart.products
+                .map((item) => item.quantity)
+                .reduce((quantity, currQuantity) => quantity + currQuantity),
+        );
+    }, [cart, quantityCart]);
 
     const handleLogout = () => {
         dispatch(userLogout());
@@ -63,7 +77,7 @@ function Header() {
                     <li>
                         {isUser && (
                             <Link to={routes.cart} onClick={handleActiveMenu}>
-                                Cart
+                                Cart <span>{quantityCart}</span>
                             </Link>
                         )}
                     </li>

@@ -27,6 +27,7 @@
 }
 
 .nav ul li a {
+    position: relative;
     display: block;
     margin: 0 2px;
     padding: 8px 18px;
@@ -46,6 +47,14 @@
 .button-logout:hover {
     background-color: var(--gray-dark);
     color: var(--white);
+}
+
+.nav ul li a span {
+    position: absolute;
+    top: 0px;
+    background-color: red;
+    color: var(--white);
+    border-radius: 50%;
 }
 
 .button-logout {
