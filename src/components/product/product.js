@@ -1,11 +1,12 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import vnd from '~/config/vnd';
+
 import style from './Product.module.css';
 
 const cx = classNames.bind(style);
 
-function Product({ product }) {
+function Product({ product, onAddToCart }) {
     return (
         <div className={cx('product')}>
             <div className={cx('image')}>
@@ -24,7 +25,7 @@ function Product({ product }) {
                 <p>{product.color}</p>
             </div>
             <div className={cx('buy')}>
-                <button>Add to cart</button>
+                <button onClick={() => onAddToCart(product)}>Add to cart</button>
             </div>
         </div>
     );
