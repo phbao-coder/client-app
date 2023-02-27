@@ -21,17 +21,13 @@ function Header() {
     const navigate = useNavigate();
 
     const [activeMenu, setActiveMenu] = useState({ active: false });
-    const [quantityCart, setQuantityCart] = useState(
-        cart.products
-            .map((item) => item.quantity)
-            .reduce((quantity, currQuantity) => quantity + currQuantity),
-    );
+    const [quantityCart, setQuantityCart] = useState(0);
 
     useEffect(() => {
         setQuantityCart(
-            cart.products
-                .map((item) => item.quantity)
-                .reduce((quantity, currQuantity) => quantity + currQuantity),
+            cart?.products
+                ?.map((item) => item.quantity)
+                ?.reduce((quantity, currQuantity) => quantity + currQuantity, 0),
         );
     }, [cart, quantityCart]);
 
@@ -77,7 +73,7 @@ function Header() {
                     <li>
                         {isUser && (
                             <Link to={routes.cart} onClick={handleActiveMenu}>
-                                Cart <span>{quantityCart}</span>
+                                Cart {quantityCart !== 0 && <span>{quantityCart}</span>}
                             </Link>
                         )}
                     </li>
