@@ -9,6 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
+import vnd from '~/config/vnd';
 
 const cx = classNames.bind(style);
 
@@ -49,7 +50,9 @@ function SearchBox() {
                                             >
                                                 {product.name}
                                             </Link>
-                                            <p className={cx('price')}>Price: {product.price} $</p>
+                                            <p className={cx('price')}>
+                                                Price: {vnd(product.price)} VND
+                                            </p>
                                         </div>
                                     </li>
                                 ))}
