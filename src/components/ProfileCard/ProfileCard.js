@@ -13,29 +13,29 @@ function ProfileCard({ name, username, email, phone }) {
             </div>
             <div className={cx('right')}>
                 <div className={cx('info')}>
-                    <h3>Infomation</h3>
+                    <h3>Thông tin liên hệ</h3>
                     <div className={cx('info-data')}>
                         <div className={cx('data')}>
-                            <h4>Email</h4>
+                            <h4>Địa chỉ Gmail</h4>
                             <p>{email}</p>
                         </div>
                         <div className={cx('data')}>
-                            <h4>Phone</h4>
+                            <h4>Số điện thoại</h4>
                             <p>{phone}</p>
                         </div>
                     </div>
                 </div>
 
                 <div className={cx('projects')}>
-                    <h3>Projects</h3>
+                    <h3>Thống kê</h3>
                     <div className={cx('projects-data')}>
                         <div className={cx('data')}>
-                            <h4>Number Cart</h4>
-                            <p>123</p>
+                            <h4>Tổng số đơn hàng</h4>
+                            <p>10</p>
                         </div>
                         <div className={cx('data')}>
-                            <h4>Sum cost</h4>
-                            <p>19.000$</p>
+                            <h4>Tổng chi phí</h4>
+                            <p>19.000.000 VND</p>
                         </div>
                     </div>
                 </div>

@@ -29,23 +29,23 @@ function Footer() {
 
                 <ul className={cx('list')}>
                     <li>
-                        <Link to={routes.home}>Home</Link>
+                        <Link to={routes.home}>Trang chủ</Link>
                     </li>
                     <li>
-                        <Link to={routes.about}>About</Link>
+                        <Link to={routes.about}>Liên hệ</Link>
                     </li>
                     <li>
-                        <Link to={routes.about}>Term</Link>
+                        <Link to={routes.about}>Chính sách</Link>
                     </li>
                     <li>
-                        <Link to={routes.about}>Service</Link>
+                        <Link to={routes.about}>Dịch vụ</Link>
                     </li>
                     <li>
-                        <Link to={routes.about}>Privacy policy</Link>
+                        <Link to={routes.about}>Điều khoản</Link>
                     </li>
                 </ul>
 
-                <p className={cx('copyright')}>didong @ 2023</p>
+                <p className={cx('copyright')}>Garden's phone @ 2023</p>
             </section>
         </div>
     );

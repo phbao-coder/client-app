@@ -9,7 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
-import vnd from '~/config/vnd';
+import vnd from '~/utils/vnd';
 
 const cx = classNames.bind(style);
 
@@ -50,9 +50,7 @@ function SearchBox() {
                                             >
                                                 {product.name}
                                             </Link>
-                                            <p className={cx('price')}>
-                                                Price: {vnd(product.price)} VND
-                                            </p>
+                                            <p className={cx('price')}>{vnd(product.price)} VND</p>
                                         </div>
                                     </li>
                                 ))}
@@ -64,7 +62,7 @@ function SearchBox() {
                 <div className={cx('container')}>
                     <input
                         type="text"
-                        placeholder="Type here..."
+                        placeholder="Nhập tên sản phẩm mà bạn cần tìm..."
                         onChange={(e) => setValue(e.target.value)}
                         spellCheck={false}
                     />

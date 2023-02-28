@@ -6,7 +6,7 @@ import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { increaQuantityProduct, decreaQuantityProduct, addToCart } from '~/store/cart/cartState';
 
-import vnd from '~/config/vnd';
+import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './Cart.module.css';

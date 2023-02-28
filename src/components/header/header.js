@@ -62,24 +62,24 @@ function Header() {
                 <ul>
                     <li>
                         <Link to={routes.home} onClick={handleActiveMenu}>
-                            Home
+                            Trang chủ
                         </Link>
                     </li>
                     <li>
                         <Link to={routes.product} onClick={handleActiveMenu}>
-                            Product
+                            Sản phẩm
                         </Link>
                     </li>
                     <li>
                         {isUser && (
                             <Link to={routes.cart} onClick={handleActiveMenu}>
-                                Cart {quantityCart !== 0 && <span>{quantityCart}</span>}
+                                Giỏ hàng {quantityCart !== 0 && <span>{quantityCart}</span>}
                             </Link>
                         )}
                     </li>
                     <li>
                         <Link to={routes.about} onClick={handleActiveMenu}>
-                            About
+                            Liên hệ
                         </Link>
                     </li>
                     <li>
@@ -90,18 +90,18 @@ function Header() {
                             </Link>
                         ) : (
                             <Link to={routes.login} onClick={handleActiveMenu}>
-                                <FontAwesomeIcon icon={faUser} className={cx('icon')} /> Login
+                                <FontAwesomeIcon icon={faUser} className={cx('icon')} /> Đăng nhập
                             </Link>
                         )}
                     </li>
                     <li>
                         {isUser ? (
                             <button onClick={handleLogout} className={cx('button-logout')}>
-                                Logout
+                                Đăng xuất
                             </button>
                         ) : (
                             <Link to={routes.register} onClick={handleActiveMenu}>
-                                Register
+                                Đăng ký
                             </Link>
                         )}
                     </li>

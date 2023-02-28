@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, increaQuantityProduct } from '~/store/cart/cartState';
-import vnd from '~/config/vnd';
+import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './DetailProductCard.module.css';
@@ -43,19 +43,19 @@ function DetailProductCard({ product }) {
                 )}
                 {product.category === 'mobile' && (
                     <p>
-                        Screen: {product.description} <br />
-                        Camera Back: {product.camBack} <br />
-                        Camera Front: {product.camFront} <br />
+                        Màn hình: {product.description} <br />
+                        Camera sau: {product.camBack} <br />
+                        Camera trước: {product.camFront} <br />
                         Ram: {product.ram} GB
                         <br />
                         Rom: {product.memory} GB <br />
                         OS: {product.os} <br />
                         Pin: {product.pin} mAh
                         <br />
-                        <span>Color: {product.color}</span>
+                        <span>Màu sắc: {product.color}</span>
                     </p>
                 )}
-                <button onClick={() => handleAddToCart(product)}>Add to cart</button>
+                <button onClick={() => handleAddToCart(product)}>Thêm vào giỏ hàng</button>
             </div>
         </div>
     );

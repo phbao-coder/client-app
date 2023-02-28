@@ -3,7 +3,7 @@ import instance from './instance';
 // Get all products
 export const getProductRequest = () => {
     try {
-        const res = instance.get('/api/products/');
+        const res = instance.get('/api/products');
         return res;
     } catch (error) {}
 };

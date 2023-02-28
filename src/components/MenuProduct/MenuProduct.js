@@ -12,7 +12,7 @@ import {
     getProductsByNameAndCategoryAndPrice,
 } from '~/store/products/productsState';
 import { useEffect, useState } from 'react';
-import vnd from '~/config/vnd';
+import vnd from '~/utils/vnd';
 const cx = classNames.bind(style);
 
 const nameProductMobile = ['Samsung', 'Iphone', 'Oppo'];
@@ -67,7 +67,7 @@ function MenuProduct() {
                         });
                     }}
                 >
-                    <span>All</span>
+                    <span>Toàn bộ</span>
                 </li>
                 <li className={cx('fillter-item')}>
                     <span
@@ -77,7 +77,7 @@ function MenuProduct() {
                             setIsDisplayAllProducts(false);
                         }}
                     >
-                        {nameProduct !== '' ? nameProduct : 'Mobile'}
+                        {nameProduct !== '' ? nameProduct : 'Di động'}
                     </span>
                     <Tippy
                         delay={[0, 0]}
@@ -118,11 +118,11 @@ function MenuProduct() {
                         setIsDisplayAllProducts(false);
                     }}
                 >
-                    <span>Accessories</span>
+                    <span>Phụ kiện</span>
                 </li>
                 <li className={cx('fillter-item')}>
                     <span>
-                        {price.priceBigger === 0 && price.priceLess === 99000000 && 'Price'}
+                        {price.priceBigger === 0 && price.priceLess === 99000000 && 'Giá'}
                         {price.priceBigger === 0 &&
                             price.priceLess < 99000000 &&
                             `Dưới ${vnd(price.priceLess)} `}

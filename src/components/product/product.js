@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import vnd from '~/config/vnd';
+import color from '~/utils/color';
+import vnd from '~/utils/vnd';
 
 import style from './Product.module.css';
 
@@ -22,10 +23,10 @@ function Product({ product, onAddToCart }) {
                         ? product.description
                         : `Chức năng ${product.description}`}
                 </p>
-                <p>{product.color}</p>
+                <p>{color(product.color)}</p>
             </div>
             <div className={cx('buy')}>
-                <button onClick={() => onAddToCart(product)}>Add to cart</button>
+                <button onClick={() => onAddToCart(product)}>Thêm vào giỏ hàng</button>
             </div>
         </div>
     );

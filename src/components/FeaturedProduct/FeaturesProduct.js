@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 
 import classNames from 'classnames/bind';
 import style from './FeaturesProduct.module.css';
-import vnd from '~/config/vnd';
+import vnd from '~/utils/vnd';
 
 const cx = classNames.bind(style);
 
@@ -54,7 +54,9 @@ function FeatureProducts({
                         </div>
                         <div className={cx('p-box-text')}>
                             <div className={cx('product-category')}>
-                                <span>{product.category}</span>
+                                <span>
+                                    {product.category === 'mobile' ? 'Di động' : 'Phụ kiện'}
+                                </span>
                             </div>
                             <Link
                                 className={cx('product-title')}
@@ -68,7 +70,7 @@ function FeatureProducts({
                                     className={cx('p-buy-btn')}
                                     to={`${routes.product}/${product._id}`}
                                 >
-                                    Buy Now
+                                    Mua ngay
                                 </Link>
                             </div>
                         </div>

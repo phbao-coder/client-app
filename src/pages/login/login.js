@@ -24,8 +24,8 @@ function Login() {
     const isUser = useSelector((state) => state.user.isUser);
 
     const schema = yup.object().shape({
-        username: yup.string().required('Username is require'),
-        password: yup.string().required('Password is require'),
+        username: yup.string().required('Vui lòng nhập tài khoản người dùng!'),
+        password: yup.string().required('Vui lòng nhập mật khẩu!'),
     });
 
     const {
@@ -48,7 +48,7 @@ function Login() {
         <div className={cx('container')}>
             <div className={cx('wrapper')}>
                 <div className={cx('title')}>
-                    <span>Login From</span>
+                    <span>Đăng nhập</span>
                 </div>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <div className={cx('row')}>
@@ -57,7 +57,7 @@ function Login() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your username..."
+                            placeholder="Nhập tài khoản người dùng..."
                             spellCheck={false}
                             {...register('username')}
                         />
@@ -69,16 +69,17 @@ function Login() {
                         </div>
                         <input
                             type="password"
-                            placeholder="Your password..."
+                            placeholder="Nhập mật khẩu..."
                             spellCheck={false}
                             {...register('password')}
                         />
                         {errors.password && <span>{errors.password.message}</span>}
                     </div>
                     <div className={cx('row')}>
-                        <button type="submit">Login</button>
+                        <button type="submit">Đăng nhập</button>
                         <div className={cx('signup-link')}>
-                            <p>Not a member?</p> <Link to={routes.register}>Signup now</Link>
+                            <p>Bạn không phải là thành viên?</p>{' '}
+                            <Link to={routes.register}>Đăng ký</Link>
                         </div>
                     </div>
                 </form>

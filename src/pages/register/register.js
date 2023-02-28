@@ -28,16 +28,16 @@ function Register() {
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const schema = yup.object().shape({
-        username: yup.string().required('Username is require'),
-        email: yup.string().email().required('Email is require'),
-        name: yup.string().required('Name is require'),
+        username: yup.string().required('Vui lòng nhập tài khoản người dùng!'),
+        email: yup.string().email('Định dạng Gmail không đúng!').required('Vui lòng nhập Gmail!'),
+        name: yup.string().required('Vui lòng nhập tên!'),
         phone: yup
             .string()
-            .matches(phoneRegExp, 'Phone number is not valid')
+            .matches(phoneRegExp, 'Định dạng số điện thoại không đúng!')
             .min(10)
-            .required('Phone number is require'),
-        address: yup.string().required('Address is require'),
-        password: yup.string().required('Password is require'),
+            .required('Vui lòng nhập số điện thoại!'),
+        address: yup.string().required('Vui lòng nhập địa chỉ!'),
+        password: yup.string().required('Vui lòng nhập mật khẩu!'),
     });
 
     const {
@@ -54,7 +54,7 @@ function Register() {
         <div className={cx('container')}>
             <div className={cx('wrapper')}>
                 <div className={cx('title')}>
-                    <span>Register From</span>
+                    <span>Đăng ký</span>
                 </div>
                 <form onSubmit={handleSubmit(handleRegisterUser)}>
                     <div className={cx('row')}>
@@ -63,7 +63,7 @@ function Register() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your username..."
+                            placeholder="Tên người dùng..."
                             spellCheck={false}
                             {...register('username')}
                         />
@@ -75,7 +75,7 @@ function Register() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your email..."
+                            placeholder="Gmail..."
                             spellCheck={false}
                             {...register('email')}
                         />
@@ -87,7 +87,7 @@ function Register() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your name..."
+                            placeholder="Họ và tên..."
                             spellCheck={false}
                             {...register('name')}
                         />
@@ -99,7 +99,7 @@ function Register() {
                         </div>
                         <input
                             type="password"
-                            placeholder="Your password..."
+                            placeholder="Mật khẩu..."
                             spellCheck={false}
                             {...register('password')}
                         />
@@ -111,7 +111,7 @@ function Register() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your phone..."
+                            placeholder="Số điện thoại..."
                             spellCheck={false}
                             {...register('phone')}
                         />
@@ -123,16 +123,16 @@ function Register() {
                         </div>
                         <input
                             type="text"
-                            placeholder="Your address..."
+                            placeholder="Địa chỉ..."
                             spellCheck={false}
                             {...register('address')}
                         />
                         {errors.address && <span>{errors.address.message}</span>}
                     </div>
                     <div className={cx('row')}>
-                        <button type="submit">Register</button>
+                        <button type="submit">Đăng ký</button>
                         <div className={cx('signup-link')}>
-                            <p>Your are member?</p> <Link to={routes.login}>Login now</Link>
+                            <p>Bạn đã có tài khoản?</p> <Link to={routes.login}>Đăng nhập</Link>
                         </div>
                     </div>
                 </form>
