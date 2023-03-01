@@ -24,7 +24,7 @@ function Cart() {
     const dispatch = useDispatch();
 
     const handleDecreaProduct = (index) => {
-        if (cart.products[index].count > 0) {
+        if (cart.products[index].count > 1) {
             dispatch(updateDecreaProductInCart(index));
         }
     };
@@ -33,15 +33,15 @@ function Cart() {
     };
     const handleRemoveProduct = (index) => {
         const productsCartTemp = [...cart.products];
-        productsCartTemp.splice(index, 1);
+        const productRemove = productsCartTemp.splice(index, 1);
         const newProductsCart = [...productsCartTemp];
-        dispatch(removeProductToCart(newProductsCart));
+        const newTotalCart = cart.cartTotal - productRemove[0].count * productRemove[0].price;
+        dispatch(removeProductToCart({ products: newProductsCart, cartTotal: newTotalCart }));
     };
 
     useEffect(() => {
         dispatch(getCartFromServer(userID));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch, userID]);
 
     return (
         <div className={cx('container')}>

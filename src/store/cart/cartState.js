@@ -5,6 +5,7 @@ const cartSlice = createSlice({
     initialState: {
         cart: {
             products: [],
+            cartTotal: 0,
         },
         isLoading: false,
     },
@@ -23,7 +24,8 @@ const cartSlice = createSlice({
             state.isLoading = true;
         },
         removeProductToCartSuccess: (state, { payload }) => {
-            state.cart.products = payload;
+            state.cart.products = payload.products;
+            state.cart.cartTotal = payload.cartTotal;
             state.isLoading = false;
         },
         removeProductToCartFailed: (state) => {
@@ -34,6 +36,7 @@ const cartSlice = createSlice({
         },
         updateIncreaProductInCartSuccess: (state, { payload }) => {
             state.cart.products[payload].count++;
+            state.cart.cartTotal += state.cart.products[payload].price;
             state.isLoading = false;
         },
         updateDecreaProductInCart: (state) => {
@@ -41,6 +44,7 @@ const cartSlice = createSlice({
         },
         updateDecreaProductInCartSuccess: (state, { payload }) => {
             state.cart.products[payload].count--;
+            state.cart.cartTotal -= state.cart.products[payload].price;
             state.isLoading = false;
         },
         updateProductInCartFailed: (state) => {
