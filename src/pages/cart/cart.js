@@ -6,6 +6,7 @@ import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import {
     getCartFromServer,
+    removeProductToCart,
     updateDecreaProductInCart,
     updateIncreaProductInCart,
 } from '~/store/cart/cartState';
@@ -30,7 +31,12 @@ function Cart() {
     const handleIncreaProduct = (index) => {
         dispatch(updateIncreaProductInCart(index));
     };
-    const handleRemoveProduct = (index) => {};
+    const handleRemoveProduct = (index) => {
+        const productsCartTemp = [...cart.products];
+        productsCartTemp.splice(index, 1);
+        const newProductsCart = [...productsCartTemp];
+        dispatch(removeProductToCart(newProductsCart));
+    };
 
     useEffect(() => {
         dispatch(getCartFromServer(userID));
@@ -61,7 +67,7 @@ function Cart() {
                             <p>Cost: {vnd(item.price * item.count)} VND</p>
                         </div>
                         <div className={cx('delete')}>
-                            <button>
+                            <button onClick={() => handleRemoveProduct(index)}>
                                 <FontAwesomeIcon icon={faTrash} /> Xóa
                             </button>
                         </div>

@@ -19,6 +19,16 @@ const cartSlice = createSlice({
         addProductToCartFailed: (state) => {
             state.isLoading = false;
         },
+        removeProductToCart: (state) => {
+            state.isLoading = true;
+        },
+        removeProductToCartSuccess: (state, { payload }) => {
+            state.cart.products = payload;
+            state.isLoading = false;
+        },
+        removeProductToCartFailed: (state) => {
+            state.isLoading = false;
+        },
         updateIncreaProductInCart: (state) => {
             state.isLoading = true;
         },
@@ -53,6 +63,9 @@ export const {
     addProductToCart,
     addProductToCartSuccess,
     addProductToCartFailed,
+    removeProductToCart,
+    removeProductToCartSuccess,
+    removeProductToCartFailed,
     updateIncreaProductInCart,
     updateIncreaProductInCartSuccess,
     updateDecreaProductInCart,

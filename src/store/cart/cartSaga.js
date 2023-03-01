@@ -7,6 +7,9 @@ import {
     getCartFromServer,
     getCartFromServerFailed,
     getCartFromServerSuccess,
+    removeProductToCart,
+    removeProductToCartFailed,
+    removeProductToCartSuccess,
     updateDecreaProductInCart,
     updateDecreaProductInCartSuccess,
     updateIncreaProductInCart,
@@ -63,11 +66,25 @@ function* workUpdateDecreaProductInCart({ payload }) {
     }
 }
 
+function* workRemoveProductInCart({ payload }) {
+    try {
+        yield put(removeProductToCartSuccess(payload));
+        // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
+        const cartLocal = yield select((state) => state.cart.cart);
+        const userID = yield select((state) => state.user.user.id);
+        yield call(postSaveCartRequest, { cartLocal, userID });
+    } catch (error) {
+        console.log(error);
+        yield put(removeProductToCartFailed());
+    }
+}
+
 function* cartSaga() {
     yield takeLatest(getCartFromServer.type, workGetCartFromServer);
     yield takeLatest(addProductToCart.type, workAddProductToCart);
     yield takeLatest(updateIncreaProductInCart.type, workUpdateIncreaProductInCart);
     yield takeLatest(updateDecreaProductInCart.type, workUpdateDecreaProductInCart);
+    yield takeLatest(removeProductToCart.type, workRemoveProductInCart);
 }
 
 export default cartSaga;
