@@ -16,7 +16,7 @@ const addToCart = (cart, product, dispatch, action) => {
             { product: product, count: 1, price: product.price },
         ];
         dispatch(action.addProductToCart({ products: newProductsCart }));
-    } else if (isProductInCart !== 1) {
+    } else if (isProductInCart !== -1) {
         // sản phẩm đã tồn tại trong giỏ tăng count lên 1
         dispatch(action.updateIncreaProductInCart(isProductInCart));
     }
