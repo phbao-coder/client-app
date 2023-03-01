@@ -6,13 +6,13 @@
  *
  */
 const addToCart = (cart, product, dispatch, action) => {
-    const productsCartTemp = [...cart.products]; // tạo mảng temp
+    const productsCartTemp = [...cart?.products]; // tạo mảng temp
     // tìm xem sản phẩm có trong giỏ hay chưa
     const isProductInCart = productsCartTemp?.findIndex((item) => item.product._id === product._id);
     if (isProductInCart === -1) {
         // thêm sản phẩm vào ds products có trong cart trước đó
         const newProductsCart = [
-            ...cart.products,
+            ...cart?.products,
             { product: product, count: 1, price: product.price },
         ];
         dispatch(action.addProductToCart({ products: newProductsCart }));

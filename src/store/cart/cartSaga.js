@@ -20,7 +20,9 @@ import {
 function* workGetCartFromServer({ payload }) {
     try {
         const res = yield call(getCartByUserRequest, payload);
-        yield put(getCartFromServerSuccess(res.data));
+        if (res.data !== null) {
+            yield put(getCartFromServerSuccess(res.data));
+        }
     } catch (error) {
         console.log(error);
         yield put(getCartFromServerFailed());
