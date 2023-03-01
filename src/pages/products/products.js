@@ -1,10 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getProducts } from '~/store/products/productsState';
-import { addToCart, increaQuantityProduct } from '~/store/cart/cartState';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Product from '~/components/Product/Product';
 import MenuProduct from '~/components/MenuProduct/MenuProduct';
+
+import { getProducts } from '~/store/products/productsState';
+import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartState';
+
+import addToCart from '~/utils/addToCart';
 
 import classNames from 'classnames/bind';
 import style from './Products.module.css';
@@ -17,18 +20,11 @@ function Products() {
     const dispatch = useDispatch();
 
     const handleAddToCart = (product) => {
-        const productsInCart = [...cart.products];
-        const isProductInCart = productsInCart.findIndex((item) => item.info.name === product.name);
-        if (isProductInCart === -1) {
-            // thêm sản phẩm mới
-            const addProductToCart = [...productsInCart, { info: product, quantity: 1 }];
-            // cập nhật tổng giá trị giỏ hàng
-            const newTotalCost = cart.totalCost + product.price;
-            dispatch(addToCart({ products: addProductToCart, totalCost: newTotalCost }));
-        } else {
-            // tăng số lượng nếu sản phẩm đã có trong giỏ hàng
-            dispatch(increaQuantityProduct(isProductInCart));
-        }
+        const action = {
+            addProductToCart,
+            updateIncreaProductInCart,
+        };
+        addToCart(cart, product, dispatch, action);
     };
 
     useEffect(() => {

@@ -21,15 +21,15 @@ function Header() {
     const navigate = useNavigate();
 
     const [activeMenu, setActiveMenu] = useState({ active: false });
-    const [quantityCart, setQuantityCart] = useState(0);
+    const [sumCountCart, setSumCountCart] = useState(0);
 
     useEffect(() => {
-        setQuantityCart(
+        setSumCountCart(
             cart?.products
-                ?.map((item) => item.quantity)
-                ?.reduce((quantity, currQuantity) => quantity + currQuantity, 0),
+                ?.map((item) => item.count)
+                ?.reduce((count, currCount) => count + currCount, 0),
         );
-    }, [cart, quantityCart]);
+    }, [cart]);
 
     const handleLogout = () => {
         dispatch(userLogout());
@@ -73,7 +73,7 @@ function Header() {
                     <li>
                         {isUser && (
                             <Link to={routes.cart} onClick={handleActiveMenu}>
-                                Giỏ hàng {quantityCart !== 0 && <span>{quantityCart}</span>}
+                                Giỏ hàng {sumCountCart !== 0 && <span>{sumCountCart}</span>}
                             </Link>
                         )}
                     </li>

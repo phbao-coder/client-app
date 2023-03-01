@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { increaQuantityProduct, decreaQuantityProduct, addToCart } from '~/store/cart/cartState';
+import {
+    getCartFromServer,
+    updateDecreaProductInCart,
+    updateIncreaProductInCart,
+} from '~/store/cart/cartState';
 
 import vnd from '~/utils/vnd';
 
@@ -15,53 +19,49 @@ const cx = classNames.bind(style);
 
 function Cart() {
     const cart = useSelector((state) => state.cart.cart);
+    const userID = useSelector((state) => state.user.user.id);
     const dispatch = useDispatch();
 
-    const handleIncreaQuantityProduct = (index) => {
-        dispatch(increaQuantityProduct(index));
-    };
-
-    const handleDecreaQuantityProduct = (index) => {
-        if (cart.products[index].quantity > 1) {
-            dispatch(decreaQuantityProduct(index));
+    const handleDecreaProduct = (index) => {
+        if (cart.products[index].count > 0) {
+            dispatch(updateDecreaProductInCart(index));
         }
     };
-
-    const handleRemoveProductFromCart = (index) => {
-        const productsCart = [...cart.products]; // tạo mảng temp
-        const product = productsCart.splice(index, 1)[0]; // xóa phần tử ở vị trí được chọn
-        const newTotalCost = cart.totalCost - product.info.price * product.quantity; // tính lại tổng giá trị giỏ hàng
-        const newProductsCart = [...productsCart];
-        dispatch(addToCart({ products: newProductsCart, totalCost: newTotalCost }));
+    const handleIncreaProduct = (index) => {
+        dispatch(updateIncreaProductInCart(index));
     };
+    const handleRemoveProduct = (index) => {};
 
-    useEffect(() => {}, [cart]);
+    useEffect(() => {
+        dispatch(getCartFromServer(userID));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className={cx('container')}>
-            <h1 className={cx('heading')}>Your Cart</h1>
+            <h1 className={cx('heading')}>Giỏ hàng của bạn</h1>
             <div className={cx('box')}>
                 {cart?.products?.map((item, index) => (
-                    <div className={cx('box-item')} key={item.info._id}>
+                    <div className={cx('box-item')} key={item.product._id}>
                         <div className={cx('box-item-left')}>
-                            <img src={item.info.images} alt={item.info.name} />
+                            <img src={item.product.images} alt={item.product.name} />
                         </div>
                         <div className={cx('box-item-right')}>
-                            <h2>{item.info.name}</h2>
+                            <h2>{item.product.name}</h2>
                             <div className={cx('quantity')}>
-                                <button onClick={() => handleDecreaQuantityProduct(index)}>
+                                <button onClick={() => handleDecreaProduct(index)}>
                                     <FontAwesomeIcon icon={faMinus} />
                                 </button>
-                                <p>Quantity: {item.quantity}</p>
-                                <button onClick={() => handleIncreaQuantityProduct(index)}>
+                                <p>Quantity: {item.count}</p>
+                                <button onClick={() => handleIncreaProduct(index)}>
                                     <FontAwesomeIcon icon={faPlus} />
                                 </button>
                             </div>
-                            <p>Price: {vnd(item.info.price)} VND</p>
-                            <p>Cost: {vnd(item.info.price * item.quantity)} VND</p>
+                            <p>Price: {vnd(item.product.price)} VND</p>
+                            <p>Cost: {vnd(item.price * item.count)} VND</p>
                         </div>
                         <div className={cx('delete')}>
-                            <button onClick={() => handleRemoveProductFromCart(index)}>
+                            <button>
                                 <FontAwesomeIcon icon={faTrash} /> Xóa
                             </button>
                         </div>
@@ -69,8 +69,8 @@ function Cart() {
                 ))}
             </div>
             <div className={cx('order')}>
-                <p>Tổng giá trị đơn hàng: {vnd(cart.totalCost)} VND</p>
-                <button>Order</button>
+                <p>Tổng giá trị đơn hàng: {vnd(cart?.cartTotal)} VND</p>
+                <button>Đặt hàng</button>
             </div>
         </div>
     );

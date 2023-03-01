@@ -5,37 +5,61 @@ const cartSlice = createSlice({
     initialState: {
         cart: {
             products: [],
-            totalCost: 0,
         },
-        isAdding: false,
+        isLoading: false,
     },
     reducers: {
-        addToCart: (state) => {
-            state.isAdding = true;
+        addProductToCart: (state) => {
+            state.isLoading = true;
         },
-        addToCartSuccess: (state, { payload }) => {
+        addProductToCartSuccess: (state, { payload }) => {
+            state.cart.products = payload.products;
+            state.isLoading = false;
+        },
+        addProductToCartFailed: (state) => {
+            state.isLoading = false;
+        },
+        updateIncreaProductInCart: (state) => {
+            state.isLoading = true;
+        },
+        updateIncreaProductInCartSuccess: (state, { payload }) => {
+            state.cart.products[payload].count++;
+            state.isLoading = false;
+        },
+        updateDecreaProductInCart: (state) => {
+            state.isLoading = true;
+        },
+        updateDecreaProductInCartSuccess: (state, { payload }) => {
+            state.cart.products[payload].count--;
+            state.isLoading = false;
+        },
+        updateProductInCartFailed: (state) => {
+            state.isLoading = false;
+        },
+        getCartFromServer: (state) => {
+            state.isLoading = true;
+        },
+        getCartFromServerSuccess: (state, { payload }) => {
             state.cart = payload;
-            state.isAdding = false;
+            state.isLoading = false;
         },
-        addToCartFailed: (state) => {
-            state.isAdding = false;
-        },
-        increaQuantityProduct: (state, { payload }) => {
-            state.cart.products[payload].quantity++;
-            state.cart.totalCost += state.cart.products[payload].info.price;
-        },
-        decreaQuantityProduct: (state, { payload }) => {
-            state.cart.products[payload].quantity--;
-            state.cart.totalCost -= state.cart.products[payload].info.price;
+        getCartFromServerFailed: (state) => {
+            state.isLoading = false;
         },
     },
 });
 
 export const {
-    addToCart,
-    addToCartSuccess,
-    addToCartFailed,
-    increaQuantityProduct,
-    decreaQuantityProduct,
+    addProductToCart,
+    addProductToCartSuccess,
+    addProductToCartFailed,
+    updateIncreaProductInCart,
+    updateIncreaProductInCartSuccess,
+    updateDecreaProductInCart,
+    updateDecreaProductInCartSuccess,
+    updateProductInCartFailed,
+    getCartFromServer,
+    getCartFromServerSuccess,
+    getCartFromServerFailed,
 } = cartSlice.actions;
 export default cartSlice.reducer;

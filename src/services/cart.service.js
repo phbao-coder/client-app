@@ -1,22 +1,32 @@
 import instance from './instance';
 
-export const addToCartRequest = (userID, cart) => {
-    const obj = {
-        userID,
-        cart,
-    };
-
+// lấy giỏ hàng đã được lưu từ trước của người dùng
+export const getCartByUserRequest = (userID) => {
     try {
-        const res = instance.post('/api/cart', obj);
+        const res = instance.get(`/api/cart/${userID}`);
         return res;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getCartByUserRequest = (userID) => {
+// sau khi add hay update cart sẽ save giỏ hàng lên csdl
+export const postSaveCartRequest = ({ cartLocal, userID }) => {
+    // xử lý dữ liệu phù hợp lưu csdl
+    const cart = cartLocal.products.map((item) => {
+        return {
+            _id: item.product._id,
+            count: item.count,
+        };
+    });
+
+    const obj = {
+        cart,
+        _id: userID,
+    };
+
     try {
-        const res = instance.get(`/api/cart/${userID}`);
+        const res = instance.post('/api/cart', obj);
         return res;
     } catch (error) {
         console.log(error);
