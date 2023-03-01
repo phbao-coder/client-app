@@ -33,7 +33,8 @@ function* workAddProductToCart({ payload }) {
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
         const cartLocal = yield select((state) => state.cart.cart);
         const userID = yield select((state) => state.user.user.id);
-        yield call(postSaveCartRequest, { cartLocal, userID });
+        const token = yield select((state) => state.user.user.accessToken);
+        yield call(postSaveCartRequest, { cartLocal, userID, token });
     } catch (error) {
         console.log(error);
         yield put(addProductToCartFailed());
@@ -46,7 +47,8 @@ function* workUpdateIncreaProductInCart({ payload }) {
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
         const cartLocal = yield select((state) => state.cart.cart);
         const userID = yield select((state) => state.user.user.id);
-        yield call(postSaveCartRequest, { cartLocal, userID });
+        const token = yield select((state) => state.user.user.accessToken);
+        yield call(postSaveCartRequest, { cartLocal, userID, token });
     } catch (error) {
         console.log(error);
         yield put(updateProductInCartFailed());
@@ -59,7 +61,8 @@ function* workUpdateDecreaProductInCart({ payload }) {
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
         const cartLocal = yield select((state) => state.cart.cart);
         const userID = yield select((state) => state.user.user.id);
-        yield call(postSaveCartRequest, { cartLocal, userID });
+        const token = yield select((state) => state.user.user.accessToken);
+        yield call(postSaveCartRequest, { cartLocal, userID, token });
     } catch (error) {
         console.log(error);
         yield put(updateProductInCartFailed());
@@ -72,7 +75,8 @@ function* workRemoveProductInCart({ payload }) {
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
         const cartLocal = yield select((state) => state.cart.cart);
         const userID = yield select((state) => state.user.user.id);
-        yield call(postSaveCartRequest, { cartLocal, userID });
+        const token = yield select((state) => state.user.user.accessToken);
+        yield call(postSaveCartRequest, { cartLocal, userID, token });
     } catch (error) {
         console.log(error);
         yield put(removeProductToCartFailed());
