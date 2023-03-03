@@ -6,6 +6,11 @@ export const Toast = Swal.mixin({
     timer: 2000,
 });
 
+export const ToastOrder = Swal.mixin({
+    toast: true,
+    showConfirmButton: true,
+});
+
 export const SwalertSuccess = Swal.mixin({
     showConfirmButton: true,
     confirmButtonColor: '#6c757d',

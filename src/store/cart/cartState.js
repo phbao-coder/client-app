@@ -60,6 +60,10 @@ const cartSlice = createSlice({
         getCartFromServerFailed: (state) => {
             state.isLoading = false;
         },
+        clearCart: (state) => {
+            state.cart.products = [];
+            state.cart.cartTotal = 0;
+        },
     },
 });
 
@@ -78,5 +82,6 @@ export const {
     getCartFromServer,
     getCartFromServerSuccess,
     getCartFromServerFailed,
+    clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
