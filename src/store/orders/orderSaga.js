@@ -1,7 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { postOrder } from '~/services/order.service';
+import { getAllOrdersByUser, postOrder } from '~/services/order.service';
 import { clearCart } from '../cart/cartState';
-import { order, orderSuccess } from './orderState';
+import {
+    getOrdersByUser,
+    getOrdersByUserFailed,
+    getOrdersByUserSuccess,
+    order,
+    orderSuccess,
+} from './orderState';
 
 function* workOrder({ payload }) {
     // payload: {_id, method, destination, phone, note, navigate}
@@ -19,8 +25,22 @@ function* workOrder({ payload }) {
     }
 }
 
+function* workGetAllOrders({ payload }) {
+    // payload phải là id user
+    try {
+        const res = yield call(getAllOrdersByUser, payload);
+        if (res.status === 200) {
+            yield put(getOrdersByUserSuccess(res.data));
+        }
+    } catch (error) {
+        console.log(error);
+        yield put(getOrdersByUserFailed());
+    }
+}
+
 function* orderSaga() {
     yield takeLatest(order.type, workOrder);
+    yield takeLatest(getOrdersByUser.type, workGetAllOrders);
 }
 
 export default orderSaga;

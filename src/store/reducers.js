@@ -9,5 +9,5 @@ export const reducers = combineReducers({
     user: userSlice,
     products: productsSlice,
     cart: cartSlice,
-    order: orderSlice,
+    orders: orderSlice,
 });
