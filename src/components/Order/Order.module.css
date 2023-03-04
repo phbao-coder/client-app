@@ -22,6 +22,12 @@
     display: flex;
 }
 
+.order .info-user .row .row-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .order .info-user .row label,
 .order .info-user .row input {
     margin-bottom: 10px;
@@ -29,14 +35,23 @@
     font-size: var(--font-size-tag-p);
 }
 
-.order .info-user .row label {
-    width: 40%;
+.order .info-user .row input {
+    border-radius: 4px;
+    border: 0.5px solid hsl(0, 0%, 80%);
 }
 
-.order .info-user .row input {
-    width: 70%;
-    outline: none;
-    border: 1px solid var(--gray);
+.order .info-user .row input:focus {
+    outline: 2.5px solid var(--blue);
+}
+
+.order .info-user .row span {
+    font-size: var(--font-size-tag-p);
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+.order .info-user .row label {
+    width: 40%;
 }
 
 .order .action {
@@ -67,6 +82,7 @@
     color: var(--white);
     background-color: var(--gray);
     border: none;
+    border-radius: 5px;
 }
 
 .order .action button:hover {
@@ -83,6 +99,12 @@
 
 .address .select {
     width: 33.3%;
+    font-size: var(--font-size-tag-p);
+}
+
+.row .select-method {
+    width: 100%;
+    font-size: var(--font-size-tag-p);
 }
 
 @media only screen and (max-width: 1500px) {
