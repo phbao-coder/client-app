@@ -1,0 +1,131 @@
+/* order */
+.order {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.order h1 {
+    margin-bottom: 20px;
+    padding: 5px;
+    color: var(--gray-dark);
+}
+
+.order .info-user {
+    margin-top: 10px;
+    padding: 0 30px;
+    width: 80%;
+}
+
+.order .info-user .row {
+    width: 100%;
+    display: flex;
+}
+
+.order .info-user .row label,
+.order .info-user .row input {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: var(--font-size-tag-p);
+}
+
+.order .info-user .row label {
+    width: 40%;
+}
+
+.order .info-user .row input {
+    width: 70%;
+    outline: none;
+    border: 1px solid var(--gray);
+}
+
+.order .action {
+    margin-top: 10px;
+    width: 20%;
+}
+
+.order .action h2 {
+    font-size: var(--font-size-tag-p);
+    font-weight: 300;
+}
+.order .action h2:last-child {
+    font-size: var(--font-size-heading-three);
+    color: var(--red);
+}
+
+.order .action .cost {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order .action button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: var(--font-size-tag-p);
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--gray);
+    border: none;
+}
+
+.order .action button:hover {
+    background-color: var(--gray-dark);
+}
+
+/* css address */
+.address {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.address .select {
+    width: 33.3%;
+}
+
+@media only screen and (max-width: 1500px) {
+    .order .action .cost {
+        gap: 10px;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .order {
+        flex-direction: column;
+    }
+
+    .order .info-user {
+        padding: 0;
+    }
+
+    .order .info-user,
+    .order .action {
+        width: 100%;
+    }
+
+    .order .action .cost {
+        flex-direction: row;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .order .info-user {
+        padding: 0;
+    }
+
+    .order .info-user .row {
+        flex-direction: column;
+    }
+
+    .order .info-user .row label {
+        width: 100%;
+    }
+
+    .order .info-user .row input {
+        width: 100%;
+    }
+}

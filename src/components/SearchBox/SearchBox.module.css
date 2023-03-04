@@ -110,6 +110,16 @@
     }
 }
 
+@media only screen and (max-width: 500px) {
+    .container {
+        width: 300px;
+    }
+
+    .box-items {
+        width: 100%;
+    }
+}
+
 /* Fix for height device */
 @media only screen and (max-height: 500px) {
     .container {
