@@ -4,11 +4,10 @@ import { clearCart } from '../cart/cartState';
 import { order, orderSuccess } from './orderState';
 
 function* workOrder({ payload }) {
-    // payload: {_id, method}
-    // method là phương thức thanh toán
-    const { _id, method, navigate } = payload;
+    // payload: {_id, method, destination, phone, note, navigate}
+    const { navigate, ...others } = payload;
     try {
-        const res = yield call(postOrder, { _id, method });
+        const res = yield call(postOrder, others);
         if (res.status === 200) {
             yield put(orderSuccess());
             yield put(clearCart());

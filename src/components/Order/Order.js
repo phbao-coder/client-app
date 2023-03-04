@@ -23,7 +23,7 @@ import style from './Order.module.css';
 const cx = classNames.bind(style);
 
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
-const methods = [{ value: 'Cash On Delivery', label: 'Thanh toán khi nhận hàng' }];
+const methods = [{ value: 'Cash on Delivery', label: 'Thanh toán khi nhận hàng' }];
 
 function Order() {
     const [method, setMethod] = useState(methods[0].value);
@@ -68,7 +68,7 @@ function Order() {
             navigate,
         };
         console.log(obj);
-        // dispatch(order(obj));
+        dispatch(order(obj));
     };
 
     return (

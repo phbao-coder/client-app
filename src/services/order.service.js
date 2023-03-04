@@ -1,9 +1,10 @@
 import instance from './instance';
 
 // create order
-export const postOrder = ({ _id, method }) => {
+export const postOrder = (obj) => {
+    // obj: {_id, method, destination, phone, note}
     try {
-        const res = instance.post('/api/order', { _id, method });
+        const res = instance.post('/api/order', obj);
         return res;
     } catch (error) {
         console.log(error);
