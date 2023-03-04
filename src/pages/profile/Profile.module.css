@@ -8,14 +8,20 @@
 
 .orders {
     width: 60%;
+    margin-top: 10px;
 }
 
 .order {
     width: 100%;
-    margin-top: 60px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.action {
+    display: flex;
+    justify-content: space-between;
 }
 
 @media only screen and (max-width: 1300px) {
