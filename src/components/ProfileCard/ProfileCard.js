@@ -1,45 +1,40 @@
+import vnd from '~/utils/vnd';
 import classNames from 'classnames/bind';
 import style from './ProfileCard.module.css';
 
 const cx = classNames.bind(style);
 
-function ProfileCard({ name, username, email, phone }) {
-    return (
-        <div className={cx('wrapper')}>
-            <div className={cx('left')}>
-                <div className={cx('image')}></div>
-                <h4>{name}</h4>
-                <p>{username}</p>
-            </div>
-            <div className={cx('right')}>
-                <div className={cx('info')}>
-                    <h3>Thông tin liên hệ</h3>
-                    <div className={cx('info-data')}>
-                        <div className={cx('data')}>
-                            <h4>Địa chỉ Gmail</h4>
-                            <p>{email}</p>
-                        </div>
-                        <div className={cx('data')}>
-                            <h4>Số điện thoại</h4>
-                            <p>{phone}</p>
-                        </div>
-                    </div>
-                </div>
+function ProfileCard({ info, orders }) {
+    const arrCost = orders?.map((item) => item.paymentIntent.amount);
+    const sumCost = arrCost?.reduce((value, curr) => value + curr, 0);
 
-                <div className={cx('projects')}>
-                    <h3>Thống kê</h3>
-                    <div className={cx('projects-data')}>
-                        <div className={cx('data')}>
-                            <h4>Tổng số đơn hàng</h4>
-                            <p>10</p>
-                        </div>
-                        <div className={cx('data')}>
-                            <h4>Tổng chi phí</h4>
-                            <p>19.000.000 VND</p>
-                        </div>
+    return (
+        <div className={cx('card')}>
+            <div className={cx('card-image')}>
+                <img
+                    src="https://znews-photo.zingcdn.me/w660/Uploaded/qfssu/2022_05_20/hansara.official_91565310_844475592737706_3368894882940378725_n.jpg"
+                    alt="avt"
+                />
+            </div>
+            <div className={cx('card-info')}>
+                <div className={cx('card-info-address')}>
+                    <h2>{info.name}</h2>
+                    <p>
+                        {info.address} <br /> {info.email} <br /> {info.phone}
+                    </p>
+                </div>
+                <div className={cx('card-info-order')}>
+                    <div className={cx('left')}>
+                        <h3>{orders?.length}</h3>
+                        <p>Tổng số đơn</p>
+                    </div>
+                    <div className={cx('right')}>
+                        <h3>{vnd(sumCost)} VND</h3>
+                        <p>Chi phí</p>
                     </div>
                 </div>
             </div>
+            <button>Cập nhật</button>
         </div>
     );
 }

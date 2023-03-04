@@ -27,7 +27,7 @@ function Profile() {
 
     return (
         <div className={cx('container')}>
-            <ProfileCard {...user} />
+            <ProfileCard info={user} orders={orders} />
         </div>
     );
 }
