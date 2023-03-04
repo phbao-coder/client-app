@@ -8,6 +8,7 @@ import ProfileCard from '~/components/ProfileCard/ProfileCard';
 
 import classNames from 'classnames/bind';
 import style from './Profile.module.css';
+import OrderCard from '~/components/OrderCard/OrderCard';
 
 const cx = classNames.bind(style);
 
@@ -33,6 +34,11 @@ function Profile() {
             <ProfileCard info={user} orders={orders} />
             <div className={cx('orders')}>
                 <h1>Danh sách giỏ hàng</h1>
+                <div className={cx('order')}>
+                    {orders?.map((order, index) => (
+                        <OrderCard key={index} order={order} />
+                    ))}
+                </div>
             </div>
         </div>
     );
