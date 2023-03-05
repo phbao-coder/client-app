@@ -64,12 +64,20 @@ function Profile() {
 
     const handleSort = (e) => {
         if (e.value === 'Tăng dần') {
-            const ordersSorted = ascending(orders);
+            const ordersSorted = ascending(ordersFilter);
             dispatch(orderSort(ordersSorted));
         } else {
-            const ordersSorted = decrease(orders);
+            const ordersSorted = decrease(ordersFilter);
             dispatch(orderSort(ordersSorted));
         }
+    };
+
+    const handleFilterDay = (e) => {
+        const ordersTemp = [...orders];
+        const newOrders = ordersTemp.filter(
+            (item) => item.createdAt.slice(0, 10) === e.target.value,
+        );
+        dispatch(orderFilter(newOrders));
     };
 
     const handleStatus = (e) => {
@@ -97,14 +105,21 @@ function Profile() {
             </div>
             <div className={cx('orders')}>
                 <div className={cx('action')}>
-                    <h1>Danh sách giỏ hàng</h1>
+                    <h1>Danh sách đơn hàng</h1>
                     <div className={cx('action-filter')}>
+                        <input
+                            type="date"
+                            onChange={(e) => handleFilterDay(e)}
+                            className={cx('input-date')}
+                        />
                         <Select
+                            className={cx('selected')}
                             onChange={(e) => handleSort(e)}
                             placeholder="Sắp xếp"
                             options={menu}
                         />
                         <Select
+                            className={cx('selected')}
                             onChange={(e) => handleStatus(e)}
                             placeholder="Trạng thái đơn"
                             options={status}

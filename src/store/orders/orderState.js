@@ -42,7 +42,7 @@ const orderSlice = createSlice({
             state.isLoading = true;
         },
         orderSortSuccess: (state, { payload }) => {
-            state.orders = payload;
+            state.ordersFilter = payload;
             state.isLoading = false;
         },
         orderSortFailed: (state) => {

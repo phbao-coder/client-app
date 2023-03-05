@@ -26,8 +26,33 @@
 
 .action .action-filter {
     display: flex;
-    align-items: center;
     gap: 20px;
+}
+
+.selected {
+    font-size: 1.2rem;
+}
+
+.input-date {
+    padding: 3px 5px;
+    border: 1px solid var(--gray);
+    font-size: 1.2rem;
+    border-radius: 4px;
+    color: var(--gray);
+    border: 0.2px solid hsl(0, 0%, 80%);
+}
+
+.input-date:focus {
+    border: none;
+    outline: 3px solid var(--blue);
+}
+
+::-webkit-calendar-picker-indicator {
+    opacity: 0.3;
+    background-color: var(--white);
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -47,6 +72,13 @@
     }
 }
 
+@media only screen and (max-width: 900px) {
+    .action {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
 @media only screen and (max-width: 670px) {
     .container {
         margin-bottom: 10%;
@@ -54,11 +86,14 @@
     }
 
     .action {
-        flex-direction: column;
-        gap: 20px;
+        align-items: center;
     }
 
     .action h1 {
         text-align: center;
+    }
+
+    .action .action-filter {
+        flex-direction: column;
     }
 }
