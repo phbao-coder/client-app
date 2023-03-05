@@ -71,8 +71,6 @@ function Profile() {
         }
     }, [isUser, navigate, dispatch, user.id]);
 
-    console.log(orders);
-
     return (
         <div className={cx('container')}>
             <div className={cx('profile')}>
@@ -81,15 +79,11 @@ function Profile() {
             <div className={cx('orders')}>
                 <div className={cx('action')}>
                     <h1>Danh sách giỏ hàng</h1>
-                    <Select
-                        onChange={(e) => handleSort(e)}
-                        placeholder="Sắp xếp"
-                        options={menu}
-                    ></Select>
+                    <Select onChange={(e) => handleSort(e)} placeholder="Sắp xếp" options={menu} />
                 </div>
                 <div className={cx('order')}>
                     {ordersRender?.map((order, index) => (
-                        <OrderCard key={index} order={order} />
+                        <OrderCard key={index} order={order} user={user} />
                     ))}
                 </div>
             </div>

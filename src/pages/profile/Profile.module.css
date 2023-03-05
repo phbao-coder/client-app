@@ -46,4 +46,13 @@
         margin-bottom: 10%;
         padding: 90px 0 0 0;
     }
+
+    .action {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .action h1 {
+        text-align: center;
+    }
 }

@@ -11,6 +11,19 @@ export const postOrder = (obj) => {
     }
 };
 
+// cencelled order
+export const putCencelledOrder = (idOrder) => {
+    // _id là _id của đơn hàng
+    const status = { status: 'Cancelled' };
+    try {
+        // vì đây là api hủy đơn nên gán mặc định 'Cancelled'
+        const res = instance.put(`/api/order/${idOrder}`, status);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // get all orders by user
 export const getAllOrdersByUser = (_id) => {
     try {

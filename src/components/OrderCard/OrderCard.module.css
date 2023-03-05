@@ -1,12 +1,5 @@
-.table-heading {
-    font-size: var(--font-size-tag-p);
-    font-weight: 600;
-    color: var(--gray-dark);
-}
-
-.table-body {
-    font-size: var(--font-size-tag-p);
-    color: var(--gray-dark);
+.products {
+    overflow: scroll;
 }
 
 .info-order {
@@ -20,6 +13,10 @@
     color: var(--gray-dark);
     font-size: var(--font-size-tag-p);
     line-height: 30px;
+}
+
+.info-order .info-order-action {
+    width: 20%;
 }
 
 .info-order .info-order-action p {
@@ -43,6 +40,27 @@
     font-size: var(--font-size-tag-p);
 }
 
+.action-sort {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.action-sort span {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.action-sort span .icon {
+    padding: 0 10px;
+}
+
+@media only screen and (max-width: 1500px) {
+    .info-order .info-order-action {
+        width: 40%;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .table-heading,
     .table-body {
@@ -51,5 +69,9 @@
 
     .info-order {
         flex-direction: column;
+    }
+
+    .info-order .info-order-action {
+        width: 100%;
     }
 }

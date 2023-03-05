@@ -16,6 +16,15 @@ const orderSlice = createSlice({
         orderFailed: (state) => {
             state.isLoading = false;
         },
+        orderCancell: (state) => {
+            state.isLoading = true;
+        },
+        orderCancellSuccess: (state) => {
+            state.isLoading = false;
+        },
+        orderCancellFailed: (state) => {
+            state.isLoading = false;
+        },
         getOrdersByUser: (state) => {
             state.isLoading = true;
         },
@@ -33,6 +42,9 @@ export const {
     order,
     orderSuccess,
     orderFailed,
+    orderCancell,
+    orderCancellSuccess,
+    orderCancellFailed,
     getOrdersByUser,
     getOrdersByUserSuccess,
     getOrdersByUserFailed,
