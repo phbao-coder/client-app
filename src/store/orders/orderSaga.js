@@ -1,3 +1,5 @@
+import { ToastOrderSuccess } from '~/minxin';
+
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getAllOrdersByUser, putCencelledOrder, postOrder } from '~/services/order.service';
 import { clearCart } from '../cart/cartState';
@@ -22,7 +24,11 @@ function* workOrder({ payload }) {
             yield put(orderSuccess());
             yield put(clearCart());
             yield navigate('/');
-            console.log('Order success');
+            ToastOrderSuccess.fire({
+                title: 'Đặt hàng thành công',
+                text: 'Đơn hàng của bạn đang được xử lý',
+                icon: 'success',
+            });
         }
     } catch (error) {
         console.log(error);

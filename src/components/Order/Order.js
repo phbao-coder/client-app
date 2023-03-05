@@ -67,7 +67,6 @@ function Order() {
             note: data.note,
             navigate,
         };
-        console.log(obj);
         dispatch(order(obj));
     };
 
