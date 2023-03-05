@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 
 import classNames from 'classnames/bind';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { orderCancell } from '~/store/orders/orderState';
 import vnd from '~/utils/vnd';
@@ -139,7 +138,14 @@ const decreaseCost = (products) => {
 const methods = (method) => {
     switch (method) {
         case 'Cash on Delivery':
-            return 'Nhận khi giao hàng';
+            return 'Thanh toán khi nhận hàng';
+        default:
+            return 'Thanh toán khi nhận hàng';
+    }
+};
+
+const status = (state) => {
+    switch (state) {
         case 'Processing':
             return 'Đơn hàng đang được xử lý';
         case 'Dispatched':
@@ -147,11 +153,11 @@ const methods = (method) => {
         case 'Cancelled':
             return 'Đơn hàng đã bị hủy';
         default:
-            return 'Đơn hàng chưa được xử lý';
+            return 'Đơn hàng đang được xử lý';
     }
 };
 
-function OrderCard({ order, user }) {
+function OrderCard({ order, user, index }) {
     const products = order.products;
     const day = order.createdAt.slice(0, 10);
     const hours = order.createdAt.slice(11, 16);
@@ -167,7 +173,7 @@ function OrderCard({ order, user }) {
     const handleCancelledOrder = () => {
         const idOrder = order._id;
         const idUser = user.id;
-        dispatch(orderCancell({ idUser, idOrder }));
+        dispatch(orderCancell({ idUser, idOrder, index }));
     };
 
     return (
@@ -292,13 +298,20 @@ function OrderCard({ order, user }) {
                         <b>Địa chỉ nhận hàng:</b> <i>{order.paymentIntent.destination}</i> <br />
                         <b>Số điện thoại nhận hàng: </b>
                         <i>{order.paymentIntent.phone}</i>
+                        <br />
+                        <b>Phương thức thanh toán</b>: {methods(order.paymentIntent.method)}
                     </p>
                 </div>
                 <div className={cx('info-order-action')}>
                     <h3>Tổng giá trị đơn hàng</h3>
                     <p>{vnd(order.paymentIntent.amount)} VND</p>
-                    <p className={cx('method')}> {methods(order.paymentIntent.method)}</p>
-                    <button onClick={() => handleCancelledOrder()}>Hủy đơn</button>
+                    <p className={cx('method')}>{status(order.orderStatus)}</p>
+                    <button
+                        onClick={() => handleCancelledOrder()}
+                        disabled={order.orderStatus === 'Cancelled'}
+                    >
+                        Hủy đơn
+                    </button>
                 </div>
             </div>
         </div>

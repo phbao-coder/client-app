@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 
-import { getOrdersByUser } from '~/store/orders/orderState';
+import { getOrdersByUser, orderSort } from '~/store/orders/orderState';
 
 import ProfileCard from '~/components/ProfileCard/ProfileCard';
 
@@ -53,23 +53,22 @@ function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [ordersRender, setOrderRender] = useState(orders);
-
     const handleSort = (e) => {
         if (e.value === 'Tăng dần') {
-            setOrderRender(ascending(orders));
+            const ordersSorted = ascending(orders);
+            dispatch(orderSort(ordersSorted));
         } else {
-            setOrderRender(decrease(orders));
+            const ordersSorted = decrease(orders);
+            dispatch(orderSort(ordersSorted));
         }
     };
 
     useEffect(() => {
         if (isUser === false) {
             navigate('/login');
-        } else {
-            dispatch(getOrdersByUser(user.id));
         }
-    }, [isUser, navigate, dispatch, user.id]);
+        dispatch(getOrdersByUser(user?.id));
+    }, [dispatch, isUser, navigate, user?.id]);
 
     return (
         <div className={cx('container')}>
@@ -82,8 +81,8 @@ function Profile() {
                     <Select onChange={(e) => handleSort(e)} placeholder="Sắp xếp" options={menu} />
                 </div>
                 <div className={cx('order')}>
-                    {ordersRender?.map((order, index) => (
-                        <OrderCard key={index} order={order} user={user} />
+                    {orders?.map((order, index) => (
+                        <OrderCard key={index} order={order} user={user} index={index} />
                     ))}
                 </div>
             </div>

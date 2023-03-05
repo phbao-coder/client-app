@@ -12,6 +12,9 @@ import {
     orderCancellFailed,
     orderCancellSuccess,
     orderFailed,
+    orderSort,
+    orderSortFailed,
+    orderSortSuccess,
     orderSuccess,
 } from './orderState';
 
@@ -42,12 +45,13 @@ function* workOrder({ payload }) {
 }
 
 function* workCancelledOrder({ payload }) {
-    const { idUser, idOrder } = payload;
+    const { idUser, idOrder, index } = payload;
     const _id = idUser;
     try {
         const res = yield call(putCencelledOrder, idOrder);
         if (res.status === 200) {
-            yield put(orderCancellSuccess());
+            // nhận index để update lại order local storage
+            yield put(orderCancellSuccess(index));
             yield put(getOrdersByUser(_id));
             ToastOrder.fire({
                 title: 'Hủy đơn thành công',
@@ -79,10 +83,21 @@ function* workGetAllOrders({ payload }) {
     }
 }
 
+function* workSortOrder({ payload }) {
+    // payload là một order đã được sắp xếp
+    try {
+        yield put(orderSortSuccess(payload));
+    } catch (error) {
+        console.log(error);
+        yield put(orderSortFailed());
+    }
+}
+
 function* orderSaga() {
     yield takeLatest(order.type, workOrder);
     yield takeLatest(orderCancell.type, workCancelledOrder);
     yield takeLatest(getOrdersByUser.type, workGetAllOrders);
+    yield takeLatest(orderSort.type, workSortOrder);
 }
 
 export default orderSaga;

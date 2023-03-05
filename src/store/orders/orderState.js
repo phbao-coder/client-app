@@ -19,7 +19,8 @@ const orderSlice = createSlice({
         orderCancell: (state) => {
             state.isLoading = true;
         },
-        orderCancellSuccess: (state) => {
+        orderCancellSuccess: (state, { payload }) => {
+            state.orders[payload].orderSatus = 'Cancelled';
             state.isLoading = false;
         },
         orderCancellFailed: (state) => {
@@ -35,6 +36,16 @@ const orderSlice = createSlice({
         getOrdersByUserFailed: (state) => {
             state.isLoading = false;
         },
+        orderSort: (state) => {
+            state.isLoading = true;
+        },
+        orderSortSuccess: (state, { payload }) => {
+            state.orders = payload;
+            state.isLoading = false;
+        },
+        orderSortFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -48,6 +59,9 @@ export const {
     getOrdersByUser,
     getOrdersByUserSuccess,
     getOrdersByUserFailed,
+    orderSort,
+    orderSortSuccess,
+    orderSortFailed,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

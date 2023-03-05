@@ -5,7 +5,8 @@ import style from './ProfileCard.module.css';
 const cx = classNames.bind(style);
 
 function ProfileCard({ info, orders }) {
-    const arrCost = orders?.map((item) => item.paymentIntent.amount);
+    const ordersNotCancelled = orders.filter((item) => item.orderStatus !== 'Cancelled');
+    const arrCost = ordersNotCancelled?.map((item) => item.paymentIntent.amount);
     const sumCost = arrCost?.reduce((value, curr) => value + curr, 0);
 
     return (
