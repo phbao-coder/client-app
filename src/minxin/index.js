@@ -45,4 +45,4 @@ export const configSwalert = {
 };
 
 // notification order
-export const ToastOrderSuccess = Swal.mixin({});
+export const ToastOrder = Swal.mixin({});
