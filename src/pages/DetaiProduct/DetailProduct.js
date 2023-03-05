@@ -6,8 +6,8 @@ import { getProductId } from '~/store/products/productsState';
 
 import classNames from 'classnames/bind';
 import style from './DetailProduct.module.css';
-import DetailProductCard from '~/components/DetailProductCard/DetailProductCard';
-import FeatureProducts from '~/components/FeaturedProduct/FeaturesProduct';
+import DetailProductCard from '~/components/ProductCard/DetailProductCard';
+import FeatureProducts from '~/components/ProductSilder/FeaturesProduct';
 
 const cx = classNames.bind(style);
 
