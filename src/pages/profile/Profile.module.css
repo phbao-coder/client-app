@@ -24,6 +24,12 @@
     justify-content: space-between;
 }
 
+.action .action-filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 @media only screen and (max-width: 1300px) {
     .container {
         display: flex;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 
-import { getOrdersByUser, orderSort } from '~/store/orders/orderState';
+import { getOrdersByUser, orderFilter, orderSort } from '~/store/orders/orderState';
 
 import ProfileCard from '~/components/ProfileCard/ProfileCard';
 
@@ -12,11 +12,6 @@ import style from './Profile.module.css';
 import OrderCard from '~/components/OrderCard/OrderCard';
 
 const cx = classNames.bind(style);
-
-const menu = [
-    { value: 'Tăng dần', label: 'Tăng dần' },
-    { value: 'Giảm dần', label: 'Giảm dần' },
-];
 
 const ascending = (orders) => {
     let ordersTemp = [...orders];
@@ -46,10 +41,24 @@ const decrease = (orders) => {
     return ordersTemp;
 };
 
+const menu = [
+    { value: 'Tăng dần', label: 'Tăng dần' },
+    { value: 'Giảm dần', label: 'Giảm dần' },
+];
+
+const status = [
+    { value: 'all', label: 'Tất cả' },
+    { value: 'Processing', label: 'Đang xử lý' },
+    { value: 'Delivered', label: 'Đã giao' },
+    { value: 'Dispatch', label: 'Đang giao' },
+    { value: 'Cancelled', label: 'Đã hủy' },
+];
+
 function Profile() {
     const user = useSelector((state) => state.user.user);
     const isUser = useSelector((state) => state.user.isUser);
     const orders = useSelector((state) => state?.orders?.orders);
+    const ordersFilter = useSelector((state) => state?.orders?.ordersFilter);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -60,6 +69,17 @@ function Profile() {
         } else {
             const ordersSorted = decrease(orders);
             dispatch(orderSort(ordersSorted));
+        }
+    };
+
+    const handleStatus = (e) => {
+        if (e.value !== 'all') {
+            // lấy ds orders gốc để filter, ordersFilter chỉ làm nv render dữ liệu dự trên orders
+            const ordersTemp = [...orders];
+            const newOrders = ordersTemp.filter((item) => item.orderStatus === e.value);
+            dispatch(orderFilter(newOrders));
+        } else {
+            dispatch(getOrdersByUser(user?.id));
         }
     };
 
@@ -78,10 +98,21 @@ function Profile() {
             <div className={cx('orders')}>
                 <div className={cx('action')}>
                     <h1>Danh sách giỏ hàng</h1>
-                    <Select onChange={(e) => handleSort(e)} placeholder="Sắp xếp" options={menu} />
+                    <div className={cx('action-filter')}>
+                        <Select
+                            onChange={(e) => handleSort(e)}
+                            placeholder="Sắp xếp"
+                            options={menu}
+                        />
+                        <Select
+                            onChange={(e) => handleStatus(e)}
+                            placeholder="Trạng thái đơn"
+                            options={status}
+                        />
+                    </div>
                 </div>
                 <div className={cx('order')}>
-                    {orders?.map((order, index) => (
+                    {ordersFilter?.map((order, index) => (
                         <OrderCard key={index} order={order} user={user} index={index} />
                     ))}
                 </div>

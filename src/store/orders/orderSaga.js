@@ -12,6 +12,8 @@ import {
     orderCancellFailed,
     orderCancellSuccess,
     orderFailed,
+    orderFilter,
+    orderFilterSuccess,
     orderSort,
     orderSortFailed,
     orderSortSuccess,
@@ -93,11 +95,21 @@ function* workSortOrder({ payload }) {
     }
 }
 
+function* workOrderFilter({ payload }) {
+    // payload là một order đã được filter
+    try {
+        yield put(orderFilterSuccess(payload));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function* orderSaga() {
     yield takeLatest(order.type, workOrder);
     yield takeLatest(orderCancell.type, workCancelledOrder);
     yield takeLatest(getOrdersByUser.type, workGetAllOrders);
     yield takeLatest(orderSort.type, workSortOrder);
+    yield takeLatest(orderFilter.type, workOrderFilter);
 }
 
 export default orderSaga;

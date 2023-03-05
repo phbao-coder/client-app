@@ -4,6 +4,7 @@ const orderSlice = createSlice({
     name: 'orders',
     initialState: {
         orders: [],
+        ordersFilter: [],
         isLoading: false,
     },
     reducers: {
@@ -31,6 +32,7 @@ const orderSlice = createSlice({
         },
         getOrdersByUserSuccess: (state, { payload }) => {
             state.orders = payload;
+            state.ordersFilter = payload;
             state.isLoading = false;
         },
         getOrdersByUserFailed: (state) => {
@@ -44,6 +46,16 @@ const orderSlice = createSlice({
             state.isLoading = false;
         },
         orderSortFailed: (state) => {
+            state.isLoading = false;
+        },
+        orderFilter: (state) => {
+            state.isLoading = true;
+        },
+        orderFilterSuccess: (state, { payload }) => {
+            state.ordersFilter = payload;
+            state.isLoading = false;
+        },
+        orderFilterFailed: (state) => {
             state.isLoading = false;
         },
     },
@@ -62,6 +74,9 @@ export const {
     orderSort,
     orderSortSuccess,
     orderSortFailed,
+    orderFilter,
+    orderFilterSuccess,
+    orderFilterFailed,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
