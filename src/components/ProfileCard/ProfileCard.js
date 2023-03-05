@@ -26,7 +26,7 @@ function ProfileCard({ info, orders }) {
                 </div>
                 <div className={cx('card-info-order')}>
                     <div className={cx('left')}>
-                        <h3>{orders?.length}</h3>
+                        <h3>{ordersNotCancelled?.length}</h3>
                         <p>Tổng số đơn</p>
                     </div>
                     <div className={cx('right')}>
