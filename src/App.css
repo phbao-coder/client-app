@@ -13,6 +13,7 @@
     --purple: #6f42c1;
     --pink: #e83e8c;
     --red: #dc3545;
+    --crimson: #ac1b2a;
     --orange: #fd7e14;
     --yellow: #ffc107;
     --green: #28a745;
@@ -25,7 +26,7 @@
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
-    --danger: #ff0000c4;
+    --danger: #dc3545;
 
     /* font size*/
     --font-size-header-logo: 1.6rem;
@@ -88,4 +89,20 @@ body {
     background-color: var(--light);
     color: var(--gray);
     border-radius: 5px;
+}
+
+/* custom btn sweetAlert2 */
+.btn-danger {
+    width: 100px;
+    padding: 10px 0px;
+    font-size: 1.2rem;
+    color: var(--white);
+    background-color: var(--red);
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: var(--crimson);
 }

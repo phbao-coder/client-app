@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { configSwalert, configToast, SwalertError, SwalertSuccess, Toast } from '~/minxin';
+import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
 import { loginUserRequest, registerUserRequest } from '~/services/user.service';
 import {
     userLogin,
@@ -16,11 +16,18 @@ function* workUserLogin(action) {
     try {
         const res = yield call(loginUserRequest, payload);
         if (res.status === 200) {
-            Toast.fire({ ...configToast.success, text: 'Login success' });
+            Toast.fire({
+                ...configToast,
+                width: 300,
+                text: 'Đăng nhập thành công',
+            });
             yield put(userLoginSuccess(res.data));
         }
     } catch (error) {
-        Toast.fire({ ...configToast.error, text: 'Username or password not vaild' });
+        ToastFailed.fire({
+            ...configToastFailed,
+            text: 'Tài khoản hoặc mật khẩu không chính xác',
+        });
         yield put(userLoginFailed());
     }
 }
@@ -30,19 +37,11 @@ function* workUserRegister(action) {
     try {
         const res = yield call(registerUserRequest, payload);
         if (res.status === 200) {
-            SwalertSuccess.fire({
-                ...configSwalert.swalertSuccess,
-                title: 'Register success',
-                text: 'Register account success fully',
-            });
+            Toast.fire({ ...configToast, text: 'Đăng ký tài khoản thành công' });
             yield put(registerUserSuccess());
         }
     } catch (error) {
-        SwalertError.fire({
-            ...configSwalert.swalertError,
-            title: 'Register error',
-            text: 'Username or password is used',
-        });
+        ToastFailed.fire({ ...configToastFailed, text: 'Các thông tin này đã có người sử dụng' });
         yield put(registerUserFailed());
     }
 }

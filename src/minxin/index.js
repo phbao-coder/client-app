@@ -2,46 +2,29 @@ import Swal from 'sweetalert2';
 
 export const Toast = Swal.mixin({
     toast: true,
-    showConfirmButton: false,
     timer: 2000,
-});
-
-export const SwalertSuccess = Swal.mixin({
-    showConfirmButton: true,
-    confirmButtonColor: '#6c757d',
-});
-
-export const SwalertError = Swal.mixin({
     showConfirmButton: false,
-    showCancelButton: true,
 });
 
 export const configToast = {
-    success: {
-        icon: 'success',
-        iconColor: '#6c757d',
-        position: 'top-end',
-        width: '15em',
-    },
-    error: {
-        icon: 'error',
-        iconColor: '#6c757d',
-        position: 'top-end',
-        width: '20em',
-    },
+    icon: 'success',
+    padding: '1rem 0.5rem',
+    position: 'top-end',
 };
 
-export const configSwalert = {
-    swalertSuccess: {
-        icon: 'success',
-        iconColor: '#6c757d',
-        position: 'center',
+export const ToastFailed = Swal.mixin({
+    customClass: {
+        cancelButton: 'btn-danger',
     },
-    swalertError: {
-        icon: 'error',
-        iconColor: '#6c757d',
-        position: 'center',
-    },
+    buttonsStyling: false,
+    cancelButtonText: 'Hủy',
+    showCancelButton: true,
+    showConfirmButton: false,
+});
+
+export const configToastFailed = {
+    icon: 'error',
+    title: 'Lỗi',
 };
 
 // notification order
