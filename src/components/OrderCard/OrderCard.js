@@ -311,7 +311,7 @@ function OrderCard({ order, user, index }) {
                         onClick={() => handleCancelledOrder()}
                         disabled={order.orderStatus === 'Cancelled'}
                     >
-                        Hủy đơn
+                        {order.orderStatus === 'Cancelled' ? 'Đã hủy' : 'Hủy đơn'}
                     </button>
                 </div>
             </div>
