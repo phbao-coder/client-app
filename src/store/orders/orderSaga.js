@@ -1,4 +1,4 @@
-import { ToastOrder } from '~/minxin';
+import { Toast } from '~/minxin';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getAllOrdersByUser, putCencelledOrder, postOrder } from '~/services/order.service';
@@ -28,19 +28,19 @@ function* workOrder({ payload }) {
         if (res.status === 200) {
             yield put(orderSuccess());
             yield put(clearCart());
-            yield navigate('/');
-            ToastOrder.fire({
+            yield navigate('/product');
+            Toast.fire({
+                icon: 'success',
                 title: 'Đặt hàng thành công',
                 text: 'Đơn hàng của bạn đang được xử lý',
-                icon: 'success',
             });
         }
     } catch (error) {
         // console.log(error);
-        ToastOrder.fire({
+        Toast.fire({
+            icon: 'error',
             title: 'Đặt hàng không thành công',
             text: 'Xin lỗi vì sự bất tiện này',
-            icon: 'error',
         });
         yield put(orderFailed());
     }
@@ -55,18 +55,18 @@ function* workCancelledOrder({ payload }) {
             // nhận index để update lại order local storage
             yield put(orderCancellSuccess(index));
             yield put(getOrdersByUser(_id));
-            ToastOrder.fire({
+            Toast.fire({
+                icon: 'success',
                 title: 'Hủy đơn thành công',
                 text: 'Đơn hàng đã được hủy',
-                icon: 'success',
             });
         }
     } catch (error) {
         console.log(error);
-        ToastOrder.fire({
+        Toast.fire({
+            icon: 'error',
             title: 'Hủy đơn không thành công',
             text: 'Xin lỗi vì sự bất tiện này',
-            icon: 'error',
         });
         yield put(orderCancellFailed());
     }

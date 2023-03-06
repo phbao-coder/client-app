@@ -1,15 +1,14 @@
 import Swal from 'sweetalert2';
 
-export const Toast = Swal.mixin({
-    toast: true,
-    timer: 2000,
-    showConfirmButton: false,
-});
+export const Toast = Swal.mixin({});
 
 export const configToast = {
+    toast: true,
+    timer: 2000,
     icon: 'success',
     padding: '1rem 0.5rem',
     position: 'top-end',
+    showConfirmButton: false,
 };
 
 export const ToastFailed = Swal.mixin({
@@ -26,6 +25,3 @@ export const configToastFailed = {
     icon: 'error',
     title: 'Lỗi',
 };
-
-// notification order
-export const ToastOrder = Swal.mixin({});
