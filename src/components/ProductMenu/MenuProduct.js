@@ -68,6 +68,7 @@ function MenuProduct() {
                 onChange={(e) => {
                     if (e.value === 'All') {
                         setIsAll(true);
+                        setPrice({ priceBigger: 0, priceLess: 999999999 });
                         setCategory('All');
                     } else {
                         setIsAll(false);
