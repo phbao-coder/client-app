@@ -9,6 +9,7 @@
 
     /* color others */
     --blue: #007bff;
+    --blue-n: #0059ff;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -92,7 +93,8 @@ body {
 }
 
 /* custom btn sweetAlert2 */
-.btn-danger {
+.btn-danger,
+.btn-success {
     width: 100px;
     padding: 10px 0px;
     font-size: 1.2rem;
@@ -101,6 +103,15 @@ body {
     border-radius: 7px;
     border: none;
     cursor: pointer;
+}
+
+.btn-success {
+    margin-right: 10px;
+    background-color: var(--blue);
+}
+
+.btn-success:hover {
+    background-color: var(--blue-n);
 }
 
 .btn-danger:hover {

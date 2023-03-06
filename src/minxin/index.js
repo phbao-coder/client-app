@@ -14,6 +14,7 @@ export const configToast = {
 export const ToastFailed = Swal.mixin({
     customClass: {
         cancelButton: 'btn-danger',
+        confirmButton: 'btn-success',
     },
     buttonsStyling: false,
     cancelButtonText: 'Hủy',

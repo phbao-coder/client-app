@@ -13,12 +13,14 @@ import classNames from 'classnames/bind';
 import style from './Products.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 function Products() {
     const products = useSelector((state) => state.products.products);
-    const cart = useSelector((state) => state.cart.cart);
+    const cart = useSelector((state) => state?.cart?.cart);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [menuDisplay, setMenuDisplay] = useState(false);
@@ -28,7 +30,7 @@ function Products() {
             addProductToCart,
             updateIncreaProductInCart,
         };
-        addToCart(cart, product, dispatch, action);
+        addToCart(cart, product, dispatch, action, navigate);
     };
 
     useEffect(() => {

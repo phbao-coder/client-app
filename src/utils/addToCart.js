@@ -5,7 +5,7 @@
  * action => obj chứa các action cần thiết
  *
  */
-const addToCart = (cart, product, dispatch, action) => {
+const addToCart = (cart, product, dispatch, action, navigate) => {
     const productsCartTemp = [...cart?.products]; // tạo mảng temp
     // tìm xem sản phẩm có trong giỏ hay chưa
     const isProductInCart = productsCartTemp?.findIndex((item) => item.product._id === product._id);
@@ -15,7 +15,7 @@ const addToCart = (cart, product, dispatch, action) => {
             ...cart?.products,
             { product: product, count: 1, price: product.price },
         ];
-        dispatch(action.addProductToCart({ products: newProductsCart }));
+        dispatch(action.addProductToCart({ products: newProductsCart, navigate }));
     } else if (isProductInCart !== -1) {
         // sản phẩm đã tồn tại trong giỏ tăng count lên 1
         dispatch(action.updateIncreaProductInCart(isProductInCart));

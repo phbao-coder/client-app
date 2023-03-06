@@ -1,4 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
 import { getCartByUserRequest, postSaveCartRequest } from '~/services/cart.service';
 import {
     addProductToCart,
@@ -30,15 +31,31 @@ function* workGetCartFromServer({ payload }) {
 }
 
 function* workAddProductToCart({ payload }) {
+    const { products, navigate } = payload;
+    console.log(products);
     try {
-        yield put(addProductToCartSuccess(payload));
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
+        yield put(addProductToCartSuccess(products));
         const cartLocal = yield select((state) => state.cart.cart);
         const userID = yield select((state) => state.user.user.id);
         const token = yield select((state) => state.user.user.accessToken);
-        yield call(postSaveCartRequest, { cartLocal, userID, token });
+        const res = yield call(postSaveCartRequest, { cartLocal, userID, token });
+        if (res.status === 200) {
+            Toast.fire({ ...configToast, text: 'Đã thêm sản phẩm vào giỏ hàng' });
+        }
     } catch (error) {
         console.log(error);
+        ToastFailed.fire({
+            ...configToastFailed,
+            title: 'Không thể thêm sản phẩm',
+            text: 'Bạn cần phải đăng nhập',
+            showConfirmButton: true,
+            confirmButtonText: 'Đồng ý',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate('/login');
+            }
+        });
         yield put(addProductToCartFailed());
     }
 }

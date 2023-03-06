@@ -14,7 +14,7 @@ const cartSlice = createSlice({
             state.isLoading = true;
         },
         addProductToCartSuccess: (state, { payload }) => {
-            state.cart.products = payload.products;
+            state.cart.products = payload;
             state.isLoading = false;
         },
         addProductToCartFailed: (state) => {
