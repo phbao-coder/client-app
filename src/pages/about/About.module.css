@@ -1,0 +1,245 @@
+.container {
+    width: 100%;
+    margin: 70px 0 70px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
+    background: linear-gradient(
+        90deg,
+        var(--gray) 0%,
+        var(--gray) 30%,
+        var(--white) 30%,
+        var(--white) 100%
+    );
+    position: relative;
+    width: 90%;
+    padding: 40px 100px;
+}
+
+.contact .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    color: var(--gray-dark);
+    font-weight: 600;
+}
+
+.box .contact-form {
+    grid-area: form;
+}
+
+.box .contact-info {
+    grid-area: info;
+}
+
+.box .contact-map {
+    grid-area: map;
+}
+
+.box .contact-form,
+.box .contact-info,
+.box .contact-map {
+    padding: 40px;
+    background-color: var(--white);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.box {
+    margin-top: 10px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 5fr 4fr;
+    grid-template-areas: 'form info' 'form map';
+    grid-gap: 20px;
+}
+
+.box h2 {
+    color: var(--gray-dark);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* form css */
+.form-box {
+    position: relative;
+    width: 100%;
+}
+
+.form-box .row-info {
+    display: flex;
+    gap: 20px;
+}
+
+.form-box .row-message .input,
+.form-box .row-info .input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.form-box .row-button .input,
+.form-box .row-message .input {
+    width: 100%;
+}
+
+.input span {
+    color: var(--gray-dark);
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+    font-size: 1.2rem;
+}
+
+.input textarea,
+.input input {
+    padding: 5px;
+    font-size: 1.2rem;
+    outline: none;
+    border: 1px solid var(--gray);
+}
+
+.input textarea {
+    width: 100%;
+    resize: none;
+    min-height: 140px;
+    margin-bottom: 15px;
+}
+
+.input button {
+    width: 100px;
+    padding: 10px;
+    font-size: 1.2rem;
+    color: var(--white);
+    border: none;
+    background-color: var(--gray);
+    cursor: pointer;
+}
+
+.input button:hover {
+    background-color: var(--gray-dark);
+}
+
+/* info */
+.box .contact-info {
+    background-color: var(--gray);
+}
+
+.box .contact-info h2 {
+    color: var(--white);
+}
+
+.box .contact-info .info .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.box .contact-info .info .info-item span {
+    min-width: 40px;
+    height: 40px;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: var(--gray-dark);
+    border-radius: 50%;
+}
+
+.box .contact-info .info .info-item p {
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.box .contact-info .info .social {
+    margin-top: 40px;
+    display: flex;
+}
+
+.box .contact-info .info .social li {
+    margin-right: 15px;
+    transition: all 0.2s;
+}
+
+.box .contact-info .info .social li:hover {
+    transform: translateY(-10px);
+}
+
+.box .contact-info .info .social li a {
+    color: var(--white);
+    font-size: 1.8rem;
+    outline: none;
+}
+
+.box .contact-map {
+    padding: 10px;
+}
+
+.box .contact-map .map {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* reponsive */
+
+@media only screen and (max-width: 1200px) {
+    .contact {
+        width: 100%;
+        padding: 20px 50px;
+    }
+
+    .box {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 'form' 'info' 'map';
+        grid-gap: 20px;
+    }
+
+    .box .contact-map {
+        min-height: 400px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .contact {
+        margin-top: 40px;
+        background: transparent;
+        width: 100%;
+        padding: 0;
+    }
+
+    .box {
+        margin-top: 40px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 'form' 'info' 'map';
+        grid-gap: 20px;
+    }
+
+    .box .contact-map {
+        min-height: 400px;
+    }
+
+    .form-box .row-message,
+    .form-box .row-info {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-box .row-message .input,
+    .form-box .row-info .input {
+        width: 100%;
+    }
+
+    .box .contact-form,
+    .box .contact-info {
+        padding: 20px 10px;
+    }
+}
