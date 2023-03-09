@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+import Tippy from '@tippyjs/react/headless';
+
 import { getProductsSearch } from '~/store/products/productsState';
+
+import routes from '~/config/routes';
+import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './SearchBox.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
-import { Link } from 'react-router-dom';
-import routes from '~/config/routes';
-import vnd from '~/utils/vnd';
 
 const cx = classNames.bind(style);
 
 function SearchBox() {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(null);
     const products = useSelector((state) => state.products.productsSearch);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getProductsSearch(value));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value]);
+    }, [value, dispatch]);
 
     return (
         <div>

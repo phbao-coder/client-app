@@ -32,7 +32,7 @@
 /* BOX ITEM SEARCH */
 .box-items {
     width: 500px;
-    height: 400px;
+    max-height: 400px;
     position: relative;
     background-color: var(--white);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
@@ -70,6 +70,11 @@
     padding: 10px 0;
     border-bottom: 1px solid var(--gray);
     gap: 20px;
+}
+
+.item-search:last-child {
+    border-bottom: none;
+    margin-bottom: 10px;
 }
 
 .item-search .left img {
