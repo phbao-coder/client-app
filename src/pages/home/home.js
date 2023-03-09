@@ -26,21 +26,11 @@ function Home() {
                 alignItems="start"
                 textAlign="start"
             />
-            <FeatureProducts
-                title={'Iphone 14 Series'}
-                products={productsFeature?.filter((product) => product.name.includes('Iphone 14'))}
-            />
             <Section
                 contents={homepage.samsung}
                 backgroundPosition="left"
                 alignItems="end"
                 textAlign="end"
-            />
-            <FeatureProducts
-                title={'Samsung Z Series'}
-                products={productsFeature?.filter((product) =>
-                    product.name.includes('Samsung Galaxy Z'),
-                )}
             />
         </div>
     );
