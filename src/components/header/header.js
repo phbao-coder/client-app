@@ -73,7 +73,10 @@ function Header() {
                     <li>
                         {isUser && (
                             <Link to={routes.cart} onClick={handleActiveMenu}>
-                                Giỏ hàng {sumCountCart !== 0 && <span>{sumCountCart}</span>}
+                                Giỏ hàng{' '}
+                                {sumCountCart !== 0 && (
+                                    <span className={cx('number')}>{sumCountCart}</span>
+                                )}
                             </Link>
                         )}
                     </li>

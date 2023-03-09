@@ -88,6 +88,11 @@
     color: var(--white);
 }
 
+/* css number products in cart */
+.number {
+    z-index: 99;
+}
+
 @media only screen and (max-width: 1400px) {
     .header {
         padding: 0 20px;
