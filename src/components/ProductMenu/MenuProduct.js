@@ -82,7 +82,11 @@ function MenuProduct() {
                 className={cx('filter-item')}
                 isDisabled={category === 'accessories' || category === 'All'}
                 placeholder="Hãng"
-                onChange={(e) => setNameProduct(e.value)}
+                onChange={(e) => {
+                    setIsAll((prev) => !prev);
+                    setCategory('mobile');
+                    setNameProduct(e.value);
+                }}
                 options={menuPhone}
             />
             <Select
