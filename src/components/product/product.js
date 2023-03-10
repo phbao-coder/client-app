@@ -4,6 +4,8 @@ import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './Product.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
@@ -22,7 +24,9 @@ function Product({ product, onAddToCart }) {
                 <span>{vnd(product.price)} VND</span>
             </div>
             <div className={cx('buy')}>
-                <button onClick={() => onAddToCart(product)}>Thêm vào giỏ</button>
+                <button onClick={() => onAddToCart(product)}>
+                    Thêm vào <FontAwesomeIcon icon={faCartShopping} />
+                </button>
             </div>
         </div>
     );
