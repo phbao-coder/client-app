@@ -7,6 +7,7 @@ const routes = {
     about: '/about',
     detailProduct: '/product/:_id', // With tag Link to={product._id}
     profile: '/profile',
+    notFound: '*',
 };
 
 export default routes;
