@@ -32,10 +32,21 @@ const cx = classNames.bind(style);
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 
 const styleSelect = {
-    border: '1px solid #6c757d',
-    borderRadius: 0,
-    height: 45,
-    fontSize: 18,
+    control: (baseStyles) => ({
+        ...baseStyles,
+        border: '1px solid #6c757d',
+        borderRadius: 0,
+        height: 45,
+        fontSize: 18,
+    }),
+    indicatorSeparator: (baseStyles) => ({
+        ...baseStyles,
+        backgroundColor: '#6c757d',
+    }),
+    dropdownIndicator: (baseStyles) => ({
+        ...baseStyles,
+        color: '#6c757d',
+    }),
 };
 
 function Register() {
@@ -156,10 +167,7 @@ function Register() {
                             options={options}
                             onChange={(e) => setCity(e.value)}
                             styles={{
-                                control: (baseStyles, state) => ({
-                                    ...baseStyles,
-                                    ...styleSelect,
-                                }),
+                                ...styleSelect,
                             }}
                         />
                         <Select
@@ -167,10 +175,7 @@ function Register() {
                             options={districtData}
                             onChange={(e) => setDistrict(e.value)}
                             styles={{
-                                control: (baseStyles, state) => ({
-                                    ...baseStyles,
-                                    ...styleSelect,
-                                }),
+                                ...styleSelect,
                             }}
                         />
                         {district === 'Ninh Kiều' && (
@@ -179,10 +184,7 @@ function Register() {
                                 options={district_NK_Data}
                                 onChange={(e) => setSubDistrict(e.value)}
                                 styles={{
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        ...styleSelect,
-                                    }),
+                                    ...styleSelect,
                                 }}
                             />
                         )}
@@ -192,10 +194,7 @@ function Register() {
                                 options={district_CR_Data}
                                 onChange={(e) => setSubDistrict(e.value)}
                                 styles={{
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        ...styleSelect,
-                                    }),
+                                    ...styleSelect,
                                 }}
                             />
                         )}
