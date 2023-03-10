@@ -126,6 +126,7 @@ function About() {
                         <Iframe
                             src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d442.80786052709266!2d105.75169936187406!3d10.04034686812696!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1678372467839!5m2!1svi!2s"
                             loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
                             className={cx('map')}
                         ></Iframe>
                     </div>
