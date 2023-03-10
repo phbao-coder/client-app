@@ -26,6 +26,7 @@ const menuPhone = [
 ];
 
 const menuPrices = [
+    { value: { priceBigger: 0, priceLess: 99000000 }, label: 'Tất cả' },
     { value: { priceBigger: 0, priceLess: 1000000 }, label: 'Dưới 1 triệu' },
     { value: { priceBigger: 1000000, priceLess: 2000000 }, label: 'Từ 1 triệu đến 2 triệu' },
     { value: { priceBigger: 2000000, priceLess: 5000000 }, label: 'Từ 2 triệu đến 5 triệu' },
@@ -90,8 +91,8 @@ function MenuProduct() {
                         setCategory('All');
                     } else {
                         setIsAll(false);
-                        setNameProduct('');
                         setCategory(e.value);
+                        setNameProduct('');
                     }
                 }}
                 options={menuCategory}
@@ -102,7 +103,7 @@ function MenuProduct() {
                 isDisabled={category === 'accessories' || category === 'All'}
                 placeholder="Hãng"
                 onChange={(e) => {
-                    setIsAll((prev) => !prev);
+                    setIsAll(false);
                     setCategory('mobile');
                     setNameProduct(e.value);
                 }}
