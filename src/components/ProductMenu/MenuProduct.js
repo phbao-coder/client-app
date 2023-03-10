@@ -36,6 +36,24 @@ const menuPrices = [
     { value: { priceBigger: 20000000, priceLess: 99000000 }, label: 'Trên 20 triệu' },
 ];
 
+const styleSelect = {
+    control: (baseStyles) => ({
+        ...baseStyles,
+        border: '1px solid #6c757d',
+        borderRadius: 0,
+        height: 45,
+        fontSize: 18,
+    }),
+    indicatorSeparator: (baseStyles) => ({
+        ...baseStyles,
+        backgroundColor: '#6c757d',
+    }),
+    dropdownIndicator: (baseStyles) => ({
+        ...baseStyles,
+        color: '#6c757d',
+    }),
+};
+
 function MenuProduct() {
     const dispatch = useDispatch();
 
@@ -77,6 +95,7 @@ function MenuProduct() {
                     }
                 }}
                 options={menuCategory}
+                styles={{ ...styleSelect }}
             />
             <Select
                 className={cx('filter-item')}
@@ -88,12 +107,14 @@ function MenuProduct() {
                     setNameProduct(e.value);
                 }}
                 options={menuPhone}
+                styles={{ ...styleSelect }}
             />
             <Select
                 className={cx('filter-item')}
                 placeholder="Giá"
                 onChange={(e) => setPrice(e.value)}
                 options={menuPrices}
+                styles={{ ...styleSelect }}
             />
         </div>
     );
