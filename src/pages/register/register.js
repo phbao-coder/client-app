@@ -1,3 +1,7 @@
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Select from 'react-select';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faEnvelope,
@@ -7,28 +11,48 @@ import {
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Link } from 'react-router-dom';
-import routes from '~/config/routes';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { registerUser } from '~/store/user/userState';
+import routes from '~/config/routes';
+
+import {
+    district as districtData,
+    district_NK as district_NK_Data,
+    district_CR as district_CR_Data,
+} from '~/utils/city';
+
 import classNames from 'classnames/bind';
 import style from './Register.module.css';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '~/store/user/userState';
+import { useState } from 'react';
 
 const cx = classNames.bind(style);
+const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
+
+const styleSelect = {
+    border: '1px solid #6c757d',
+    borderRadius: 0,
+    height: 45,
+    fontSize: 18,
+};
 
 function Register() {
     const dispatch = useDispatch();
+
+    const [city, setCity] = useState(options[0].value);
+    const [district, setDistrict] = useState(districtData[0].value);
+    const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
 
     const phoneRegExp =
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const schema = yup.object().shape({
-        username: yup.string().required('Vui lòng nhập tài khoản người dùng!'),
+        username: yup
+            .string()
+            .min(12, 'Tên tài khoản ít nhất 12 ký tự')
+            .required('Vui lòng nhập tài khoản người dùng!'),
         email: yup.string().email('Định dạng Gmail không đúng!').required('Vui lòng nhập Gmail!'),
         name: yup.string().required('Vui lòng nhập tên!'),
         phone: yup
@@ -37,7 +61,10 @@ function Register() {
             .min(10)
             .required('Vui lòng nhập số điện thoại!'),
         address: yup.string().required('Vui lòng nhập địa chỉ!'),
-        password: yup.string().required('Vui lòng nhập mật khẩu!'),
+        password: yup
+            .string()
+            .min(9, 'Mật khẩu ít nhất 9 ký tự')
+            .required('Vui lòng nhập mật khẩu!'),
     });
 
     const {
@@ -47,7 +74,13 @@ function Register() {
     } = useForm({ resolver: yupResolver(schema) });
 
     const handleRegisterUser = (data) => {
-        dispatch(registerUser(data));
+        // console.log({ ...data, address: `${data.address}, ${subDistrict}, ${district}, ${city}` });
+        dispatch(
+            registerUser({
+                ...data,
+                address: `${data.address}, ${subDistrict}, ${district}, ${city}`,
+            }),
+        );
     };
 
     return (
@@ -116,6 +149,56 @@ function Register() {
                             {...register('phone')}
                         />
                         {errors.phone && <span>{errors.phone.message}</span>}
+                    </div>
+                    <div className={cx('select')}>
+                        <Select
+                            defaultValue={options[0]}
+                            options={options}
+                            onChange={(e) => setCity(e.value)}
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    ...styleSelect,
+                                }),
+                            }}
+                        />
+                        <Select
+                            defaultValue={districtData[0]}
+                            options={districtData}
+                            onChange={(e) => setDistrict(e.value)}
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    ...styleSelect,
+                                }),
+                            }}
+                        />
+                        {district === 'Ninh Kiều' && (
+                            <Select
+                                defaultValue={district_NK_Data[0]}
+                                options={district_NK_Data}
+                                onChange={(e) => setSubDistrict(e.value)}
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        ...styleSelect,
+                                    }),
+                                }}
+                            />
+                        )}
+                        {district === 'Cái Răng' && (
+                            <Select
+                                defaultValue={district_CR_Data[0]}
+                                options={district_CR_Data}
+                                onChange={(e) => setSubDistrict(e.value)}
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        ...styleSelect,
+                                    }),
+                                }}
+                            />
+                        )}
                     </div>
                     <div className={cx('row')}>
                         <div className={cx('icon')}>
