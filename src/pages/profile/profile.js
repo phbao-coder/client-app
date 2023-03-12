@@ -10,6 +10,7 @@ import ProfileCard from '~/components/ProfileCard/ProfileCard';
 import classNames from 'classnames/bind';
 import style from './Profile.module.css';
 import OrderCard from '~/components/OrderCard/OrderCard';
+import { getCoupons } from '~/store/coupons/couponsState';
 
 const cx = classNames.bind(style);
 
@@ -96,6 +97,7 @@ function Profile() {
             navigate('/login');
         }
         dispatch(getOrdersByUser(user?.id));
+        dispatch(getCoupons());
     }, [dispatch, isUser, navigate, user?.id]);
 
     return (

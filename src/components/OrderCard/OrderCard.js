@@ -177,6 +177,8 @@ function OrderCard({ order, user, index }) {
         dispatch(orderCancell({ idUser, idOrder, index }));
     };
 
+    console.log(order);
+
     return (
         <div className={cx('order')}>
             <div className={cx('products')}>

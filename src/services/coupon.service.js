@@ -8,3 +8,12 @@ export const applyCouponRequest = ({ idCart, code }) => {
         console.log(error);
     }
 };
+
+export const getCouponsRequest = () => {
+    try {
+        const res = instance.get('/api/coupon');
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
