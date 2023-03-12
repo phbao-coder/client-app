@@ -319,12 +319,17 @@ function OrderCard({ order, user, index, coupons }) {
                         <i>{order.paymentIntent.phone}</i>
                         <br />
                         <b>Phương thức thanh toán</b>: {methods(order.paymentIntent.method)} <br />
-                        <b>Mã giảm giá: </b> {coupon.code} <b>Giảm:</b> {coupon.discountAmount} %
+                        {coupon && (
+                            <span>
+                                <b>Mã giảm giá: </b> {coupon?.code} <b>Giảm:</b>{' '}
+                                {coupon?.discountAmount} %
+                            </span>
+                        )}
                     </p>
                 </div>
                 <div className={cx('info-order-action')}>
                     <h3>Tổng giá trị đơn hàng</h3>
-                    <p className={cx('sale-total')}>{vnd(sumPriceOrinal)} VND </p>
+                    {coupon && <p className={cx('sale-total')}>{vnd(sumPriceOrinal)} VND </p>}
                     <p>{vnd(order.paymentIntent.amount)} VND</p>
                     <p className={cx('method')}>{status(order.orderStatus)}</p>
                     <button
