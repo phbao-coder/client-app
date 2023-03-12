@@ -40,6 +40,21 @@ h1 {
     line-height: 30px;
 }
 
+.cart-item .cart-info .sale {
+    color: var(--white);
+    padding: 0 20px;
+    background-color: var(--red);
+}
+
+.cart-item .cart-info .sale-original {
+    text-decoration: line-through;
+}
+
+.cart-item .cart-info .sale-price {
+    color: var(--red);
+    font-size: 1.4rem;
+}
+
 .cart-item .cart-info h3 {
     margin-bottom: 5px;
     font-size: var(--font-size-heading-three);

@@ -59,12 +59,32 @@ function Cart() {
                                 <div className={cx('cart-flex')}>
                                     <img src={product.product.images} alt={product.product.name} />
                                     <div className={cx('cart-info')}>
-                                        <h3>{product.product.name}</h3>
+                                        <h3>
+                                            {product.product.name}{' '}
+                                            {product.product.sale.isOnSale && (
+                                                <span className={cx('sale')}>
+                                                    -{product.product.sale.salePercentage} %
+                                                </span>
+                                            )}
+                                        </h3>
+                                        <p className={cx('sale-original')}>
+                                            {vnd(product.product.price)} VND
+                                        </p>
+                                        <p className={cx('sale-price')}>
+                                            {vnd(
+                                                product.product.price -
+                                                    (product.product.price / 100) *
+                                                        product.product.sale.salePercentage,
+                                            )}{' '}
+                                            VND
+                                        </p>
                                         <p>
-                                            Giá sản phẩm: {vnd(product.product.price)} VND
-                                            <br />
-                                            Tổng giá: {vnd(
-                                                product.count * product.product.price,
+                                            Tạm tính:{' '}
+                                            {vnd(
+                                                product.count *
+                                                    (product.product.price -
+                                                        (product.product.price / 100) *
+                                                            product.product.sale.salePercentage),
                                             )}{' '}
                                             VND
                                         </p>
