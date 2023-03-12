@@ -158,7 +158,7 @@ const status = (state) => {
     }
 };
 
-function OrderCard({ order, user, index }) {
+function OrderCard({ order, user, index, coupons }) {
     const products = order.products;
     const day = order.createdAt.slice(0, 10);
     const hours = order.createdAt.slice(11, 16);
@@ -177,7 +177,12 @@ function OrderCard({ order, user, index }) {
         dispatch(orderCancell({ idUser, idOrder, index }));
     };
 
-    console.log(order);
+    // tính lại giá trị gốc của đơn hàng khi chưa giảm giá
+    const sumPriceOrinal = order.products
+        ?.map((item) => item.price * item.count)
+        ?.reduce((value, curr) => value + curr, 0);
+
+    const coupon = coupons.find((item) => item._id === order.paymentIntent.couponUsed);
 
     return (
         <div className={cx('order')}>
@@ -313,11 +318,13 @@ function OrderCard({ order, user, index }) {
                         <b>Số điện thoại nhận hàng: </b>
                         <i>{order.paymentIntent.phone}</i>
                         <br />
-                        <b>Phương thức thanh toán</b>: {methods(order.paymentIntent.method)}
+                        <b>Phương thức thanh toán</b>: {methods(order.paymentIntent.method)} <br />
+                        <b>Mã giảm giá: </b> {coupon.code} <b>Giảm:</b> {coupon.discountAmount} %
                     </p>
                 </div>
                 <div className={cx('info-order-action')}>
                     <h3>Tổng giá trị đơn hàng</h3>
+                    <p className={cx('sale-total')}>{vnd(sumPriceOrinal)} VND </p>
                     <p>{vnd(order.paymentIntent.amount)} VND</p>
                     <p className={cx('method')}>{status(order.orderStatus)}</p>
                     <button

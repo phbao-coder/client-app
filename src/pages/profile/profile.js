@@ -60,6 +60,7 @@ function Profile() {
     const isUser = useSelector((state) => state.user.isUser);
     const orders = useSelector((state) => state?.orders?.orders);
     const ordersFilter = useSelector((state) => state?.orders?.ordersFilter);
+    const coupons = useSelector((state) => state.coupons?.coupons);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -130,7 +131,13 @@ function Profile() {
                 </div>
                 <div className={cx('order')}>
                     {ordersFilter?.map((order, index) => (
-                        <OrderCard key={index} order={order} user={user} index={index} />
+                        <OrderCard
+                            key={index}
+                            order={order}
+                            user={user}
+                            index={index}
+                            coupons={coupons}
+                        />
                     ))}
                 </div>
             </div>
