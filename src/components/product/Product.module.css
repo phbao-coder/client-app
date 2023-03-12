@@ -40,6 +40,11 @@
     align-items: center;
 }
 
+.information p {
+    font-size: 1.2rem;
+    color: var(--gray-dark);
+}
+
 .information a {
     text-align: center;
     color: var(--gray-dark);
@@ -66,21 +71,19 @@
     left: 50%;
     transform: translateX(-50%);
     transition: all 0.2s;
+    background-color: var(--gray);
+}
+
+.buy:hover {
+    bottom: 20px;
+    background-color: var(--gray-dark);
 }
 
 .buy button {
     padding: 10px 20px;
     border: none;
-    background-color: var(--gray);
+    background-color: transparent;
     color: var(--white);
     font-size: 1.2rem;
     cursor: pointer;
-}
-
-.buy:hover {
-    bottom: 20px;
-}
-
-.buy button:hover {
-    background-color: var(--gray-dark);
 }

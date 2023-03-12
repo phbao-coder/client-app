@@ -10,18 +10,20 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(style);
 
 function Product({ product, onAddToCart }) {
+    const { _id, name, images, price, sale, memory, category } = product;
     return (
         <div className={cx('product')}>
-            <span className={cx('sale')}>15%</span>
+            {sale.isOnSale && <span className={cx('sale')}>{sale.salePercentage} %</span>}
             <div className={cx('image')}>
-                <img src={product.images} alt={product.name} />
+                <img src={images} alt={name} />
             </div>
             <div className={cx('information')}>
-                <Link to={product._id}>{product.name}</Link>
+                <Link to={_id}>{name}</Link>
+                {category === 'mobile' && <p>{memory} GB</p>}
                 <span className={cx('price-sale')}>
-                    {vnd(product.price - (product.price / 100) * 15)}{' '}
+                    {vnd(price - (price / 100) * sale.salePercentage)}{' '}
                 </span>
-                <span>{vnd(product.price)} VND</span>
+                <span>{vnd(price)} VND</span>
             </div>
             <div className={cx('buy')}>
                 <button onClick={() => onAddToCart(product)}>
