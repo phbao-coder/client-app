@@ -19,6 +19,7 @@ import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './Order.module.css';
+import { applyCoupon } from '~/store/cart/cartState';
 
 const cx = classNames.bind(style);
 
@@ -31,6 +32,8 @@ function Order() {
     const [city, setCity] = useState(options[0].value);
     const [district, setDistrict] = useState(districtData[0].value);
     const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
+
+    const [code, setCode] = useState(null);
 
     const cart = useSelector((state) => state.cart.cart);
     const userID = useSelector((state) => state.user.user.id);
@@ -68,6 +71,14 @@ function Order() {
             navigate,
         };
         dispatch(order(obj));
+    };
+
+    const handleApplyCoupon = () => {
+        if (code !== null) {
+            const idCart = cart._id;
+            console.log(cart);
+            dispatch(applyCoupon({ userID, idCart, code }));
+        }
     };
 
     return (
@@ -174,6 +185,10 @@ function Order() {
                 </div>
             </div>
             <div className={cx('action')}>
+                <div className={cx('coupon')}>
+                    <input placeholder="Mã giảm giá" onChange={(e) => setCode(e.target.value)} />
+                    <button onClick={() => handleApplyCoupon()}>Áp dụng</button>
+                </div>
                 <div className={cx('cost')}>
                     <h2>Tổng tiền:</h2>
                     <h2>{vnd(cart.cartTotal)} VND</h2>

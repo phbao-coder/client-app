@@ -64,6 +64,15 @@ const cartSlice = createSlice({
             state.cart.products = [];
             state.cart.cartTotal = 0;
         },
+        applyCoupon: (state) => {
+            state.isLoading = true;
+        },
+        applyCouponSuccess: (state) => {
+            state.isLoading = false;
+        },
+        applyCouponFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -83,5 +92,8 @@ export const {
     getCartFromServerSuccess,
     getCartFromServerFailed,
     clearCart,
+    applyCoupon,
+    applyCouponSuccess,
+    applyCouponFailed,
 } = cartSlice.actions;
 export default cartSlice.reducer;

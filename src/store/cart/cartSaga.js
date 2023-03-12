@@ -1,10 +1,14 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
 import { getCartByUserRequest, postSaveCartRequest } from '~/services/cart.service';
+import { applyCouponRequest } from '~/services/coupon.service';
 import {
     addProductToCart,
     addProductToCartFailed,
     addProductToCartSuccess,
+    applyCoupon,
+    applyCouponFailed,
+    applyCouponSuccess,
     getCartFromServer,
     getCartFromServerFailed,
     getCartFromServerSuccess,
@@ -68,6 +72,7 @@ function* workUpdateIncreaProductInCart({ payload }) {
         const userID = yield select((state) => state.user.user.id);
         const token = yield select((state) => state.user.user.accessToken);
         yield call(postSaveCartRequest, { cartLocal, userID, token });
+        yield put(getCartFromServer(userID));
     } catch (error) {
         console.log(error);
         yield put(updateProductInCartFailed());
@@ -82,6 +87,7 @@ function* workUpdateDecreaProductInCart({ payload }) {
         const userID = yield select((state) => state.user.user.id);
         const token = yield select((state) => state.user.user.accessToken);
         yield call(postSaveCartRequest, { cartLocal, userID, token });
+        yield put(getCartFromServer(userID));
     } catch (error) {
         console.log(error);
         yield put(updateProductInCartFailed());
@@ -102,12 +108,41 @@ function* workRemoveProductInCart({ payload }) {
     }
 }
 
+function* workApplyCoupon({ payload }) {
+    // payload is obj = { userID, cartID, codeCoupon}
+    const { userID, idCart, code } = payload;
+    yield put(getCartFromServer(userID));
+    try {
+        const res = yield call(applyCouponRequest, { idCart, code });
+        console.log(res);
+        if (res.status === 200) {
+            yield put(getCartFromServer(userID));
+            yield put(applyCouponSuccess());
+        }
+    } catch (error) {
+        console.log(error);
+        if (error.response.status === 400) {
+            ToastFailed.fire({
+                title: 'Lỗi',
+                text: 'Không thể áp dụng cho đơn hàng này!',
+            });
+        } else if (error.response.status === 404) {
+            ToastFailed.fire({
+                title: 'Lỗi',
+                text: 'Mã giảm giá không tồn tại',
+            });
+        }
+        yield put(applyCouponFailed());
+    }
+}
+
 function* cartSaga() {
     yield takeLatest(getCartFromServer.type, workGetCartFromServer);
     yield takeLatest(addProductToCart.type, workAddProductToCart);
     yield takeLatest(updateIncreaProductInCart.type, workUpdateIncreaProductInCart);
     yield takeLatest(updateDecreaProductInCart.type, workUpdateDecreaProductInCart);
     yield takeLatest(removeProductToCart.type, workRemoveProductInCart);
+    yield takeLatest(applyCoupon.type, workApplyCoupon);
 }
 
 export default cartSaga;

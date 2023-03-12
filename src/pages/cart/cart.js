@@ -50,7 +50,7 @@ function Cart() {
 
     return (
         <div className={cx('container')}>
-            {cart.cartTotal !== 0 ? (
+            {cart.products.length !== 0 ? (
                 <>
                     <h1>Giỏ hàng của bạn</h1>
                     <div className={cx('cart')}>
