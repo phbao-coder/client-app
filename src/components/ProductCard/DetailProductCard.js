@@ -4,7 +4,7 @@ import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartSt
 import Tippy from '@tippyjs/react/headless';
 
 import vnd from '~/utils/vnd';
-import color from '~/utils/color';
+import colorVietnamese from '~/utils/color';
 import addToCart from '~/utils/addToCart';
 
 import classNames from 'classnames/bind';
@@ -25,40 +25,55 @@ function DetailProductCard({ product }) {
         };
         addToCart(cart, product, dispatch, action);
     };
+    const {
+        images,
+        name,
+        price,
+        color,
+        category,
+        description,
+        camBack,
+        camFront,
+        ram,
+        memory,
+        os,
+        pin,
+        sale,
+    } = product;
 
     return (
         <div className={cx('container', 'flex')}>
             <div className={cx('left')}>
                 <div className={cx('main-image')}>
-                    <img src={product.images} alt={product.name} className={cx('slide')} />
+                    <img src={images} alt={name} className={cx('slide')} />
                 </div>
             </div>
             <div className={cx('right')}>
                 <h3>
-                    {product.name} <span>-15%</span>
+                    {name} {sale.isOnSale && <span>{sale.salePercentage} %</span>}
                 </h3>
-                <h4>{vnd(product.price)} VND</h4>
+                <h4>{vnd(price)} VND</h4>
                 <h4 className={cx('price-sale')}>
-                    {vnd(product.price - (product.price / 100) * 15)} VND
+                    {vnd(price - (price / 100) * sale.salePercentage)} VND
                 </h4>
-                {product.category === 'accessories' && (
+                {category === 'accessories' && (
                     <p>
-                        Chức năng: {product.description} <br />
-                        <span>Màu sắc: {color(product.color)}</span>
+                        Chức năng: {description} <br />
+                        <span>Màu sắc: {colorVietnamese(color)}</span>
                     </p>
                 )}
-                {product.category === 'mobile' && (
+                {category === 'mobile' && (
                     <p>
-                        Màn hình: {product.description} <br />
-                        Camera sau: {product.camBack} <br />
-                        Camera trước: {product.camFront} <br />
-                        Ram: {product.ram} GB
+                        Màn hình: {description} <br />
+                        Camera sau: {camBack} <br />
+                        Camera trước: {camFront} <br />
+                        Ram: {ram} GB
                         <br />
-                        Rom: {product.memory} GB <br />
-                        OS: {product.os} <br />
-                        Pin: {product.pin} mAh
+                        Rom: {memory} GB <br />
+                        OS: {os} <br />
+                        Pin: {pin} mAh
                         <br />
-                        <span>Màu sắc: {product.color}</span>
+                        <span>Màu sắc: {color}</span>
                     </p>
                 )}
                 <Tippy arrow={true} render={() => <></>}>

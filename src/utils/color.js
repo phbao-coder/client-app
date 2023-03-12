@@ -1,4 +1,4 @@
-const color = (color) => {
+const colorVietnamese = (color) => {
     switch (color) {
         case 'white':
             return 'Trắng';
@@ -23,4 +23,4 @@ const color = (color) => {
     }
 };
 
-export default color;
+export default colorVietnamese;
