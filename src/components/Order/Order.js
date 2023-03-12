@@ -63,7 +63,7 @@ function Order() {
     const handleOrder = (data) => {
         const address = `${data.address},Phường ${subDistrict},Quận ${district},Th.phố ${city}`;
         const obj = {
-            _id: userID,
+            idUser: userID,
             method: method,
             destination: address,
             phone: data.phone,

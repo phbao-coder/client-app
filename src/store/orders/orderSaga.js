@@ -36,7 +36,7 @@ function* workOrder({ payload }) {
             });
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         Toast.fire({
             icon: 'error',
             title: 'Đặt hàng không thành công',
