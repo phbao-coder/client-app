@@ -20,6 +20,7 @@ import vnd from '~/utils/vnd';
 import classNames from 'classnames/bind';
 import style from './Order.module.css';
 import { applyCoupon } from '~/store/cart/cartState';
+import { getCoupon } from '~/store/coupons/couponsState';
 
 const cx = classNames.bind(style);
 
@@ -33,7 +34,10 @@ function Order() {
     const [district, setDistrict] = useState(districtData[0].value);
     const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
 
-    const [code, setCode] = useState(null);
+    // coupon này là coupon được người dùng apply
+    const coupon = useSelector((state) => state.coupons.coupon);
+
+    const [code, setCode] = useState(coupon[0].code);
 
     const cart = useSelector((state) => state.cart.cart);
     const userID = useSelector((state) => state.user.user.id);
@@ -78,6 +82,7 @@ function Order() {
             const idCart = cart._id;
             console.log(cart);
             dispatch(applyCoupon({ userID, idCart, code }));
+            dispatch(getCoupon(code));
         }
     };
 
@@ -186,7 +191,11 @@ function Order() {
             </div>
             <div className={cx('action')}>
                 <div className={cx('coupon')}>
-                    <input placeholder="Mã giảm giá" onChange={(e) => setCode(e.target.value)} />
+                    <input
+                        placeholder="Mã giảm giá"
+                        onChange={(e) => setCode(e.target.value)}
+                        defaultValue={code}
+                    />
                     <span className={cx('coupon-button')} onClick={() => handleApplyCoupon()}>
                         Áp dụng
                     </span>

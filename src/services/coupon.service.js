@@ -9,6 +9,16 @@ export const applyCouponRequest = ({ idCart, code }) => {
     }
 };
 
+export const getCouponByCodeRequest = (code) => {
+    console.log(code);
+    try {
+        const res = instance.get('/api/coupon', code);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getCouponsRequest = () => {
     try {
         const res = instance.get('/api/coupon');
