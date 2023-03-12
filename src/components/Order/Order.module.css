@@ -91,6 +91,9 @@
 
 .order .action .coupon {
     margin: 68px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .order .action .coupon input {
@@ -104,6 +107,21 @@
 
 .order .action .coupon input:focus {
     outline: 2.5px solid var(--blue);
+}
+
+.order .action .coupon .coupon-button {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--gray);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.order .action .coupon .coupon-button:hover {
+    background-color: var(--gray-dark);
 }
 
 /* css address */

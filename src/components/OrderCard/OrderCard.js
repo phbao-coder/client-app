@@ -274,7 +274,18 @@ function OrderCard({ order, user, index }) {
                                 <StyledTableRow key={index}>
                                     <StyledTableCell>{product.product.name}</StyledTableCell>
                                     <StyledTableCell align="right">
-                                        {vnd(product.product.price)} VND
+                                        <p className={cx('price-original')}>
+                                            {vnd(product.product.price)}
+                                        </p>
+                                        {product.product.sale.isOnSale && (
+                                            <p className={cx('price-sale')}>
+                                                {vnd(
+                                                    product.product.price -
+                                                        (product.product.price / 100) *
+                                                            product.product.sale.salePercentage,
+                                                )}
+                                            </p>
+                                        )}
                                     </StyledTableCell>
                                     <StyledTableCell align="right">{product.count}</StyledTableCell>
                                     <StyledTableCell align="right">

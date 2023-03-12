@@ -64,6 +64,15 @@
     padding: 0 10px;
 }
 
+.price-original {
+    text-decoration: line-through;
+}
+
+.price-sale {
+    color: var(--red);
+    font-size: 1.2rem;
+}
+
 @media only screen and (max-width: 1500px) {
     .info-order .info-order-action {
         width: 30%;

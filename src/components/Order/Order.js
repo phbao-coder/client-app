@@ -187,7 +187,9 @@ function Order() {
             <div className={cx('action')}>
                 <div className={cx('coupon')}>
                     <input placeholder="Mã giảm giá" onChange={(e) => setCode(e.target.value)} />
-                    <button onClick={() => handleApplyCoupon()}>Áp dụng</button>
+                    <span className={cx('coupon-button')} onClick={() => handleApplyCoupon()}>
+                        Áp dụng
+                    </span>
                 </div>
                 <div className={cx('cost')}>
                     <h2>Tổng tiền:</h2>
