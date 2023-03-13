@@ -124,6 +124,11 @@
     background-color: var(--gray-dark);
 }
 
+.order .action .coupon .coupon-apply {
+    font-size: 1.2rem;
+    color: var(--red);
+}
+
 /* css address */
 .address {
     width: 100%;

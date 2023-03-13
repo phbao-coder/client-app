@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,6 @@ import vnd from '~/utils/vnd';
 import classNames from 'classnames/bind';
 import style from './Order.module.css';
 import { applyCoupon } from '~/store/cart/cartState';
-import { getCoupon } from '~/store/coupons/couponsState';
 
 const cx = classNames.bind(style);
 
@@ -28,21 +27,18 @@ const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 const methods = [{ value: 'Cash on Delivery', label: 'Thanh toán khi nhận hàng' }];
 
 function Order() {
+    const cart = useSelector((state) => state.cart.cart);
+    const userID = useSelector((state) => state.user.user.id);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [method, setMethod] = useState(methods[0].value);
 
     const [city, setCity] = useState(options[0].value);
     const [district, setDistrict] = useState(districtData[0].value);
     const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
 
-    // coupon này là coupon được người dùng apply
-    const coupon = useSelector((state) => state.coupons.coupon);
-
-    const [code, setCode] = useState(coupon[0].code);
-
-    const cart = useSelector((state) => state.cart.cart);
-    const userID = useSelector((state) => state.user.user.id);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const [code, setCode] = useState(cart?.isUsedCoupon?.couponTnfo?.code);
 
     const phoneRegExp =
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -80,11 +76,14 @@ function Order() {
     const handleApplyCoupon = () => {
         if (code !== null) {
             const idCart = cart._id;
-            console.log(cart);
             dispatch(applyCoupon({ userID, idCart, code }));
-            dispatch(getCoupon(code));
         }
     };
+
+    useEffect(
+        () => setCode(cart?.isUsedCoupon?.couponTnfo?.code),
+        [cart?.isUsedCoupon?.couponTnfo?.code],
+    );
 
     return (
         <form onSubmit={handleSubmit(handleOrder)} className={cx('order')}>
@@ -196,6 +195,11 @@ function Order() {
                         onChange={(e) => setCode(e.target.value)}
                         defaultValue={code}
                     />
+                    {cart.isUsedCoupon.status === true && (
+                        <span className={cx('coupon-apply')}>
+                            Đã áp dụng -{cart?.isUsedCoupon?.couponTnfo?.discountAmount} %
+                        </span>
+                    )}
                     <span className={cx('coupon-button')} onClick={() => handleApplyCoupon()}>
                         Áp dụng
                     </span>
