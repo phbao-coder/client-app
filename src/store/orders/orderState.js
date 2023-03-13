@@ -58,6 +58,10 @@ const orderSlice = createSlice({
         orderFilterFailed: (state) => {
             state.isLoading = false;
         },
+        clearOrders: (state) => {
+            state.orders = [];
+            state.ordersFilter = [];
+        },
     },
 });
 
@@ -77,6 +81,7 @@ export const {
     orderFilter,
     orderFilterSuccess,
     orderFilterFailed,
+    clearOrders,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

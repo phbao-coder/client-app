@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
 import { loginUserRequest, registerUserRequest } from '~/services/user.service';
 import { clearCart } from '../cart/cartState';
+import { clearOrders } from '../orders/orderState';
 import {
     userLogin,
     userLoginSuccess,
@@ -51,6 +52,7 @@ function* workUserRegister(action) {
 function* workLogout() {
     try {
         yield put(clearCart());
+        yield put(clearOrders());
     } catch (error) {
         console.log(error);
     }
