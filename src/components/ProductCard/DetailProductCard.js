@@ -50,11 +50,11 @@ function DetailProductCard({ product }) {
             </div>
             <div className={cx('right')}>
                 <h3>
-                    {name} {sale.isOnSale && <span>{sale.salePercentage} %</span>}
+                    {name} {sale?.isOnSale && <span>{sale?.salePercentage} %</span>}
                 </h3>
                 <h4>{vnd(price)} VND</h4>
                 <h4 className={cx('price-sale')}>
-                    {vnd(price - (price / 100) * sale.salePercentage)} VND
+                    {vnd(price - (price / 100) * sale?.salePercentage)} VND
                 </h4>
                 {category === 'accessories' && (
                     <p>
