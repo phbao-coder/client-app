@@ -1,5 +1,5 @@
 const { call, put, takeLatest } = require('redux-saga/effects');
-const { getCouponsRequest } = require('~/services/coupon.service');
+const { getCouponsRequest } = require('~/request/coupon.request');
 const { getCouponsSuccess, getCouponsFailed, getCoupons } = require('./couponsState');
 
 function* workGetAllCoupons() {

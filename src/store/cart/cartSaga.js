@@ -1,7 +1,9 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
-import { getCartByUserRequest, postSaveCartRequest } from '~/services/cart.service';
-import { applyCouponRequest } from '~/services/coupon.service';
+
+import { getCartByUserRequest, postSaveCartRequest } from '~/request/cart.request';
+import { applyCouponRequest } from '~/request/coupon.request';
+
 import {
     addProductToCart,
     addProductToCartFailed,

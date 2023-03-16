@@ -7,7 +7,7 @@ import {
     getProductsByNameAndPriceRequest,
     getProductsByNameRequest,
     getProductsByPriceRequest,
-} from '~/services/product.service';
+} from '~/request/product.request';
 import {
     getProducts,
     getProductsByCategory,

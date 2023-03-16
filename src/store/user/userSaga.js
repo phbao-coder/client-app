@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
-import { loginUserRequest, registerUserRequest } from '~/services/user.service';
+import { loginUserRequest, registerUserRequest } from '~/request/user.request';
 import { clearCart } from '../cart/cartState';
 import { clearOrders } from '../orders/orderState';
 import {

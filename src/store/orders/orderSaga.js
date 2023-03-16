@@ -1,7 +1,8 @@
 import { Toast } from '~/minxin';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getAllOrdersByUser, putCencelledOrder, postOrder } from '~/services/order.service';
+import { getAllOrdersByUser, putCencelledOrder, postOrder } from '~/request/order.request';
+
 import { clearCart } from '../cart/cartState';
 import {
     getOrdersByUser,
