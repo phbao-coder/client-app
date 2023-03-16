@@ -1,13 +1,13 @@
 import routes from '../config/routes';
 
-import Home from '~/pages/Home/Home';
-import Login from '~/pages/Login/Login';
-import Register from '~/pages/Register/Register';
-import Products from '~/pages/Products/Products';
-import Cart from '~/pages/Cart/Cart';
-import About from '~/pages/About/About';
+import Home from '~/pages/home/home';
+import Login from '~/pages/login/login';
+import Register from '~/pages/register/register';
+import Products from '~/pages/products/products';
+import Cart from '~/pages/cart/cart';
+import About from '~/pages/about/about';
 import DetailProduct from '~/pages/DetaiProduct/DetailProduct';
-import Profile from '~/pages/Profile/Profile';
+import Profile from '~/pages/profile/profile';
 import NotFound from '~/pages/NotFound/NotFound';
 
 const routers = [
