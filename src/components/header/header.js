@@ -44,6 +44,9 @@ function Header() {
         });
     };
 
+    // rename folder and file
+    const rename = 1;
+
     return (
         <header className={cx('header')}>
             <div className={cx('logo')}>
