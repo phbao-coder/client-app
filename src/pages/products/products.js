@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Product from '~/components/Product/Product';
+import Product from '~/components/product/product';
 import MenuProduct from '~/components/ProductMenu/MenuProduct';
 
 import { getProducts } from '~/store/products/productsState';
