@@ -16,9 +16,11 @@ import {
 // put tương tự như dispatch, call(fn, {type, action})
 function* workUserLogin(action) {
     const { payload } = action;
+    console.log(payload);
     try {
         const res = yield call(loginUserRequest, payload);
         if (res.status === 200) {
+            console.log(res);
             Toast.fire({
                 ...configToast,
                 width: 300,
