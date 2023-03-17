@@ -37,8 +37,8 @@ function SearchBox() {
                 render={(attrs) => (
                     <div tabIndex="-1" {...attrs} className={cx('box-items')}>
                         <h2>Sản phẩm gợi ý</h2>
-                        {products === [] ? (
-                            <ul>Không tìm thấy sản phẩm</ul>
+                        {products.length === 0 ? (
+                            <span className={cx('product-not-found')}>Không tìm thấy sản phẩm</span>
                         ) : (
                             <ul>
                                 {products?.map((product) => (
