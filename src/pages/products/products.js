@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ function Products() {
         addToCart(cart, product, dispatch, action, navigate);
     };
 
-    console.log('re-render-page');
+    console.log('render-page');
 
     return (
         <div className={cx('container')}>

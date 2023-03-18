@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,12 @@ const cx = classNames.bind(style);
 
 function Product({ product, onAddToCart }) {
     const { _id, name, images, price, sale, memory, category } = product;
-    // console.log('re-render-product');
+    console.log('re-render-product');
+
+    const handleAddToCart = () => {
+        onAddToCart(product);
+    };
+
     return (
         <div className={cx('product')}>
             {sale.isOnSale && <span className={cx('sale')}>{sale.salePercentage} %</span>}
@@ -29,7 +34,7 @@ function Product({ product, onAddToCart }) {
                 <span>{vnd(price)} VND</span>
             </div>
             <div className={cx('buy')}>
-                <button onClick={() => onAddToCart(product)}>
+                <button onClick={handleAddToCart}>
                     Thêm vào <FontAwesomeIcon icon={faCartShopping} />
                 </button>
             </div>

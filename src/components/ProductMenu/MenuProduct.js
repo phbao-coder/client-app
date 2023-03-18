@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Select from 'react-select';
 
 import {
@@ -63,7 +63,10 @@ function MenuProduct() {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState({ priceBigger: 0, priceLess: 99999999 });
 
+    console.log('render-menu');
+
     useEffect(() => {
+        console.log('render-useEffect-menu');
         if (isAll) {
             dispatch(getProductsByPrice(price));
         } else {
@@ -121,4 +124,4 @@ function MenuProduct() {
     );
 }
 
-export default MenuProduct;
+export default memo(MenuProduct);
