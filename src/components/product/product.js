@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
+import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartState';
 
 import vnd from '~/utils/vnd';
 
@@ -9,12 +14,16 @@ import style from './Product.module.css';
 
 const cx = classNames.bind(style);
 
-function Product({ product, onAddToCart }) {
+function Product({ product }) {
     const { _id, name, images, price, sale, memory, category } = product;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleAddToCart = () => {
-        onAddToCart(product);
+        dispatch(addProductToCart({ product, navigate }));
     };
+
+    console.log('render-product');
 
     return (
         <div className={cx('product')}>
@@ -26,7 +35,7 @@ function Product({ product, onAddToCart }) {
                 <Link to={_id}>{name}</Link>
                 {category === 'mobile' && <p>{memory} GB</p>}
                 <span className={cx('price-sale')}>
-                    {vnd(price - (price / 100) * sale.salePercentage)}{' '}
+                    {vnd(price - (price / 100) * sale.salePercentage)}
                 </span>
                 <span>{vnd(price)} VND</span>
             </div>

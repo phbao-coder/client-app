@@ -36,17 +36,34 @@ function* workGetCartFromServer({ payload }) {
     }
 }
 
+// Tái cấu trúc lại work add product
 function* workAddProductToCart({ payload }) {
-    const { products, navigate } = payload;
+    const { product, navigate } = payload;
     try {
         // mỗi lần có sự thay đổi cart trên local ta sẽ cập nhật nó lên csdl
         const userID = yield select((state) => state.user.user.id);
         const token = yield select((state) => state.user.accessToken);
         if (token !== null) {
-            yield put(addProductToCartSuccess(products));
-            const cartLocal = yield select((state) => state.cart.cart);
-            yield call(postSaveCartRequest, { cartLocal, userID, token });
-            Toast.fire({ ...configToast, text: 'Đã thêm sản phẩm vào giỏ hàng' });
+            const cart = yield select((state) => state.cart.cart); // cart được lấy từ local
+            const productsCartTemp = [...cart?.products]; // tạo mảng temp
+            // tìm xem sản phẩm có trong giỏ hay chưa
+            const isProductInCart = productsCartTemp?.findIndex(
+                (item) => item.product._id === product._id,
+            );
+            if (isProductInCart === -1) {
+                // thêm sản phẩm vào ds products có trong cart trước đó
+                const newProductsCart = [
+                    ...cart?.products,
+                    { product: product, count: 1, price: product.price },
+                ];
+                yield put(addProductToCartSuccess(newProductsCart));
+                const cartLocal = yield select((state) => state.cart.cart); // cart được lấy từ local
+                yield call(postSaveCartRequest, { cartLocal, userID, token });
+                Toast.fire({ ...configToast, text: 'Đã thêm sản phẩm vào giỏ hàng' });
+            } else if (isProductInCart !== -1) {
+                // sản phẩm đã tồn tại trong giỏ tăng count lên 1
+                yield put(updateIncreaProductInCart(isProductInCart));
+            }
         } else {
             ToastFailed.fire({
                 ...configToastFailed,
