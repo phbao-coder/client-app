@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,6 @@ const cx = classNames.bind(style);
 
 function Product({ product, onAddToCart }) {
     const { _id, name, images, price, sale, memory, category } = product;
-    console.log('re-render-product');
 
     const handleAddToCart = () => {
         onAddToCart(product);

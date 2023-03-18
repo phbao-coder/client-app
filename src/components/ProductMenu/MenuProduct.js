@@ -63,10 +63,7 @@ function MenuProduct() {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState({ priceBigger: 0, priceLess: 99999999 });
 
-    console.log('render-menu');
-
     useEffect(() => {
-        console.log('render-useEffect-menu');
         if (isAll) {
             dispatch(getProductsByPrice(price));
         } else {
