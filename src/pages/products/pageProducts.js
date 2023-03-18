@@ -14,8 +14,6 @@ const cx = classNames.bind(style);
 function Products() {
     const [menuDisplay, setMenuDisplay] = useState(false);
 
-    console.log('render-page');
-
     return (
         <div className={cx('container')}>
             <div className={cx('menu', { 'menu-display': menuDisplay })}>

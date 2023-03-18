@@ -10,8 +10,6 @@ const cx = classNames.bind(style);
 function ProductList() {
     const products = useSelector((state) => state.products.products);
 
-    console.log('render-product-list');
-
     return (
         <div className={cx('products')}>
             {products?.map((product) => (

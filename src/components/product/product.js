@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
-import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartState';
+import { addProductToCart } from '~/store/cart/cartState';
 
 import vnd from '~/utils/vnd';
 
@@ -22,8 +22,6 @@ function Product({ product }) {
     const handleAddToCart = () => {
         dispatch(addProductToCart({ product, navigate }));
     };
-
-    console.log('render-product');
 
     return (
         <div className={cx('product')}>
