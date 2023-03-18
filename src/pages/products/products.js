@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import Product from '~/components/product/product';
 import MenuProduct from '~/components/ProductMenu/MenuProduct';
 
-import { getProducts } from '~/store/products/productsState';
 import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartState';
 
 import addToCart from '~/utils/addToCart';
 
 import classNames from 'classnames/bind';
 import style from './Products.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
@@ -33,9 +33,7 @@ function Products() {
         addToCart(cart, product, dispatch, action, navigate);
     };
 
-    useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
+    console.log('re-render-page');
 
     return (
         <div className={cx('container')}>

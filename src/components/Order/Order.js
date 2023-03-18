@@ -39,7 +39,7 @@ function Order() {
     const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
 
     const [code, setCode] = useState(
-        cart?.isUsedCoupon?.couponTnfo?.code ? '' : cart?.isUsedCoupon?.couponTnfo?.code,
+        cart?.isUsedCoupon?.couponTnfo?.code ? cart?.isUsedCoupon?.couponTnfo?.code : '',
     );
 
     const phoneRegExp =
@@ -82,10 +82,9 @@ function Order() {
         }
     };
 
-    useEffect(
-        () => setCode(cart?.isUsedCoupon?.couponTnfo?.code),
-        [cart?.isUsedCoupon?.couponTnfo?.code],
-    );
+    useEffect(() => {
+        setCode(cart?.isUsedCoupon?.couponTnfo?.code ? cart?.isUsedCoupon?.couponTnfo?.code : '');
+    }, [cart?.isUsedCoupon?.couponTnfo?.code]);
 
     return (
         <form onSubmit={handleSubmit(handleOrder)} className={cx('order')}>
@@ -197,7 +196,7 @@ function Order() {
                         onChange={(e) => setCode(e.target.value)}
                         defaultValue={code}
                     />
-                    {cart.isUsedCoupon.status === true && (
+                    {cart?.isUsedCoupon?.status === true && (
                         <span className={cx('coupon-apply')}>
                             Đã áp dụng -{cart?.isUsedCoupon?.couponTnfo?.discountAmount} %
                         </span>

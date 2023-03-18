@@ -1,16 +1,19 @@
+import { memo } from 'react';
+
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './Product.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
 function Product({ product, onAddToCart }) {
     const { _id, name, images, price, sale, memory, category } = product;
+    // console.log('re-render-product');
     return (
         <div className={cx('product')}>
             {sale.isOnSale && <span className={cx('sale')}>{sale.salePercentage} %</span>}
@@ -34,4 +37,4 @@ function Product({ product, onAddToCart }) {
     );
 }
 
-export default Product;
+export default memo(Product);
