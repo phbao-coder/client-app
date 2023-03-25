@@ -193,7 +193,8 @@ header {
 
 .search__box--container--header--icon {
     padding: 5px;
-    font-size: 28px;
+    font-size: 22px;
+    color: #939393;
     cursor: pointer;
 }
 
