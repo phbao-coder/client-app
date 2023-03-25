@@ -9,6 +9,8 @@ import {
 
 import classNames from 'classnames/bind';
 import style from './MenuProduct.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
@@ -26,13 +28,14 @@ const menuPhone = [
 ];
 
 const menuPrices = [
-    { value: { priceBigger: 0, priceLess: 99000000 }, label: 'Tất cả' },
+    { value: { priceBigger: 0, priceLess: 99000001 }, label: 'Tất cả' },
     { value: { priceBigger: 0, priceLess: 1000000 }, label: 'Dưới 1 triệu' },
-    { value: { priceBigger: 1000000, priceLess: 2000000 }, label: 'Từ 1 triệu đến 2 triệu' },
-    { value: { priceBigger: 2000000, priceLess: 5000000 }, label: 'Từ 2 triệu đến 5 triệu' },
+    { value: { priceBigger: 1000000, priceLess: 2000000 }, label: 'Từ 1 - 2 triệu' },
+    { value: { priceBigger: 2000000, priceLess: 5000000 }, label: 'Từ 2 - 5 triệu' },
+    { value: { priceBigger: 5000000, priceLess: 10000000 }, label: 'Từ 5 - 10 triệu' },
     {
         value: { priceBigger: 10000000, priceLess: 20000000 },
-        label: 'Từ 10 triệu đến 20 triệu',
+        label: 'Từ 10 - 20 triệu',
     },
     { value: { priceBigger: 20000000, priceLess: 99000000 }, label: 'Trên 20 triệu' },
 ];
@@ -40,10 +43,9 @@ const menuPrices = [
 const styleSelect = {
     control: (baseStyles) => ({
         ...baseStyles,
-        border: '1px solid #6c757d',
+        width: 150,
         borderRadius: 0,
-        height: 45,
-        fontSize: 18,
+        fontSize: 16,
     }),
     indicatorSeparator: (baseStyles) => ({
         ...baseStyles,
@@ -63,6 +65,26 @@ function MenuProduct() {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState({ priceBigger: 0, priceLess: 99999999 });
 
+    const [displayFilter, setDisplayFilter] = useState(false);
+
+    const handleDisplayFilter = () => {
+        if (displayFilter) {
+            setDisplayFilter(false);
+            document.body.style.overflow = '';
+        } else {
+            setDisplayFilter(true);
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const handleCancelFilter = () => {
+        setIsAll(true);
+        setCategory('');
+        setNameProduct('');
+        setPrice({ priceBigger: 0, priceLess: 99999999 });
+        handleDisplayFilter();
+    };
+
     useEffect(() => {
         if (isAll) {
             dispatch(getProductsByPrice(price));
@@ -80,44 +102,141 @@ function MenuProduct() {
     }, [category, dispatch, isAll, nameProduct, price]);
 
     return (
-        <div className={cx('filter')}>
-            <Select
-                className={cx('filter-item')}
-                placeholder="Tất cả"
-                onChange={(e) => {
-                    if (e.value === 'All') {
-                        setIsAll(true);
-                        setPrice({ priceBigger: 0, priceLess: 999999999 });
-                        setCategory('All');
-                    } else {
-                        setIsAll(false);
-                        setCategory(e.value);
-                        setNameProduct('');
-                    }
-                }}
-                options={menuCategory}
-                styles={{ ...styleSelect }}
-            />
-            <Select
-                className={cx('filter-item')}
-                isDisabled={category === 'accessories' || category === 'All'}
-                placeholder="Hãng"
-                onChange={(e) => {
-                    setIsAll(false);
-                    setCategory('mobile');
-                    setNameProduct(e.value);
-                }}
-                options={menuPhone}
-                styles={{ ...styleSelect }}
-            />
-            <Select
-                className={cx('filter-item')}
-                placeholder="Giá"
-                onChange={(e) => setPrice(e.value)}
-                options={menuPrices}
-                styles={{ ...styleSelect }}
-            />
-        </div>
+        <>
+            <div className={cx('container')}>
+                <div className={cx('container__pc')}>
+                    <Select
+                        placeholder="Tất cả"
+                        onChange={(e) => {
+                            if (e.value === 'All') {
+                                setIsAll(true);
+                                setPrice({ priceBigger: 0, priceLess: 999999999 });
+                                setCategory('All');
+                            } else {
+                                setIsAll(false);
+                                setCategory(e.value);
+                                setNameProduct('');
+                            }
+                        }}
+                        options={menuCategory}
+                        styles={{ ...styleSelect }}
+                    />
+                    <Select
+                        isDisabled={category === 'accessories' || category === 'All'}
+                        placeholder="Hãng"
+                        onChange={(e) => {
+                            setIsAll(false);
+                            setCategory('mobile');
+                            setNameProduct(e.value);
+                        }}
+                        options={menuPhone}
+                        styles={{ ...styleSelect }}
+                    />
+                    <Select
+                        placeholder="Giá"
+                        onChange={(e) => setPrice(e.value)}
+                        options={menuPrices}
+                        styles={{
+                            ...styleSelect,
+                        }}
+                    />
+                </div>
+                <div className={cx('container__mobile')}>
+                    <button
+                        className={cx('container__mobile--button')}
+                        onClick={handleDisplayFilter}
+                    >
+                        <FontAwesomeIcon icon={faFilter} /> Lọc
+                    </button>
+                </div>
+            </div>
+            {displayFilter && (
+                <div className={cx('container__filter')}>
+                    <div className={cx('container__filter--body')}>
+                        <div className={cx('container__filter--body--item')}>
+                            <h3>Loại</h3>
+                            <div>
+                                <button
+                                    onClick={() => {
+                                        setIsAll(false);
+                                        setCategory('mobile');
+                                        setNameProduct('');
+                                    }}
+                                >
+                                    Điện thoại
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setIsAll(false);
+                                        setCategory('accessories');
+                                        setNameProduct('');
+                                    }}
+                                >
+                                    Phụ kiện
+                                </button>
+                            </div>
+                        </div>
+                        <div className={cx('container__filter--body--item')}>
+                            <h3>Hãng</h3>
+                            <div>
+                                {menuPhone.map((item) => (
+                                    <button
+                                        key={item.label}
+                                        onClick={() => {
+                                            setIsAll(false);
+                                            setCategory('mobile');
+                                            setNameProduct(item.value);
+                                        }}
+                                    >
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={cx('container__filter--body--item')}>
+                            <h3>Giá</h3>
+                            <div>
+                                {menuPrices.map((item) => (
+                                    <button key={item.label} onClick={() => setPrice(item.value)}>
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={cx('container__filter--body--item')}>
+                            <h3>Đã chọn</h3>
+                            <div>
+                                <div>
+                                    {nameProduct !== '' && <button>{nameProduct}</button>}
+                                    {category !== '' && (
+                                        <button>
+                                            {(category === 'mobile' && 'Điện thoại') ||
+                                                (category === 'accessories' && 'Phụ kiện')}
+                                        </button>
+                                    )}
+                                    {menuPrices.filter(
+                                        (item) => item.value.priceLess === price.priceLess,
+                                    )[0]?.label && (
+                                        <button>
+                                            {
+                                                menuPrices.filter(
+                                                    (item) =>
+                                                        item.value.priceLess === price.priceLess,
+                                                )[0]?.label
+                                            }
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('container__filter--footer')}>
+                        <button onClick={handleCancelFilter}>Hủy</button>
+                        <button onClick={handleDisplayFilter}>Xác nhận</button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
