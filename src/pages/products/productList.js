@@ -13,7 +13,9 @@ function ProductList() {
     return (
         <div className={cx('products')}>
             {products?.map((product) => (
-                <Product product={product} key={product._id} />
+                <div className={cx('products__item')}>
+                    <Product product={product} key={product._id} />
+                </div>
             ))}
         </div>
     );

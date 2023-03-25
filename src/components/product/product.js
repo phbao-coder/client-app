@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faCartShopping, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { addProductToCart } from '~/store/cart/cartState';
 
@@ -25,21 +25,25 @@ function Product({ product }) {
 
     return (
         <div className={cx('product')}>
-            {sale.isOnSale && <span className={cx('sale')}>{sale.salePercentage} %</span>}
-            <div className={cx('image')}>
-                <img src={images} alt={name} />
+            <div className={cx('product__header')}>
+                <Link to={_id} className={cx('product__header--link')}>
+                    <img className={cx('product__header--link--image')} src={images} alt={name} />
+                </Link>
+                {sale.isOnSale && (
+                    <span className={cx('product__header--sale')}>Sale {sale.salePercentage}%</span>
+                )}
             </div>
-            <div className={cx('information')}>
-                <Link to={_id}>{name}</Link>
-                {category === 'mobile' && <p>{memory} GB</p>}
-                <span className={cx('price-sale')}>
-                    {vnd(price - (price / 100) * sale.salePercentage)}
-                </span>
-                <span>{vnd(price)} VND</span>
-            </div>
-            <div className={cx('buy')}>
-                <button onClick={handleAddToCart}>
-                    Thêm vào <FontAwesomeIcon icon={faCartShopping} />
+            <div className={cx('product__body')}>
+                <Link className={cx('product__body--link')} to={_id}>
+                    {name}
+                </Link>
+                <span>{vnd(price - (price / 100) * sale.salePercentage)}</span>
+                <span className={cx('product__body--sale')}>{vnd(price)}</span>
+                <button className={cx('product__body--button')} onClick={handleAddToCart}>
+                    <span className={cx('product__body--button-text')}>Thêm vào giỏ hàng</span>
+                    <span className={cx('product__body--button-icon')}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </span>
                 </button>
             </div>
         </div>
