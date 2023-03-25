@@ -1,13 +1,8 @@
-import { useState } from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
 import MenuProduct from '~/components/ProductMenu/MenuProduct';
+import ProductList from './productList';
 
 import classNames from 'classnames/bind';
 import style from './Products.module.css';
-import ProductList from './productList';
 
 const cx = classNames.bind(style);
 

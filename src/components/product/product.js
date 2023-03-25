@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faCartShopping, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { addProductToCart } from '~/store/cart/cartState';
 
@@ -15,7 +15,7 @@ import style from './Product.module.css';
 const cx = classNames.bind(style);
 
 function Product({ product }) {
-    const { _id, name, images, price, sale, memory, category } = product;
+    const { _id, name, images, price, sale } = product;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
