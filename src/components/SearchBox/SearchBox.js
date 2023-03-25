@@ -15,7 +15,7 @@ import style from './SearchBox.module.css';
 
 const cx = classNames.bind(style);
 
-function SearchBox() {
+function SearchBox({ onHandleDisplaySearchBox }) {
     const [value, setValue] = useState(null);
     const products = useSelector((state) => state.products.productsSearch);
     const dispatch = useDispatch();
@@ -48,6 +48,7 @@ function SearchBox() {
                                 </div>
                                 <div className={cx('box__item--right')}>
                                     <Link
+                                        onClick={onHandleDisplaySearchBox}
                                         to={`${routes.product}/${product._id}`}
                                         className={cx('box__item--right--name')}
                                     >

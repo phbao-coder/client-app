@@ -134,7 +134,7 @@ function Header() {
                                 />
                             </div>
                             <div className={cx('search__box--container--body')}>
-                                <SearchBox />
+                                <SearchBox onHandleDisplaySearchBox={handleDisplaySearchBox} />
                             </div>
                         </div>
                     </div>
