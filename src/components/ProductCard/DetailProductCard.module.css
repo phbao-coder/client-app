@@ -29,7 +29,7 @@
     outline: none;
     bottom: -10px;
     padding: 7px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .container__information--name {
@@ -39,7 +39,7 @@
 
 .container__information--sale {
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .container__information--detail h3 {
-    font-size: 18px;
+    font-size: 16px;
     width: 100%;
     text-decoration: underline;
 }

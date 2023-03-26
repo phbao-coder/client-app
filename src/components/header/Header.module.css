@@ -1,5 +1,5 @@
 :root {
-    --height-header: 60px;
+    --height-header: 50px;
 }
 
 header {
@@ -9,7 +9,6 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* position: fixed; */
     z-index: 999;
 }
 
@@ -23,7 +22,7 @@ header {
 }
 
 .logo__item {
-    font-size: 2rem;
+    font-size: 26px;
     color: #000000;
 }
 
@@ -53,7 +52,7 @@ header {
 
 .menu__item--cart--icon {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     display: none;
 }
 
@@ -62,15 +61,15 @@ header {
 }
 
 .menu__item__cart--icon {
-    height: 30px;
+    height: 28px;
     cursor: pointer;
 }
 
 .menu__item__cart--number {
     position: absolute;
-    font-size: 16px;
+    font-size: 14px;
     color: #000000;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -92,7 +91,7 @@ header {
     padding: 5px;
     position: relative;
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .menu__item--center nav a:after {
@@ -165,7 +164,7 @@ header {
 }
 
 .menu__item__search--icon {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* SEARCH BOX */

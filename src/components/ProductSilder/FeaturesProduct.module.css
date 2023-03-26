@@ -24,10 +24,14 @@
 .swiper__item--button--item {
     cursor: pointer;
     padding: 6px;
-    font-size: 28px;
+
     background-color: transparent;
     border: none;
     outline: none;
+}
+
+.swiper__item--button--item svg {
+    font-size: 28px;
 }
 
 .swiper__item {

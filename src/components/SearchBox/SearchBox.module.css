@@ -14,14 +14,14 @@
     border-left: none;
     border-right: none;
     border-bottom: 1px solid #939393;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .container span {
     position: absolute;
     right: 3px;
     color: #939393;
-    font-size: 18px;
+    font-size: 14px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -34,7 +34,7 @@
 .box h2 {
     margin: 5px 0;
     padding: 2px 5px;
-    font-size: 18px;
+    font-size: 14px;
     background-color: #f5f5f5;
     font-weight: 300;
     color: #666;
@@ -70,7 +70,7 @@
 
 .box__item--right--name {
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .box__item--right--price--price {
