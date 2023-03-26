@@ -1,148 +1,99 @@
 .container {
-    width: 80%;
-    margin: auto;
-    margin-top: 5%;
-    height: auto;
-    background-color: var(--white);
-    transition: 0.2s;
-}
-
-.left,
-.right {
-    width: 50%;
-    padding: 30px;
-}
-
-.flex {
     display: flex;
-    justify-content: space-between;
+    padding: 5%;
+    gap: 0 40px;
 }
 
-.main-image {
-    width: auto;
-    height: auto;
+.container--left {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.slide {
-    width: 100%;
+.container--left img {
+    width: 90%;
+    height: fit-content;
 }
 
-.right h3 {
-    color: var(--gray-dark);
-    font-size: calc(var(--font-size-heading-three) + 0.6rem);
-    margin-bottom: 10px;
+.container--right {
+    width: 50%;
+    height: 100%;
 }
 
-.right h3 span {
-    margin-left: 10px;
-    padding: 0 20px;
-    color: var(--white);
-    background-color: var(--red);
+.container--right__button {
+    margin: 20px 0;
+    cursor: pointer;
+    color: #fff;
+    background-color: #282828;
+    border: none;
+    outline: none;
+    bottom: -10px;
+    padding: 7px;
+    font-size: 16px;
 }
 
-.right h4 {
-    color: var(--red);
-    font-size: var(--font-size-heading-three);
+.container__information--name {
+    line-height: 20px;
+    font-size: 20px;
+}
+
+.container__information--sale {
+    margin-top: 10px;
+    font-size: 18px;
     font-weight: 300;
+}
+
+.container__information--price {
+    margin-top: 7px;
+    display: flex;
+    gap: 10px;
+}
+
+.container__information--price h3 {
+    font-weight: 300;
+}
+
+.container__information--price--original {
     text-decoration: line-through;
 }
 
-.right .price-sale {
-    font-size: calc(var(--font-size-heading-three) + 0.2rem);
-    font-weight: 600;
-    text-decoration: none;
+.container__information--detail {
+    margin-top: 7px;
 }
 
-.right p {
-    font-size: var(--font-size-tag-p);
-    color: var(--gray);
-    margin: 20px 0 50px 0;
-    line-height: 25px;
+.container__information--detail h3 {
+    font-size: 18px;
+    width: 100%;
+    text-decoration: underline;
 }
 
-.right p span {
-    text-transform: capitalize;
+.container__information--detail ul {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-.right {
-    position: relative;
-}
-
-.title-button {
-    padding: 10px;
-    background-color: var(--white);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.right button {
-    position: absolute;
-    padding: 10px 40px;
-    right: 30px;
-    bottom: 30px;
-    border: none;
-    background-color: var(--gray);
-    color: var(--white);
-    font-size: 1.6rem;
-    cursor: pointer;
-}
-
-.right button:hover {
-    background-color: var(--gray-dark);
-}
-
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 700px) {
     .container {
-        margin-top: 6%;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 10%;
     }
-}
 
-@media only screen and (max-width: 1300px) {
-    .container {
-        margin-top: 7%;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    .container {
-        margin-top: 80px;
+    .container--left {
+        justify-content: center;
+        align-items: center;
         width: 100%;
     }
-}
 
-@media only screen and (max-width: 600px) {
-    .container {
-        margin-top: 80px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .left,
-    .right {
+    .container--left img {
         width: 100%;
-        padding: 30px;
+        height: auto;
     }
 
-    .right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .right p,
-    .right h3 {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .right h3 span {
-        margin-top: 10px;
-        width: 40%;
-    }
-
-    .right button {
-        width: 70%;
-        right: 50%;
-        transform: translateX(50%);
+    .container--right {
+        width: 100%;
     }
 }
