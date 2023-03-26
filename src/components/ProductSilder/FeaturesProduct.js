@@ -1,30 +1,37 @@
-import { Link } from 'react-router-dom';
-import routes from '~/config/routes';
+import { useRef } from 'react';
 
+import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import Product from '../product/product';
+
 import classNames from 'classnames/bind';
 import style from './FeaturesProduct.module.css';
-import vnd from '~/utils/vnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
+SwiperCore.use(Navigation);
+
 function FeatureProducts({
     title,
-    positionTitle = 'center',
-    fontSizeTitle = 55,
-    letterScpacing = 10,
-    wordScpacing = 20,
+    positionTitle = 'left',
+    fontSizeTitle = 18,
+    letterScpacing = 0,
+    wordScpacing = 0,
     products,
 }) {
+    const navigationNextRef = useRef(null);
+    const navigationPrevRef = useRef(null);
+
     return (
-        <section className={cx('p-slider')}>
+        <section className={cx('container')}>
             <h1
-                className={cx('product-slider-heading')}
+                className={cx('container--heading')}
                 style={{
                     textAlign: positionTitle,
                     fontSize: `${fontSizeTitle}px`,
@@ -35,45 +42,25 @@ function FeatureProducts({
                 {title}
             </h1>
             <Swiper
-                slidesPerView={'auto'}
-                navigation={true}
-                pagination={{
-                    clickable: true,
+                navigation={{ prevEl: navigationPrevRef.current, nextEl: navigationNextRef }}
+                onBeforeInit={(swiper) => {
+                    swiper.params.navigation.prevEl = navigationPrevRef.current;
+                    swiper.params.navigation.nextEl = navigationNextRef.current;
                 }}
-                modules={[Pagination, Navigation]}
+                slidesPerView={'auto'}
                 className={cx('swiper')}
             >
+                <div className={cx('swiper__item--button')}>
+                    <button className={cx('swiper__item--button--item')} ref={navigationNextRef}>
+                        <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+                    </button>
+                    <button className={cx('swiper__item--button--item')} ref={navigationPrevRef}>
+                        <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                    </button>
+                </div>
                 {products?.map((product) => (
-                    <SwiperSlide className={cx('product-box')} key={product._id}>
-                        <div className={cx('p-img-container')}>
-                            <div className={cx('p-img')}>
-                                <Link to={`${routes.product}/${product._id}`}>
-                                    <img src={product.images} alt={product.name} />
-                                </Link>
-                            </div>
-                        </div>
-                        <div className={cx('p-box-text')}>
-                            <div className={cx('product-category')}>
-                                <span>
-                                    {product.category === 'mobile' ? 'Di động' : 'Phụ kiện'}
-                                </span>
-                            </div>
-                            <Link
-                                className={cx('product-title')}
-                                to={`${routes.product}/${product._id}`}
-                            >
-                                {product.name}
-                            </Link>
-                            <div className={cx('price-buy')}>
-                                <span>{vnd(product.price)} VND</span>
-                                <Link
-                                    className={cx('p-buy-btn')}
-                                    to={`${routes.product}/${product._id}`}
-                                >
-                                    Mua ngay
-                                </Link>
-                            </div>
-                        </div>
+                    <SwiperSlide className={cx('swiper__item')} key={product._id}>
+                        <Product product={product} />
                     </SwiperSlide>
                 ))}
             </Swiper>

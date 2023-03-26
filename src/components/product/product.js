@@ -26,7 +26,11 @@ function Product({ product }) {
     return (
         <div className={cx('product')}>
             <div className={cx('product__header')}>
-                <Link to={_id} className={cx('product__header--link')}>
+                <Link
+                    to={`/product/${_id}`}
+                    preventScrollReset={true}
+                    className={cx('product__header--link')}
+                >
                     <img className={cx('product__header--link--image')} src={images} alt={name} />
                 </Link>
                 {sale.isOnSale && (
@@ -34,7 +38,11 @@ function Product({ product }) {
                 )}
             </div>
             <div className={cx('product__body')}>
-                <Link className={cx('product__body--link')} to={_id}>
+                <Link
+                    to={`/product/${_id}`}
+                    preventScrollReset={true}
+                    className={cx('product__body--link')}
+                >
                     {name}
                 </Link>
                 <span>{vnd(price - (price / 100) * sale.salePercentage)}</span>

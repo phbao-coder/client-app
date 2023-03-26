@@ -1,13 +1,14 @@
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import { getProductId } from '~/store/products/productsState';
 
-import classNames from 'classnames/bind';
-import style from './DetailProduct.module.css';
 import DetailProductCard from '~/components/ProductCard/DetailProductCard';
 import FeatureProducts from '~/components/ProductSilder/FeaturesProduct';
+
+import classNames from 'classnames/bind';
+import style from './DetailProduct.module.css';
 
 const cx = classNames.bind(style);
 
@@ -58,7 +59,7 @@ function DetailProduct() {
                         : 'Một số phụ kiện khác'
                 }
                 positionTitle="left"
-                fontSizeTitle={30}
+                fontSizeTitle={18}
                 letterScpacing={0}
                 wordScpacing={0}
                 products={productsAccessories}
@@ -70,7 +71,7 @@ function DetailProduct() {
                         : 'Một số điện thoại khác'
                 }
                 positionTitle="left"
-                fontSizeTitle={30}
+                fontSizeTitle={18}
                 letterScpacing={0}
                 wordScpacing={0}
                 products={productsMobile}
