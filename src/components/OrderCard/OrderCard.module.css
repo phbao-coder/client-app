@@ -82,3 +82,9 @@
 .container__info__action button:disabled {
     background-color: #ddd;
 }
+
+@media only screen and (max-width: 750px) {
+    .container__info {
+        flex-direction: column;
+    }
+}
