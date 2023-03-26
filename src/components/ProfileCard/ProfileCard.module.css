@@ -87,4 +87,9 @@
         width: 100%;
         height: 350px;
     }
+
+    .container__information table th:first-child {
+        font-weight: 600;
+        padding-right: 1px;
+    }
 }
