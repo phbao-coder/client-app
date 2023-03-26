@@ -1,47 +1,16 @@
 import { faDownLong, faUpLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-    styled,
-    tableCellClasses,
-} from '@mui/material';
 
-import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { orderCancell } from '~/store/orders/orderState';
+
 import vnd from '~/utils/vnd';
+
+import classNames from 'classnames/bind';
 import style from './OrderCard.module.css';
 
 const cx = classNames.bind(style);
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-        fontSize: 20,
-        fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 18,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
 
 // sort theo tung gia thanh cua tung san pham
 const ascendingPrice = (products) => {
@@ -160,8 +129,8 @@ const status = (state) => {
 
 function OrderCard({ order, user, index, coupons }) {
     const products = order.products;
-    const day = order.createdAt.slice(0, 10);
     const hours = order.createdAt.slice(11, 16);
+    const day = order.createdAt.slice(0, 10);
 
     const [productsDisplay, setProductsDisplay] = useState(products);
 
@@ -185,162 +154,174 @@ function OrderCard({ order, user, index, coupons }) {
     const coupon = coupons.find((item) => item._id === order.paymentIntent.couponUsed);
 
     return (
-        <div className={cx('order')}>
-            <div className={cx('products')}>
-                <TableContainer component={Paper} sx={{ minWidth: '1000px' }}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Tên sản phẩm</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <div className={cx('action-sort')}>
-                                        <span>
-                                            {sortPrice ? (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faUpLong}
-                                                    onClick={() => {
-                                                        setSortPirce((prev) => !prev);
-                                                        setProductsDisplay(
-                                                            ascendingPrice(products),
-                                                        );
-                                                    }}
-                                                />
-                                            ) : (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faDownLong}
-                                                    onClick={() => {
-                                                        setSortPirce((prev) => !prev);
-                                                        setProductsDisplay(decreasePrice(products));
-                                                    }}
-                                                />
-                                            )}
-                                        </span>
+        <>
+            <div className={cx('container')}>
+                <div className={cx('container__table')}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Tên sản phẩm</td>
+                                <td>
+                                    <span>
+                                        {sortPrice ? (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faUpLong}
+                                                onClick={() => {
+                                                    setSortPirce((prev) => !prev);
+                                                    setProductsDisplay(ascendingPrice(products));
+                                                }}
+                                            />
+                                        ) : (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faDownLong}
+                                                onClick={() => {
+                                                    setSortPirce((prev) => !prev);
+                                                    setProductsDisplay(decreasePrice(products));
+                                                }}
+                                            />
+                                        )}
                                         <p>Giá thành</p>
-                                    </div>
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <div className={cx('action-sort')}>
-                                        <span>
-                                            {sortCount ? (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faUpLong}
-                                                    onClick={() => {
-                                                        setSortCount((prev) => !prev);
-                                                        setProductsDisplay(
-                                                            ascendingCount(products),
-                                                        );
-                                                    }}
-                                                />
-                                            ) : (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faDownLong}
-                                                    onClick={() => {
-                                                        setSortCount((prev) => !prev);
-                                                        setProductsDisplay(decreaseCount(products));
-                                                    }}
-                                                />
-                                            )}
-                                        </span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        {sortCount ? (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faUpLong}
+                                                onClick={() => {
+                                                    setSortCount((prev) => !prev);
+                                                    setProductsDisplay(ascendingCount(products));
+                                                }}
+                                            />
+                                        ) : (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faDownLong}
+                                                onClick={() => {
+                                                    setSortCount((prev) => !prev);
+                                                    setProductsDisplay(decreaseCount(products));
+                                                }}
+                                            />
+                                        )}
                                         <p>Số lượng</p>
-                                    </div>
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <div className={cx('action-sort')}>
-                                        <span>
-                                            {sortCost ? (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faUpLong}
-                                                    onClick={() => {
-                                                        setSortCost((prev) => !prev);
-                                                        setProductsDisplay(ascendingCost(products));
-                                                    }}
-                                                />
-                                            ) : (
-                                                <FontAwesomeIcon
-                                                    className={cx('icon')}
-                                                    icon={faDownLong}
-                                                    onClick={() => {
-                                                        setSortCost((prev) => !prev);
-                                                        setProductsDisplay(decreaseCost(products));
-                                                    }}
-                                                />
-                                            )}
-                                        </span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        {sortCost ? (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faUpLong}
+                                                onClick={() => {
+                                                    setSortCost((prev) => !prev);
+                                                    setProductsDisplay(ascendingCost(products));
+                                                }}
+                                            />
+                                        ) : (
+                                            <FontAwesomeIcon
+                                                className={cx('icon')}
+                                                icon={faDownLong}
+                                                onClick={() => {
+                                                    setSortCost((prev) => !prev);
+                                                    setProductsDisplay(decreaseCost(products));
+                                                }}
+                                            />
+                                        )}
                                         <p>Thành tiền</p>
-                                    </div>
-                                </StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
+                                    </span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {productsDisplay.map((product, index) => (
-                                <StyledTableRow key={index}>
-                                    <StyledTableCell>{product.product.name}</StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        <p className={cx('price-original')}>
+                                <tr key={index}>
+                                    <th>{product.product.name}</th>
+                                    <th>
+                                        <p className={cx('price__original')}>
                                             {vnd(product.product.price)}
                                         </p>
-                                        {product.product.sale.isOnSale && (
-                                            <p className={cx('price-sale')}>
-                                                {vnd(
-                                                    product.product.price -
-                                                        (product.product.price / 100) *
-                                                            product.product.sale.salePercentage,
-                                                )}
-                                            </p>
+                                        <p className={cx('price__sale')}>
+                                            {vnd(
+                                                product.product.price -
+                                                    (product.product.price / 100) *
+                                                        product.product.sale.salePercentage,
+                                            )}
+                                        </p>
+                                    </th>
+                                    <th>{product.count}</th>
+                                    <th>
+                                        {vnd(
+                                            (product.product.price -
+                                                (product.product.price / 100) *
+                                                    product.product.sale.salePercentage) *
+                                                product.count,
                                         )}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">{product.count}</StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        {vnd(product.price * product.count)} VND
-                                    </StyledTableCell>
-                                </StyledTableRow>
+                                    </th>
+                                </tr>
                             ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-            <div className={cx('info-order')}>
-                <div className={cx('info-order-day')}>
-                    <h3>Đặt hàng vào:</h3>
-                    <p>
-                        {day}
-                        <br />
-                        {hours}
-                    </p>
-                    <h3>Thông tin nhận hàng:</h3>
-                    <p>
-                        <b>Địa chỉ nhận hàng:</b> <i>{order.paymentIntent.destination}</i> <br />
-                        <b>Số điện thoại nhận hàng: </b>
-                        <i>{order.paymentIntent.phone}</i>
-                        <br />
-                        <b>Phương thức thanh toán</b>: {methods(order.paymentIntent.method)} <br />
-                        {coupon && (
+                        </tbody>
+                    </table>
+                </div>
+                <div className={cx('container__info')}>
+                    <div className={cx('container__info__detail')}>
+                        <div>
+                            <p>
+                                <b>Đặt hàng vào: </b> {hours} {day}
+                            </p>
                             <span>
-                                <b>Mã giảm giá: </b> {coupon?.code} <b>Giảm:</b>{' '}
-                                {coupon?.discountAmount} %
+                                <ul>
+                                    <li>
+                                        <b>Địa chỉ nhận hàng: </b> {order.paymentIntent.destination}
+                                    </li>
+                                    <li>
+                                        <b>Số điện thoại nhận hàng: </b> {order.paymentIntent.phone}
+                                    </li>
+                                    <li>
+                                        <b>Phương thức thanh toán: </b>{' '}
+                                        {methods(order.paymentIntent.method)}
+                                    </li>
+                                    <li>
+                                        {coupon && (
+                                            <>
+                                                <b>Mã giảm giá: </b> {coupon?.code} <b>Giảm:</b>{' '}
+                                                {coupon?.discountAmount}%
+                                            </>
+                                        )}
+                                    </li>
+                                </ul>
                             </span>
-                        )}
-                    </p>
-                </div>
-                <div className={cx('info-order-action')}>
-                    <h3>Tổng giá trị đơn hàng</h3>
-                    {coupon && <p className={cx('sale-total')}>{vnd(sumPriceOrinal)} VND </p>}
-                    <p>{vnd(order.paymentIntent.amount)} VND</p>
-                    <p className={cx('method')}>{status(order.orderStatus)}</p>
-                    <button
-                        onClick={() => handleCancelledOrder()}
-                        disabled={order.orderStatus === 'Cancelled'}
-                    >
-                        {order.orderStatus === 'Cancelled' ? 'Đã hủy' : 'Hủy đơn'}
-                    </button>
+                        </div>
+                    </div>
+                    <div className={cx('container__info__action')}>
+                        <span>
+                            <p>
+                                <b>Tổng giá trị đơn hàng </b>
+                            </p>
+                            {coupon && (
+                                <>
+                                    <p className={cx('container__info__action--price--original')}>
+                                        {vnd(sumPriceOrinal)} VND{' '}
+                                    </p>
+                                </>
+                            )}
+                            <p className={cx('container__info__action--price--discount')}>
+                                {vnd(order.paymentIntent.amount)} VND
+                            </p>
+                            <p>{status(order.orderStatus)}</p>
+                        </span>
+                        <button
+                            onClick={() => handleCancelledOrder()}
+                            disabled={order.orderStatus === 'Cancelled'}
+                        >
+                            {order.orderStatus === 'Cancelled' ? 'Đã hủy' : 'Hủy đơn'}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
