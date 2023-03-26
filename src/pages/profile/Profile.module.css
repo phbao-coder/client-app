@@ -1,39 +1,43 @@
 .container {
     width: 100%;
-    padding: 90px 0 0 0;
     display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 100px;
-}
-
-.orders {
-    width: 60%;
-    margin-top: 10px;
-}
-
-.order {
-    width: 100%;
-    margin-top: 50px;
-    display: flex;
+    align-items: center;
     flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    margin-bottom: 100px;
+    gap: 50px 0;
 }
 
-.action {
+.container__profile {
+    width: 80%;
+}
+
+.container__track {
+    width: 90%;
+}
+
+.container__track--action {
+    margin-bottom: 10px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 10px;
 }
 
-.action .action-filter {
+.container__track--action h1 {
+    font-size: 20px;
+}
+
+.conatiner__track--action__input {
     display: flex;
     gap: 20px;
 }
 
-.selected {
-    font-size: 1.2rem;
+.conatiner__track--action__input--select {
+    font-size: 16px;
 }
 
-.input-date {
+.conatiner__track--action__input--date {
     padding: 3px 5px;
     border: 1px solid var(--gray);
     font-size: 1.2rem;
@@ -42,7 +46,7 @@
     border: 0.2px solid hsl(0, 0%, 80%);
 }
 
-.input-date:focus {
+.conatiner__track--action__input--date:focus {
     border: none;
     outline: 3px solid var(--blue);
 }
@@ -55,45 +59,15 @@
     border-radius: 3px;
 }
 
-@media only screen and (max-width: 1300px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-
-    .orders {
-        width: 90%;
-    }
-
-    .order {
-        margin-top: 40px;
-    }
-}
-
 @media only screen and (max-width: 900px) {
-    .action {
+    .container__track--action {
         flex-direction: column;
-        gap: 20px;
+        align-items: normal;
     }
 }
 
-@media only screen and (max-width: 670px) {
-    .container {
-        margin-bottom: 10%;
-        padding: 90px 0 0 0;
-    }
-
-    .action {
-        align-items: center;
-    }
-
-    .action h1 {
-        text-align: center;
-    }
-
-    .action .action-filter {
+@media only screen and (max-width: 500px) {
+    .conatiner__track--action__input {
         flex-direction: column;
     }
 }

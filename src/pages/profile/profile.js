@@ -103,33 +103,33 @@ function Profile() {
 
     return (
         <div className={cx('container')}>
-            <div className={cx('profile')}>
+            <div className={cx('container__profile')}>
                 <ProfileCard info={user} orders={orders} />
             </div>
-            <div className={cx('orders')}>
-                <div className={cx('action')}>
+            <div className={cx('container__track')}>
+                <div className={cx('container__track--action')}>
                     <h1>Danh sách đơn hàng</h1>
-                    <div className={cx('action-filter')}>
+                    <div className={cx('conatiner__track--action__input')}>
                         <input
                             type="date"
                             onChange={(e) => handleFilterDay(e)}
-                            className={cx('input-date')}
+                            className={cx('conatiner__track--action__input--date')}
                         />
                         <Select
-                            className={cx('selected')}
                             onChange={(e) => handleSort(e)}
                             placeholder="Sắp xếp"
                             options={menu}
+                            className={cx('conatiner__track--action__input--select')}
                         />
                         <Select
-                            className={cx('selected')}
                             onChange={(e) => handleStatus(e)}
                             placeholder="Trạng thái đơn"
                             options={status}
+                            className={cx('conatiner__track--action__input--select')}
                         />
                     </div>
                 </div>
-                <div className={cx('order')}>
+                <div className={cx('container__track--orders')}>
                     {ordersFilter?.map((order, index) => (
                         <OrderCard
                             key={index}
