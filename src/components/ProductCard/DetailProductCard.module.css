@@ -25,11 +25,16 @@
     cursor: pointer;
     color: #fff;
     background-color: #282828;
-    border: none;
+    border: 1px solid #282828;
     outline: none;
     bottom: -10px;
     padding: 7px;
     font-size: 14px;
+}
+
+.container--right__button:hover {
+    color: #282828;
+    background-color: #fff;
 }
 
 .container__information--name {
