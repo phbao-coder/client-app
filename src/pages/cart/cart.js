@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,7 +23,6 @@ const cx = classNames.bind(style);
 function Cart() {
     const cart = useSelector((state) => state.cart.cart);
     const userID = useSelector((state) => state.user.user.id);
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleDecreaProduct = (index) => {
