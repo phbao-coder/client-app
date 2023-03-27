@@ -29,14 +29,19 @@
 }
 
 .product__body--button {
-    color: #282828;
-    background-color: transparent;
+    color: #fff;
+    background-color: #282828;
     cursor: pointer;
     font-size: 14px;
-    border: none;
+    border: 1px solid #282828;
     display: flex;
     top: 50%;
     left: -40%;
+}
+
+.product__body--button:hover {
+    color: #282828;
+    background-color: #fff;
 }
 
 .product__body--button span {
