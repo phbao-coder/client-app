@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import {
     getCartFromServer,
@@ -23,7 +23,7 @@ const cx = classNames.bind(style);
 function Cart() {
     const cart = useSelector((state) => state.cart.cart);
     const userID = useSelector((state) => state.user.user.id);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleDecreaProduct = (index) => {
@@ -49,78 +49,88 @@ function Cart() {
     }, [dispatch, userID]);
 
     return (
-        <div className={cx('container')}>
-            {cart.products.length !== 0 ? (
-                <>
-                    <h1>Giỏ hàng của bạn</h1>
-                    <div className={cx('cart')}>
-                        {cart?.products.map((product, index) => (
-                            <div className={cx('cart-item')} key={index}>
-                                <div className={cx('cart-flex')}>
-                                    <img src={product.product.images} alt={product.product.name} />
-                                    <div className={cx('cart-info')}>
-                                        <h3>
-                                            {product.product.name}{' '}
-                                            {product.product.sale.isOnSale && (
-                                                <span className={cx('sale')}>
-                                                    -{product.product.sale.salePercentage} %
-                                                </span>
-                                            )}
-                                        </h3>
-                                        <p className={cx('sale-original')}>
-                                            {vnd(product.product.price)} VND
-                                        </p>
-                                        <p className={cx('sale-price')}>
-                                            {vnd(
-                                                product.product.price -
-                                                    (product.product.price / 100) *
-                                                        product.product.sale.salePercentage,
-                                            )}{' '}
-                                            VND
-                                        </p>
-                                        <p>
-                                            Tạm tính:{' '}
-                                            {vnd(
-                                                product.count *
-                                                    (product.product.price -
-                                                        (product.product.price / 100) *
-                                                            product.product.sale.salePercentage),
-                                            )}{' '}
-                                            VND
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={cx('cart-action')}>
-                                    <div className={cx('cart-button')}>
-                                        <button onClick={() => handleDecreaProduct(index)}>
-                                            <FontAwesomeIcon icon={faMinus} />
-                                        </button>
-                                        <p>{product.count}</p>
-                                        <button onClick={() => handleIncreaProduct(index)}>
-                                            <FontAwesomeIcon icon={faPlus} />
-                                        </button>
-                                    </div>
-                                    <div className={cx('cart-delete')}>
-                                        <button onClick={() => handleRemoveProduct(index)}>
-                                            <FontAwesomeIcon icon={faTrash} /> Xóa
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+        <>
+            <div className={cx('container')}>
+                <h1 className={cx('heading')}>Giỏ hàng của bạn</h1>
+                {cart.products.length !== 0 && (
+                    <div className={cx('table--container')}>
+                        <table className={cx('cart')}>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cart?.products.map((product, index) => (
+                                    <tr key={index}>
+                                        <th>
+                                            <button onClick={() => handleRemoveProduct(index)}>
+                                                <FontAwesomeIcon icon={faXmark} />
+                                            </button>
+                                        </th>
+                                        <th>
+                                            <div className={cx('cart__column--name')}>
+                                                <img
+                                                    src={product.product.images}
+                                                    alt={product.product.name}
+                                                    style={{ width: '70px' }}
+                                                />
+                                                <Link to={`/product/${product.product._id}`}>
+                                                    {product.product.name}
+                                                </Link>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <span className={cx('cart__column--price')}>
+                                                <p className={cx('cart__column--price--original')}>
+                                                    {vnd(product.product.price)}
+                                                </p>
+                                                <p className={cx('cart__column--price--sale')}>
+                                                    {vnd(
+                                                        product.product.price -
+                                                            (product.product.price / 100) *
+                                                                product.product.sale.salePercentage,
+                                                    )}
+                                                </p>
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <div className={cx('cart__column--count')}>
+                                                <button onClick={() => handleDecreaProduct(index)}>
+                                                    <FontAwesomeIcon icon={faMinus} />
+                                                </button>
+                                                <span>{product.count}</span>
+                                                <button onClick={() => handleIncreaProduct(index)}>
+                                                    <FontAwesomeIcon icon={faPlus} />
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <span className={cx('cart__column--sum')}>
+                                                {vnd(
+                                                    product.count *
+                                                        (product.product.price -
+                                                            (product.product.price / 100) *
+                                                                product.product.sale
+                                                                    .salePercentage),
+                                                )}
+                                            </span>
+                                        </th>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className={cx('action--container')}>
+                            <Order />
+                        </div>
                     </div>
-                    <Order />
-                </>
-            ) : (
-                <div className={cx('empty-cart')}>
-                    <img
-                        src="https://assets.materialup.com/uploads/16e7d0ed-140b-4f86-9b7e-d9d1c04edb2b/preview.png"
-                        alt=""
-                    />
-                    <button onClick={() => navigate('/product')}>Quay lại trang sản phẩm</button>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+        </>
     );
 }
 
