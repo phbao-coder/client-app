@@ -10,6 +10,8 @@ import * as yup from 'yup';
 
 import { order } from '~/store/orders/orderState';
 
+import { applyCoupon } from '~/store/cart/cartState';
+
 import {
     district as districtData,
     district_CR as district_CR_Data,
@@ -19,12 +21,21 @@ import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './Order.module.css';
-import { applyCoupon } from '~/store/cart/cartState';
 
 const cx = classNames.bind(style);
 
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 const methods = [{ value: 'Cash on Delivery', label: 'Thanh toán khi nhận hàng' }];
+
+const theme = (theme) => ({
+    ...theme,
+    borderRadius: 0,
+    colors: {
+        ...theme.colors,
+        primary25: '#ddd',
+        primary: '#282828',
+    },
+});
 
 function Order() {
     const cart = useSelector((state) => state.cart.cart);
@@ -87,127 +98,132 @@ function Order() {
     }, [cart?.isUsedCoupon?.couponTnfo?.code]);
 
     return (
-        <form onSubmit={handleSubmit(handleOrder)} className={cx('order')}>
-            <div className={cx('info-user')}>
-                <h1>Thông tin nhận hàng</h1>
-                <div>
-                    <div className={cx('row')}>
-                        <label>Tên người nhận</label>
-                        <div className={cx('row-item')}>
-                            <input
-                                type="text"
-                                placeholder="Nhập tên..."
-                                spellCheck={false}
-                                {...register('name')}
-                            />
-                            {errors.name && <span>{errors.name.message}</span>}
-                        </div>
-                    </div>
-                    <div className={cx('row')}>
-                        <label>Số điện thoại</label>
-                        <div className={cx('row-item')}>
-                            <input
-                                type="text"
-                                placeholder="Nhập số điện thoại..."
-                                spellCheck={false}
-                                {...register('phone')}
-                            />
-                            {errors.phone && <span>{errors.phone.message}</span>}
-                        </div>
-                    </div>
-                    <div className={cx('address')}>
-                        <Select
-                            className={cx('select')}
-                            onChange={(e) => {
-                                setCity(e.value);
-                            }}
-                            defaultValue={options[0]}
-                            options={options}
+        <form onSubmit={handleSubmit(handleOrder)} className={cx('form__order')}>
+            <div className={cx('form__order--left')}>
+                <div className={cx('form__order__row')}>
+                    <label>Tên người nhận</label>
+                    <div className={cx('form__order__row--item')}>
+                        <input
+                            type="text"
+                            placeholder="Nhập tên..."
+                            spellCheck={false}
+                            {...register('name')}
                         />
-                        <Select
-                            className={cx('select')}
-                            onChange={(e) => {
-                                setDistrict(e.value);
-                            }}
-                            defaultValue={districtData[0]}
-                            options={districtData}
+                        {errors.name && <span>{errors.name.message}</span>}
+                    </div>
+                </div>
+                <div className={cx('form__order__row')}>
+                    <label>Số điện thoại</label>
+                    <div className={cx('form__order__row--item')}>
+                        <input
+                            type="text"
+                            placeholder="Nhập số điện thoại..."
+                            spellCheck={false}
+                            {...register('phone')}
                         />
-                        {district === 'Ninh Kiều' && (
-                            <Select
-                                className={cx('select')}
-                                onChange={(e) => {
-                                    setSubDistrict(e.value);
-                                }}
-                                defaultValue={district_NK_Data[0]}
-                                options={district_NK_Data}
-                            />
-                        )}
-                        {district === 'Cái Răng' && (
-                            <Select
-                                className={cx('select')}
-                                onChange={(e) => {
-                                    setSubDistrict(e.value);
-                                }}
-                                defaultValue={district_CR_Data[0]}
-                                options={district_CR_Data}
-                            />
-                        )}
+                        {errors.phone && <span>{errors.phone.message}</span>}
                     </div>
-                    <div className={cx('row')}>
-                        <label>Tên đường, Số nhà / hẻm</label>
-                        <div className={cx('row-item')}>
-                            <input
-                                type="text"
-                                placeholder="Nhập địa chỉ chi tiết..."
-                                spellCheck={false}
-                                {...register('address')}
-                            />
-                            {errors.address && <span>{errors.address.message}</span>}
-                        </div>
-                    </div>
-                    <div className={cx('row')}>
-                        <label>Ghi chú</label>
-                        <div className={cx('row-item')}>
-                            <input
-                                type="text"
-                                placeholder="Ghi chú..."
-                                spellCheck={false}
-                                {...register('note')}
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('row')}>
-                        <label>Phương thức thanh toán</label>
+                </div>
+                <div className={cx('form__order__row--address')}>
+                    <Select
+                        onChange={(e) => {
+                            setCity(e.value);
+                        }}
+                        defaultValue={options[0]}
+                        options={options}
+                        theme={theme}
+                        className={cx('form__order__row--select')}
+                    />
+                    <Select
+                        onChange={(e) => {
+                            setDistrict(e.value);
+                        }}
+                        defaultValue={districtData[0]}
+                        options={districtData}
+                        theme={theme}
+                        className={cx('form__order__row--select')}
+                    />
+                    {district === 'Ninh Kiều' && (
                         <Select
-                            className={cx('select-method')}
                             onChange={(e) => {
-                                setMethod(e.value);
+                                setSubDistrict(e.value);
                             }}
-                            defaultValue={methods[0]}
-                            options={methods}
+                            defaultValue={district_NK_Data[0]}
+                            options={district_NK_Data}
+                            theme={theme}
+                            className={cx('form__order__row--select')}
+                        />
+                    )}
+                    {district === 'Cái Răng' && (
+                        <Select
+                            onChange={(e) => {
+                                setSubDistrict(e.value);
+                            }}
+                            defaultValue={district_CR_Data[0]}
+                            options={district_CR_Data}
+                            theme={theme}
+                            className={cx('form__order__row--select')}
+                        />
+                    )}
+                </div>
+                <div className={cx('form__order__row')}>
+                    <label>Tên đường, Số nhà / hẻm</label>
+                    <div className={cx('form__order__row--item')}>
+                        <input
+                            type="text"
+                            placeholder="Nhập địa chỉ chi tiết..."
+                            spellCheck={false}
+                            {...register('address')}
+                        />
+                        {errors.address && <span>{errors.address.message}</span>}
+                    </div>
+                </div>
+                <div className={cx('form__order__row')}>
+                    <label>Ghi chú</label>
+                    <div className={cx('form__order__row--item')}>
+                        <input
+                            type="text"
+                            placeholder="Ghi chú..."
+                            spellCheck={false}
+                            {...register('note')}
                         />
                     </div>
                 </div>
+                <div className={cx('form__order__row')}>
+                    <label>Phương thức thanh toán</label>
+                    <Select
+                        onChange={(e) => {
+                            setMethod(e.value);
+                        }}
+                        defaultValue={methods[0]}
+                        options={methods}
+                        theme={theme}
+                    />
+                </div>
             </div>
-            <div className={cx('action')}>
-                <div className={cx('coupon')}>
+            <div className={cx('form__order--right')}>
+                <h2>Nhập mã giảm giá</h2>
+                <div className={cx('form__order__coupon')}>
                     <input
                         placeholder="Mã giảm giá"
                         onChange={(e) => setCode(e.target.value)}
                         defaultValue={code}
                     />
                     {cart?.isUsedCoupon?.status === true && (
-                        <span className={cx('coupon-apply')}>
+                        <span className={cx('form__order__coupon__applly')}>
                             Đã áp dụng -{cart?.isUsedCoupon?.couponTnfo?.discountAmount} %
                         </span>
                     )}
-                    <span className={cx('coupon-button')} onClick={() => handleApplyCoupon()}>
+                    <span
+                        className={cx('form__order__coupon__button')}
+                        onClick={() => handleApplyCoupon()}
+                    >
                         Áp dụng
                     </span>
                 </div>
-                <div className={cx('cost')}>
-                    <h2>Tổng tiền:</h2>
-                    <h2>{vnd(cart.cartTotal)} VND</h2>
+                <div className={cx('form__order_total')}>
+                    <h2 className={cx('form__order_total--title')}>Tổng tiền: </h2>
+                    <h2 className={cx('form__order_total--total')}>{vnd(cart.cartTotal)}</h2>
                 </div>
                 <button type="submit">Đặt hàng</button>
             </div>

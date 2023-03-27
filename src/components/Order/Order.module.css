@@ -1,4 +1,112 @@
-/* order */
+.form__order {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form__order--left {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+}
+.form__order--right {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+}
+
+/* css input */
+.form__order__row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+}
+
+.form__order__row label {
+    font-size: 16px;
+    font-weight: 600;
+}
+.form__order__row--item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__order__row--item input,
+.form__order--right input {
+    min-height: 38px;
+    font-size: 14px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid hsl(0, 0%, 80%);
+}
+
+.form__order__row--item input:focus,
+.form__order--right input:focus {
+    outline: 2px solid #282828;
+}
+
+/* select address */
+.form__order__row--address {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 10px;
+}
+
+.form__order__row--select {
+    width: 33%;
+}
+
+/* right */
+.form__order--right h2 {
+    font-size: 16px;
+}
+
+.form__order__coupon {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form__order__coupon .form__order__coupon__button,
+.form__order--right button {
+    cursor: pointer;
+    padding: 7px;
+    color: #fff;
+    text-align: center;
+    background-color: #282828;
+    border: 1px solid #282828;
+}
+
+.form__order__coupon .form__order__coupon__button:hover,
+.form__order--right button:hover {
+    background-color: #fff;
+    color: #282828;
+}
+
+.form__order_total .form__order_total--title {
+    font-size: 16px;
+}
+
+.form__order_total .form__order_total--total {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 650px) {
+    .form__order {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .form__order--left,
+    .form__order--right {
+        width: 100%;
+    }
+}
+
+/* order
 .order {
     width: 100%;
     display: flex;
@@ -130,7 +238,7 @@
 }
 
 /* css address */
-.address {
+/* .address {
     width: 100%;
     margin: 10px 0;
     display: flex;
@@ -190,4 +298,4 @@
     .order .info-user .row input {
         width: 100%;
     }
-}
+} */
