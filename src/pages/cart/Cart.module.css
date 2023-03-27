@@ -13,6 +13,7 @@
 
 .container {
     width: 100%;
+    margin-bottom: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,10 +143,21 @@
     margin-top: 40px;
 }
 
+.action--container .action--container--title {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding: 2px;
+}
+
 @media only screen and (max-width: 1000px) {
-    .container .table--container,
-    .container .action--container {
+    .container .table--container {
         width: 90%;
+    }
+
+    .container .action--container {
+        width: 100%;
     }
 }
 

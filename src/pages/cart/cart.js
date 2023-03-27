@@ -124,6 +124,7 @@ function Cart() {
                             </tbody>
                         </table>
                         <div className={cx('action--container')}>
+                            <h2 className={cx('action--container--title')}>Thông tin nhận hàng</h2>
                             <Order />
                         </div>
                     </div>
