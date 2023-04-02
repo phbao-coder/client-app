@@ -31,23 +31,15 @@ import { useState } from 'react';
 const cx = classNames.bind(style);
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 
-const styleSelect = {
-    control: (baseStyles) => ({
-        ...baseStyles,
-        border: '1px solid #6c757d',
-        borderRadius: 0,
-        height: 45,
-        fontSize: 18,
-    }),
-    indicatorSeparator: (baseStyles) => ({
-        ...baseStyles,
-        backgroundColor: '#6c757d',
-    }),
-    dropdownIndicator: (baseStyles) => ({
-        ...baseStyles,
-        color: '#6c757d',
-    }),
-};
+const theme = (theme) => ({
+    ...theme,
+    borderRadius: 0,
+    colors: {
+        ...theme.colors,
+        primary25: '#ddd',
+        primary: '#282828',
+    },
+});
 
 function Register() {
     const dispatch = useDispatch();
@@ -96,128 +88,122 @@ function Register() {
 
     return (
         <div className={cx('container')}>
-            <div className={cx('wrapper')}>
-                <div className={cx('title')}>
-                    <span>Đăng ký</span>
-                </div>
-                <form onSubmit={handleSubmit(handleRegisterUser)}>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faUser} />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Tên người dùng..."
-                            spellCheck={false}
-                            {...register('username')}
-                        />
-                        {errors.username && <span>{errors.username.message}</span>}
+            <div className={cx('container--filter')}>
+                <div className={cx('register')}>
+                    <div className={cx('register--heading')}>
+                        <h1>Đăng ký</h1>
                     </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Gmail..."
-                            spellCheck={false}
-                            {...register('email')}
-                        />
-                        {errors.email && <span>{errors.email.message}</span>}
-                    </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faUser} />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Họ và tên..."
-                            spellCheck={false}
-                            {...register('name')}
-                        />
-                        {errors.name && <span>{errors.name.message}</span>}
-                    </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faLock} />
-                        </div>
-                        <input
-                            type="password"
-                            placeholder="Mật khẩu..."
-                            spellCheck={false}
-                            {...register('password')}
-                        />
-                        {errors.password && <span>{errors.password.message}</span>}
-                    </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faPhone} />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Số điện thoại..."
-                            spellCheck={false}
-                            {...register('phone')}
-                        />
-                        {errors.phone && <span>{errors.phone.message}</span>}
-                    </div>
-                    <div className={cx('select')}>
-                        <Select
-                            defaultValue={options[0]}
-                            options={options}
-                            onChange={(e) => setCity(e.value)}
-                            styles={{
-                                ...styleSelect,
-                            }}
-                        />
-                        <Select
-                            defaultValue={districtData[0]}
-                            options={districtData}
-                            onChange={(e) => setDistrict(e.value)}
-                            styles={{
-                                ...styleSelect,
-                            }}
-                        />
-                        {district === 'Ninh Kiều' && (
-                            <Select
-                                defaultValue={district_NK_Data[0]}
-                                options={district_NK_Data}
-                                onChange={(e) => setSubDistrict(e.value)}
-                                styles={{
-                                    ...styleSelect,
-                                }}
+                    <form onSubmit={handleSubmit(handleRegisterUser)}>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faUser} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Tên người dùng..."
+                                spellCheck={false}
+                                {...register('username')}
                             />
-                        )}
-                        {district === 'Cái Răng' && (
-                            <Select
-                                defaultValue={district_CR_Data[0]}
-                                options={district_CR_Data}
-                                onChange={(e) => setSubDistrict(e.value)}
-                                styles={{
-                                    ...styleSelect,
-                                }}
-                            />
-                        )}
-                    </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faLocationDot} />
+                            {errors.username && <span>{errors.username.message}</span>}
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Địa chỉ..."
-                            spellCheck={false}
-                            {...register('address')}
-                        />
-                        {errors.address && <span>{errors.address.message}</span>}
-                    </div>
-                    <div className={cx('row')}>
-                        <button type="submit">Đăng ký</button>
-                        <div className={cx('signup-link')}>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Gmail..."
+                                spellCheck={false}
+                                {...register('email')}
+                            />
+                            {errors.email && <span>{errors.email.message}</span>}
+                        </div>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faUser} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Họ và tên..."
+                                spellCheck={false}
+                                {...register('name')}
+                            />
+                            {errors.name && <span>{errors.name.message}</span>}
+                        </div>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faLock} />
+                            </div>
+                            <input
+                                type="password"
+                                placeholder="Mật khẩu..."
+                                spellCheck={false}
+                                {...register('password')}
+                            />
+                            {errors.password && <span>{errors.password.message}</span>}
+                        </div>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faPhone} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Số điện thoại..."
+                                spellCheck={false}
+                                {...register('phone')}
+                            />
+                            {errors.phone && <span>{errors.phone.message}</span>}
+                        </div>
+                        <div className={cx('select')}>
+                            <Select
+                                defaultValue={options[0]}
+                                options={options}
+                                onChange={(e) => setCity(e.value)}
+                                theme={theme}
+                            />
+                            <Select
+                                defaultValue={districtData[0]}
+                                options={districtData}
+                                onChange={(e) => setDistrict(e.value)}
+                                theme={theme}
+                            />
+                            {district === 'Ninh Kiều' && (
+                                <Select
+                                    defaultValue={district_NK_Data[0]}
+                                    options={district_NK_Data}
+                                    onChange={(e) => setSubDistrict(e.value)}
+                                    theme={theme}
+                                />
+                            )}
+                            {district === 'Cái Răng' && (
+                                <Select
+                                    defaultValue={district_CR_Data[0]}
+                                    options={district_CR_Data}
+                                    onChange={(e) => setSubDistrict(e.value)}
+                                    theme={theme}
+                                />
+                            )}
+                        </div>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faLocationDot} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Địa chỉ..."
+                                spellCheck={false}
+                                {...register('address')}
+                            />
+                            {errors.address && <span>{errors.address.message}</span>}
+                        </div>
+                        <div className={cx('row')}>
+                            <button type="submit">Đăng ký</button>
+                        </div>
+                        <div className={cx('link')}>
                             <p>Bạn đã có tài khoản?</p> <Link to={routes.login}>Đăng nhập</Link>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     );
