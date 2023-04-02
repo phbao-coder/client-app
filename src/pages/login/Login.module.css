@@ -1,84 +1,74 @@
 .container {
-    margin: auto;
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    background-color: transparent;
+    background-image: url('https://cdn.mos.cms.futurecdn.net/hofAQNpgapKkMXKKvUqPQb.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 70vh;
 }
 
-.wrapper {
-    width: 380px;
-    background-color: var(--white);
-}
-
-.wrapper .title {
-    line-height: 80px;
-    background-color: var(--gray);
-    font-size: var(--font-size-heading-one);
-    font-weight: var(--font-weight-heading-one);
-    text-align: center;
-    color: var(--white);
-}
-
-.wrapper form {
-    padding: 30px 20px 40px 20px;
-}
-
-.wrapper form .row {
-    height: 45px;
-    margin-bottom: 25px;
-    position: relative;
-}
-
-.wrapper form .row span {
-    color: var(--red);
-    font-weight: 600;
-}
-
-.wrapper form .row .icon {
-    width: 47px;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: var(--font-size-heading-four);
-    background-color: var(--gray);
-}
-
-.wrapper form .row input {
-    padding-left: 60px;
+.container--filter {
     width: 100%;
     height: 100%;
-    outline: none;
-    border: 1px solid var(--gray);
-    font-size: var(--font-size-heading-four);
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.login {
+    padding: 10px 30px;
+    background-color: #fff;
+}
+
+.login--heading h1 {
+    width: 100%;
+    font-size: 28px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.row {
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.icon {
+    position: absolute;
+    transform: translate(50%, 50%);
+}
+
+.row input {
+    padding: 7px 0 7px 30px;
+    font-size: 14px;
+}
+
+.row span {
+    color: var(--red);
 }
 
 .row button {
-    width: 100%;
-    height: 47px;
-    border: none;
-    color: var(--white);
-    font-size: var(--font-size-heading-four);
-    background-color: var(--gray);
+    padding: 7px 10px;
+    outline: none;
+    color: #fff;
+    border: 1px solid #282828;
+    background-color: #282822;
     cursor: pointer;
 }
 
 .row button:hover {
-    background-color: var(--gray-dark);
+    background-color: #fff;
+    color: #282822;
 }
 
-.row .signup-link {
-    margin-top: 10px;
+.link {
     display: flex;
-    font-size: var(--font-size-heading-four);
-    gap: 10px;
+    justify-content: space-between;
+    gap: 7px;
 }
 
-@media only screen and (max-height: 500px) {
-    .container {
-        margin-top: 50px;
-    }
+.link a {
+    color: #282822;
 }

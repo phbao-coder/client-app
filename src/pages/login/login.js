@@ -46,43 +46,45 @@ function Login() {
 
     return (
         <div className={cx('container')}>
-            <div className={cx('wrapper')}>
-                <div className={cx('title')}>
-                    <span>Đăng nhập</span>
-                </div>
-                <form onSubmit={handleSubmit(handleLogin)}>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faUser} />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Nhập tài khoản người dùng..."
-                            spellCheck={false}
-                            {...register('username')}
-                        />
-                        {errors.username && <span>{errors.username.message}</span>}
+            <div className={cx('container--filter')}>
+                <div className={cx('login')}>
+                    <div className={cx('login--heading')}>
+                        <h1>Đăng nhập</h1>
                     </div>
-                    <div className={cx('row')}>
-                        <div className={cx('icon')}>
-                            <FontAwesomeIcon icon={faLock} />
+                    <form onSubmit={handleSubmit(handleLogin)}>
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faUser} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Nhập tài khoản người dùng..."
+                                spellCheck={false}
+                                {...register('username')}
+                            />
+                            {errors.username && <span>{errors.username.message}</span>}
                         </div>
-                        <input
-                            type="password"
-                            placeholder="Nhập mật khẩu..."
-                            spellCheck={false}
-                            {...register('password')}
-                        />
-                        {errors.password && <span>{errors.password.message}</span>}
-                    </div>
-                    <div className={cx('row')}>
-                        <button type="submit">Đăng nhập</button>
-                        <div className={cx('signup-link')}>
-                            <p>Bạn không phải là thành viên?</p>{' '}
+                        <div className={cx('row')}>
+                            <div className={cx('icon')}>
+                                <FontAwesomeIcon icon={faLock} />
+                            </div>
+                            <input
+                                type="password"
+                                placeholder="Nhập mật khẩu..."
+                                spellCheck={false}
+                                {...register('password')}
+                            />
+                            {errors.password && <span>{errors.password.message}</span>}
+                        </div>
+                        <div className={cx('row')}>
+                            <button type="submit">Đăng nhập</button>
+                        </div>
+                        <div className={cx('link')}>
                             <Link to={routes.register}>Đăng ký</Link>
+                            <Link to={routes.home}>Quên mật khẩu?</Link>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     );
