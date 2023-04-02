@@ -37,12 +37,14 @@
 
 .icon {
     position: absolute;
-    transform: translate(50%, 50%);
+    transform: translate(50%, 65%);
 }
 
 .row input {
-    padding: 7px 0 7px 30px;
+    width: 300px;
+    padding: 9px 0 9px 30px;
     font-size: 14px;
+    border: 1px solid hsl(0, 0%, 80%);
 }
 
 .row span {
