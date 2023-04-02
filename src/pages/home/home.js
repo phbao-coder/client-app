@@ -6,6 +6,7 @@ import style from './Home.module.css';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getProductsFeature } from '~/store/products/productsState';
+import Banner from '~/components/Banner/Banner';
 
 const cx = classNames.bind(style);
 
@@ -18,6 +19,7 @@ function Home() {
 
     return (
         <div className={cx('container')}>
+            <Banner />
             <Section
                 contents={homepage.iphone}
                 backgroundPosition="right"
