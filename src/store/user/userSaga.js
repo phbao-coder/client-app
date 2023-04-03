@@ -1,6 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
-import { loginUserRequest, registerUserRequest, updateUserRequest } from '~/request/user.request';
+import {
+    forgotPasswordRequest,
+    loginUserRequest,
+    registerUserRequest,
+    updateUserRequest,
+} from '~/request/user.request';
 import { clearCart } from '../cart/cartState';
 import { clearOrders } from '../orders/orderState';
 import {
@@ -13,6 +18,9 @@ import {
     userLogout,
     updateUser,
     updateUserSuccess,
+    getPasswordSuccess,
+    getPasswordFailed,
+    getPassword,
 } from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
@@ -65,6 +73,19 @@ function* workUserUpdate({ payload }) {
     }
 }
 
+function* workGetPassword({ payload }) {
+    try {
+        const res = yield call(forgotPasswordRequest, payload);
+        if (res.status === 200) {
+            Toast.fire({ ...configToast, text: 'Mật khẩu mới đã được gửi đến email.' });
+            yield put(getPasswordSuccess());
+        }
+    } catch (error) {
+        console.log(error);
+        yield put(getPasswordFailed());
+    }
+}
+
 function* workLogout() {
     try {
         yield put(clearCart());
@@ -78,6 +99,7 @@ function* userSaga() {
     yield takeLatest(userLogin.type, workUserLogin);
     yield takeLatest(registerUser.type, workUserRegister);
     yield takeLatest(updateUser.type, workUserUpdate);
+    yield takeLatest(getPassword.type, workGetPassword);
     yield takeLatest(userLogout.type, workLogout);
 }
 

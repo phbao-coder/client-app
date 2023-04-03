@@ -52,6 +52,15 @@ const userSlice = createSlice({
         updateUserFailed: (state) => {
             state.isLoading = false;
         },
+        getPassword: (state) => {
+            state.isLoading = true;
+        },
+        getPasswordSuccess: (state) => {
+            state.isLoading = false;
+        },
+        getPasswordFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -66,5 +75,8 @@ export const {
     updateUser,
     updateUserSuccess,
     updateUserFailed,
+    getPassword,
+    getPasswordSuccess,
+    getPasswordFailed,
 } = userSlice.actions;
 export default userSlice.reducer;
