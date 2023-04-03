@@ -8,6 +8,7 @@ import Cart from '~/pages/cart/cart';
 import About from '~/pages/about/about';
 import DetailProduct from '~/pages/DetaiProduct/DetailProduct';
 import Profile from '~/pages/profile/profile';
+import EditProfile from '~/pages/editProfile/EditProfile';
 import NotFound from '~/pages/NotFound/NotFound';
 
 const routers = [
@@ -42,6 +43,10 @@ const routers = [
     {
         path: routes.profile,
         component: <Profile />,
+    },
+    {
+        path: routes.editProfile,
+        component: <EditProfile />,
     },
     {
         path: routes.notFound,
