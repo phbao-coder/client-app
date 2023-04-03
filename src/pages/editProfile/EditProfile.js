@@ -1,25 +1,20 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 import {
     faEnvelope,
     faLocationDot,
-    faLock,
     faPhone,
     faUser,
+    faLock,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { registerUser } from '~/store/user/userState';
-import routes from '~/config/routes';
 
 import {
     district as districtData,
@@ -29,6 +24,7 @@ import {
 
 import classNames from 'classnames/bind';
 import style from './EditProfile.module.css';
+import { updateUser } from '~/store/user/userState';
 
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 
@@ -45,11 +41,15 @@ const theme = (theme) => ({
 const cx = classNames.bind(style);
 
 function EditProfile() {
+    const user = useSelector((state) => state.user.user);
+    const { username, name, phone, email, address, id } = user;
+    const addressDetail = address.split(','); // [street, sub district, district, city]
+
     const dispatch = useDispatch();
 
-    const [city, setCity] = useState(options[0].value);
-    const [district, setDistrict] = useState(districtData[0].value);
-    const [subDistrict, setSubDistrict] = useState(district_NK_Data[0].value);
+    const [city, setCity] = useState(addressDetail[3]);
+    const [district, setDistrict] = useState(addressDetail[2]?.trim());
+    const [subDistrict, setSubDistrict] = useState(addressDetail[1]);
 
     const phoneRegExp =
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -67,6 +67,10 @@ function EditProfile() {
             .min(10)
             .required('Vui lòng nhập số điện thoại!'),
         address: yup.string().required('Vui lòng nhập địa chỉ!'),
+        password: yup
+            .string()
+            .min(9, 'Mật khẩu ít nhất 9 ký tự')
+            .required('Vui lòng nhập mật khẩu!'),
     });
 
     const {
@@ -75,11 +79,12 @@ function EditProfile() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const handleRegisterUser = (data) => {
+    const handleUpdateUser = (data) => {
         // console.log({ ...data, address: `${data.address}, ${subDistrict}, ${district}, ${city}` });
         dispatch(
-            registerUser({
+            updateUser({
                 ...data,
+                id,
                 address: `${data.address}, ${subDistrict}, ${district}, ${city}`,
             }),
         );
@@ -102,7 +107,7 @@ function EditProfile() {
                 <div className={cx('container--right')}>
                     <div className={cx('container__information')}>
                         <div className={cx('register')}>
-                            <form onSubmit={handleSubmit(handleRegisterUser)}>
+                            <form onSubmit={handleSubmit(handleUpdateUser)}>
                                 <div className={cx('row')}>
                                     <div className={cx('icon')}>
                                         <FontAwesomeIcon icon={faUser} />
@@ -110,6 +115,7 @@ function EditProfile() {
                                     <input
                                         type="text"
                                         placeholder="Tên người dùng..."
+                                        defaultValue={username}
                                         spellCheck={false}
                                         {...register('username')}
                                     />
@@ -122,6 +128,7 @@ function EditProfile() {
                                     <input
                                         type="text"
                                         placeholder="Gmail..."
+                                        defaultValue={email}
                                         spellCheck={false}
                                         {...register('email')}
                                     />
@@ -134,6 +141,7 @@ function EditProfile() {
                                     <input
                                         type="text"
                                         placeholder="Họ và tên..."
+                                        defaultValue={name}
                                         spellCheck={false}
                                         {...register('name')}
                                     />
@@ -146,6 +154,7 @@ function EditProfile() {
                                     <input
                                         type="text"
                                         placeholder="Số điện thoại..."
+                                        defaultValue={phone}
                                         spellCheck={false}
                                         {...register('phone')}
                                     />
@@ -154,14 +163,20 @@ function EditProfile() {
                                 <div className={cx('select')}>
                                     <Select
                                         className={cx('select--item')}
-                                        defaultValue={options[0]}
+                                        defaultValue={{
+                                            label: addressDetail[3],
+                                            value: addressDetail[3],
+                                        }}
                                         options={options}
                                         onChange={(e) => setCity(e.value)}
                                         theme={theme}
                                     />
                                     <Select
                                         className={cx('select--item')}
-                                        defaultValue={districtData[0]}
+                                        defaultValue={{
+                                            label: addressDetail[2],
+                                            value: addressDetail[2],
+                                        }}
                                         options={districtData}
                                         onChange={(e) => setDistrict(e.value)}
                                         theme={theme}
@@ -169,7 +184,10 @@ function EditProfile() {
                                     {district === 'Ninh Kiều' && (
                                         <Select
                                             className={cx('select--item')}
-                                            defaultValue={district_NK_Data[0]}
+                                            defaultValue={{
+                                                label: addressDetail[1],
+                                                value: addressDetail[1],
+                                            }}
                                             options={district_NK_Data}
                                             onChange={(e) => setSubDistrict(e.value)}
                                             theme={theme}
@@ -178,7 +196,10 @@ function EditProfile() {
                                     {district === 'Cái Răng' && (
                                         <Select
                                             className={cx('select--item')}
-                                            defaultValue={district_CR_Data[0]}
+                                            defaultValue={{
+                                                label: addressDetail[1],
+                                                value: addressDetail[1],
+                                            }}
                                             options={district_CR_Data}
                                             onChange={(e) => setSubDistrict(e.value)}
                                             theme={theme}
@@ -192,10 +213,23 @@ function EditProfile() {
                                     <input
                                         type="text"
                                         placeholder="Địa chỉ..."
+                                        defaultValue={addressDetail[0]}
                                         spellCheck={false}
                                         {...register('address')}
                                     />
                                     {errors.address && <span>{errors.address.message}</span>}
+                                </div>
+                                <div className={cx('row')}>
+                                    <div className={cx('icon')}>
+                                        <FontAwesomeIcon icon={faLock} />
+                                    </div>
+                                    <input
+                                        type="password"
+                                        placeholder="Mật khẩu..."
+                                        spellCheck={false}
+                                        {...register('password')}
+                                    />
+                                    {errors.password && <span>{errors.password.message}</span>}
                                 </div>
                                 <div className={cx('row')}>
                                     <button type="submit">Chỉnh sửa</button>

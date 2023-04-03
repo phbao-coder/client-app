@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
-import { loginUserRequest, registerUserRequest } from '~/request/user.request';
+import { loginUserRequest, registerUserRequest, updateUserRequest } from '~/request/user.request';
 import { clearCart } from '../cart/cartState';
 import { clearOrders } from '../orders/orderState';
 import {
@@ -11,6 +11,8 @@ import {
     registerUserFailed,
     registerUserSuccess,
     userLogout,
+    updateUser,
+    updateUserSuccess,
 } from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
@@ -51,6 +53,18 @@ function* workUserRegister(action) {
     }
 }
 
+function* workUserUpdate({ payload }) {
+    try {
+        const res = yield call(updateUserRequest, payload);
+        if (res.status === 200) {
+            yield put(updateUserSuccess(res.data));
+            Toast.fire({ ...configToast, text: 'Cập nhật thành công' });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function* workLogout() {
     try {
         yield put(clearCart());
@@ -63,6 +77,7 @@ function* workLogout() {
 function* userSaga() {
     yield takeLatest(userLogin.type, workUserLogin);
     yield takeLatest(registerUser.type, workUserRegister);
+    yield takeLatest(updateUser.type, workUserUpdate);
     yield takeLatest(userLogout.type, workLogout);
 }
 

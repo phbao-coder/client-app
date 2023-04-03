@@ -38,6 +38,20 @@ const userSlice = createSlice({
         registerUserFailed: (state) => {
             state.isLoading = false;
         },
+        updateUser: (state) => {
+            state.isLoading = true;
+        },
+        updateUserSuccess: (state, { payload }) => {
+            state.user.username = payload.username;
+            state.user.name = payload.name;
+            state.user.address = payload.address;
+            state.user.phone = payload.phone;
+            state.user.email = payload.email;
+            state.isLoading = false;
+        },
+        updateUserFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -49,5 +63,8 @@ export const {
     registerUser,
     registerUserSuccess,
     registerUserFailed,
+    updateUser,
+    updateUserSuccess,
+    updateUserFailed,
 } = userSlice.actions;
 export default userSlice.reducer;
