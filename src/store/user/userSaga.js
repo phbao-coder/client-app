@@ -47,13 +47,14 @@ function* workUserLogin(action) {
     }
 }
 
-function* workUserRegister(action) {
-    const { payload } = action;
+function* workUserRegister({ payload }) {
+    const { data, navigate } = payload;
     try {
-        const res = yield call(registerUserRequest, payload);
+        const res = yield call(registerUserRequest, data);
         if (res.status === 200) {
             Toast.fire({ ...configToast, text: 'Đăng ký tài khoản thành công' });
             yield put(registerUserSuccess());
+            navigate('/login');
         }
     } catch (error) {
         ToastFailed.fire({ ...configToastFailed, text: 'Các thông tin này đã có người sử dụng' });

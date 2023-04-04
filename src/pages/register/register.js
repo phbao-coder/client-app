@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
@@ -43,6 +43,7 @@ const theme = (theme) => ({
 
 function Register() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [city, setCity] = useState(options[0].value);
     const [district, setDistrict] = useState(districtData[0].value);
@@ -80,8 +81,11 @@ function Register() {
         // console.log({ ...data, address: `${data.address}, ${subDistrict}, ${district}, ${city}` });
         dispatch(
             registerUser({
-                ...data,
-                address: `${data.address}, ${subDistrict}, ${district}, ${city}`,
+                data: {
+                    ...data,
+                    address: `${data.address}, ${subDistrict}, ${district}, ${city}`,
+                },
+                navigate,
             }),
         );
     };
