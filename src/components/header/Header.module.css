@@ -15,8 +15,6 @@ header {
 /* LOGO */
 
 .logo {
-    width: 100%;
-    height: var(--height-header);
     display: grid;
     place-items: center;
 }
@@ -42,6 +40,9 @@ header {
 }
 
 /* MENU CART */
+.menu__item--left {
+    display: flex;
+}
 
 .menu__item--cart {
     display: flex;

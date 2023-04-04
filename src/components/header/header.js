@@ -55,14 +55,14 @@ function Header() {
     return (
         <>
             <header>
-                <div className={cx('logo')}>
-                    <Link to={routes.home} className={cx('logo__item')}>
-                        Garden's Phone
-                    </Link>
-                </div>
                 <div className={cx('menu')}>
                     <div className={cx('menu__container')}>
                         <div className={cx('menu__item--left')}>
+                            <div className={cx('logo')}>
+                                <Link to={routes.home} className={cx('logo__item')}>
+                                    Garden's Phone
+                                </Link>
+                            </div>
                             <div className={cx('menu__item--cart')}>
                                 <span>
                                     <FontAwesomeIcon
