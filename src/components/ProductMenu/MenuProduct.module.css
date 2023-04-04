@@ -65,6 +65,11 @@
     justify-content: space-between;
 }
 
+/* CSS BUTTON SELECT */
+.select {
+    min-width: 130px;
+}
+
 @media only screen and (max-width: 700px) {
     .container__pc {
         display: none;

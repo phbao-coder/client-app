@@ -40,22 +40,15 @@ const menuPrices = [
     { value: { priceBigger: 20000000, priceLess: 99000000 }, label: 'Trên 20 triệu' },
 ];
 
-const styleSelect = {
-    control: (baseStyles) => ({
-        ...baseStyles,
-        width: 150,
-        borderRadius: 0,
-        fontSize: 16,
-    }),
-    indicatorSeparator: (baseStyles) => ({
-        ...baseStyles,
-        backgroundColor: '#6c757d',
-    }),
-    dropdownIndicator: (baseStyles) => ({
-        ...baseStyles,
-        color: '#6c757d',
-    }),
-};
+const theme = (theme) => ({
+    ...theme,
+    borderRadius: 0,
+    colors: {
+        ...theme.colors,
+        primary25: '#ddd',
+        primary: '#282828',
+    },
+});
 
 function MenuProduct() {
     const dispatch = useDispatch();
@@ -106,6 +99,7 @@ function MenuProduct() {
             <div className={cx('container')}>
                 <div className={cx('container__pc')}>
                     <Select
+                        className={cx('select')}
                         placeholder="Tất cả"
                         onChange={(e) => {
                             if (e.value === 'All') {
@@ -119,9 +113,10 @@ function MenuProduct() {
                             }
                         }}
                         options={menuCategory}
-                        styles={{ ...styleSelect }}
+                        theme={theme}
                     />
                     <Select
+                        className={cx('select')}
                         isDisabled={category === 'accessories' || category === 'All'}
                         placeholder="Hãng"
                         onChange={(e) => {
@@ -130,15 +125,14 @@ function MenuProduct() {
                             setNameProduct(e.value);
                         }}
                         options={menuPhone}
-                        styles={{ ...styleSelect }}
+                        theme={theme}
                     />
                     <Select
+                        className={cx('select')}
                         placeholder="Giá"
                         onChange={(e) => setPrice(e.value)}
                         options={menuPrices}
-                        styles={{
-                            ...styleSelect,
-                        }}
+                        theme={theme}
                     />
                 </div>
                 <div className={cx('container__mobile')}>
