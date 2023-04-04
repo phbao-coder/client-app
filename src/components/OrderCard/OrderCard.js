@@ -9,6 +9,7 @@ import vnd from '~/utils/vnd';
 
 import classNames from 'classnames/bind';
 import style from './OrderCard.module.css';
+import { Toast } from '~/minxin';
 
 const cx = classNames.bind(style);
 
@@ -143,7 +144,17 @@ function OrderCard({ order, user, index, coupons }) {
     const handleCancelledOrder = () => {
         const idOrder = order._id;
         const idUser = user.id;
-        dispatch(orderCancell({ idUser, idOrder, index }));
+        Toast.fire({
+            title: 'Hủy đơn',
+            text: 'Bạn có muốn hủy đơn hàng?',
+            showCancelButton: true,
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(orderCancell({ idUser, idOrder, index }));
+            }
+        });
     };
 
     // tính lại giá trị gốc của đơn hàng khi chưa giảm giá
