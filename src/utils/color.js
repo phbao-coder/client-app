@@ -18,6 +18,8 @@ const colorVietnamese = (color) => {
             return 'Vàng';
         case 'sliver':
             return 'Bạc';
+        case 'pink':
+            return 'Hồng';
         default:
             return color;
     }

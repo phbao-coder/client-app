@@ -14,7 +14,7 @@ import style from './Product.module.css';
 
 const cx = classNames.bind(style);
 
-function Product({ product }) {
+function Product({ product, isDisplayButton = true }) {
     const { _id, name, images, price, sale } = product;
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -39,12 +39,14 @@ function Product({ product }) {
                 </Link>
                 <span>{vnd(price - (price / 100) * sale.salePercentage)}</span>
                 <span className={cx('product__body--sale')}>{vnd(price)}</span>
-                <button className={cx('product__body--button')} onClick={handleAddToCart}>
-                    <span className={cx('product__body--button-text')}>Thêm vào giỏ hàng</span>
-                    <span className={cx('product__body--button-icon')}>
-                        <FontAwesomeIcon icon={faPlus} />
-                    </span>
-                </button>
+                {isDisplayButton && (
+                    <button className={cx('product__body--button')} onClick={handleAddToCart}>
+                        <span className={cx('product__body--button-text')}>Thêm vào giỏ hàng</span>
+                        <span className={cx('product__body--button-icon')}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </span>
+                    </button>
+                )}
             </div>
         </div>
     );

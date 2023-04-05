@@ -24,12 +24,12 @@ function Home() {
 
     const productsFeature = useSelector((state) => state?.products?.productsFeature);
     const productsAccessoriesOfWeek = productsFeature.filter(
-        (product) => product.sold > 10 && product.category === 'accessories',
+        (product) => product.sold >= 50 && product.category === 'accessories',
     );
     const productsMobileOfWeek = productsFeature.filter(
-        (product) => product.sold > 5 && product.category === 'mobile',
+        (product) => product.sold >= 50 && product.category === 'mobile',
     );
-    const productsOfSale = productsFeature.filter((product) => product.sale.salePercentage >= 30);
+    const productsOfSale = productsFeature.filter((product) => product.sale.salePercentage >= 15);
 
     useEffect(() => {
         dispatch(getProductsFeature());
@@ -86,7 +86,7 @@ function Home() {
                         <div className={cx('product--container')}>
                             {productsMobileOfWeek?.slice(0, 3)?.map((product) => (
                                 <div key={product._id} className={cx('product--item')}>
-                                    <Product product={product} />
+                                    <Product product={product} isDisplayButton={false} />
                                 </div>
                             ))}
                         </div>
@@ -96,7 +96,7 @@ function Home() {
                         <div className={cx('product--container')}>
                             {productsAccessoriesOfWeek?.slice(0, 3)?.map((product) => (
                                 <div key={product._id} className={cx('product--item')}>
-                                    <Product product={product} />
+                                    <Product product={product} isDisplayButton={false} />
                                 </div>
                             ))}
                         </div>
@@ -109,7 +109,7 @@ function Home() {
                 <div className={cx('product--container')}>
                     {productsOfSale?.slice(0, 16).map((product) => (
                         <div key={product._id} className={cx('product--item')}>
-                            <Product product={product} />
+                            <Product product={product} isDisplayButton={false} />
                         </div>
                     ))}
                 </div>

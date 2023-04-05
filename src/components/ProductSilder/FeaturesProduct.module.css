@@ -13,31 +13,19 @@
     width: 100%;
     color: #000;
     padding-bottom: 5px;
-    border-bottom: 1px solid #000;
+    font-size: 18px;
 }
 
 .swiper {
     width: 100%;
     position: relative;
-}
-
-.swiper__item--button--item {
-    cursor: pointer;
-    padding: 6px;
-
-    background-color: transparent;
-    border: none;
-    outline: none;
-}
-
-.swiper__item--button--item svg {
-    font-size: 28px;
+    border: 1px solid hsl(0, 0%, 80%);
 }
 
 .swiper__item {
     width: 290px;
     height: 100%;
-    margin: 10px 0px 10px 10px;
+    margin: 25px 10px;
     display: flex;
     flex-direction: column;
 }
