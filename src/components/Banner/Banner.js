@@ -43,7 +43,6 @@ function Banner() {
                                         giúp thiết bị toát lên được vẻ ngoài sang trọng đầy tính
                                         thời thượng
                                     </p>
-                                    <button className={cx('content--button')}>Mua ngay</button>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +68,6 @@ function Banner() {
                                         hỗ trợ các tác vụ ghi chép hay phác họa nhanh một cách tiện
                                         lợi
                                     </p>
-                                    <button className={cx('content--button')}>Mua ngay</button>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +89,6 @@ function Banner() {
                                         Vật liệu cao cấp cùng bản lề hình giọt nước, <br />
                                         nếp gấp gần như tàng hình dù bạn gập mỡ nhiều lần
                                     </p>
-                                    <button className={cx('content--button')}>Mua ngay</button>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +110,6 @@ function Banner() {
                                         Mặt lưng sử dụng gốm sinh học nano <br />
                                         tích hợp tăng tính sang trọng và thẩm mỹ
                                     </p>
-                                    <button className={cx('content--button')}>Mua ngay</button>
                                 </div>
                             </div>
                         </div>
