@@ -26,23 +26,15 @@ function Product({ product }) {
     return (
         <div className={cx('product')}>
             <div className={cx('product__header')}>
-                <Link
-                    to={`/product/${_id}`}
-                    preventScrollReset={true}
-                    className={cx('product__header--link')}
-                >
+                <Link to={`/product/${_id}`} className={cx('product__header--link')}>
                     <img className={cx('product__header--link--image')} src={images} alt={name} />
                 </Link>
                 {sale.isOnSale && (
-                    <span className={cx('product__header--sale')}>Sale {sale.salePercentage}%</span>
+                    <span className={cx('product__header--sale')}>- {sale.salePercentage}%</span>
                 )}
             </div>
             <div className={cx('product__body')}>
-                <Link
-                    to={`/product/${_id}`}
-                    preventScrollReset={true}
-                    className={cx('product__body--link')}
-                >
+                <Link to={`/product/${_id}`} className={cx('product__body--link')}>
                     {name}
                 </Link>
                 <span>{vnd(price - (price / 100) * sale.salePercentage)}</span>
