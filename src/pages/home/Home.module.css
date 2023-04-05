@@ -4,6 +4,7 @@
 }
 
 .section {
+    margin-bottom: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -16,27 +17,20 @@
 }
 
 .section--heading,
-.mobile--heading,
-.accessories--heading {
-    margin: 50px 0;
+.product--heading {
+    margin: 100px 0 0;
     width: 100%;
     text-align: center;
     font-size: 36px;
     font-weight: 400;
 }
 
-.mobile--heading,
-.accessories--heading {
+.product--heading {
     font-size: 30px;
-    margin: 0 0 50px;
+    margin: 100px 0 100px;
 }
 
-.accessories--heading {
-    margin: 50px 0 50px;
-}
-
-.mobile,
-.accessories {
+.product {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -44,8 +38,7 @@
     align-items: center;
 }
 
-.mobile--container,
-.accessories--container {
+.product--container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -54,7 +47,22 @@
     gap: 20px;
 }
 
-.accessories--item,
-.mobile--item {
+.product--item {
     max-width: 400px;
+}
+
+.product--button {
+    margin-top: 50px;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #282828;
+    outline: none;
+    border: 1px solid #282828;
+}
+
+.product--button:hover {
+    background-color: #fff;
+    color: #282828;
 }

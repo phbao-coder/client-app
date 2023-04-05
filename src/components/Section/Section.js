@@ -42,17 +42,22 @@ function Section({
             className={cx('home')}
             style={{ backgroundImage: `url(${image})`, backgroundPosition: backgroundPosition }}
         >
-            <div className={cx('text')} style={{ alignItems: alignItems, textAlign: textAlign }}>
-                <h4>New phone</h4>
-                <h1>
-                    {name} <br /> {title}
-                </h1>
+            <div className={cx('filter')}>
+                <div
+                    className={cx('text')}
+                    style={{ alignItems: alignItems, textAlign: textAlign }}
+                >
+                    <h4>New phone</h4>
+                    <h1>
+                        {name} <br /> {title}
+                    </h1>
 
-                <p>{content}</p>
+                    <p>{content}</p>
 
-                <Link to={routes.product} className={cx('btn')}>
-                    Shop now
-                </Link>
+                    <Link to={routes.product} className={cx('btn')}>
+                        Shop now
+                    </Link>
+                </div>
             </div>
         </section>
     );
