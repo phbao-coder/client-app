@@ -92,7 +92,7 @@ function Home() {
                         </div>
                     </div>
                     <div className={cx('product')}>
-                        <h2 className={cx('product--heading')}>Điện thoại</h2>
+                        <h2 className={cx('product--heading')}>Phụ kiện</h2>
                         <div className={cx('product--container')}>
                             {productsAccessoriesOfWeek?.slice(0, 3)?.map((product) => (
                                 <div key={product._id} className={cx('product--item')}>
