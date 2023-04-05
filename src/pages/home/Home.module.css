@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    margin-bottom: 100px;
 }
 
 .section {
@@ -49,20 +50,4 @@
 
 .product--item {
     max-width: 400px;
-}
-
-.product--button {
-    margin-top: 50px;
-    cursor: pointer;
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #282828;
-    outline: none;
-    border: 1px solid #282828;
-}
-
-.product--button:hover {
-    background-color: #fff;
-    color: #282828;
 }
