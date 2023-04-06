@@ -7,11 +7,13 @@ import routes from '~/config/routes';
 import classNames from 'classnames/bind';
 import style from './ProfileCard.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(style);
 
 function ProfileCard({ info, orders }) {
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user.user);
 
     const ordersNotCancelled = orders.filter((item) => item.orderStatus !== 'Cancelled');
     const arrCost = ordersNotCancelled?.map((item) => item.paymentIntent.amount);
@@ -26,12 +28,21 @@ function ProfileCard({ info, orders }) {
     return (
         <div className={cx('container')}>
             <div className={cx('container--left')}>
-                <div
-                    className={cx('container__avatar')}
-                    style={{
-                        backgroundImage: `url('https://media.thieunien.vn/thumb//uploads/2021/11/18/han-sara-sinh-nhat-tuoi-21-viet-tam-thu-no-luc-de-truong-thanh-tu-nhung-dieu-chua-hoan-hao_48097.jpg')`,
-                    }}
-                ></div>
+                {user.avatar ? (
+                    <div
+                        className={cx('container__avatar')}
+                        style={{
+                            backgroundImage: `url('${user.avatar}')`,
+                        }}
+                    ></div>
+                ) : (
+                    <div
+                        className={cx('container__avatar')}
+                        style={{
+                            backgroundImage: `url('https://static.thenounproject.com/png/559587-200.png')`,
+                        }}
+                    ></div>
+                )}
             </div>
             <div className={cx('container--right')}>
                 <div className={cx('container__information')}>

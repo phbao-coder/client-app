@@ -5,25 +5,21 @@
 }
 
 .container--left {
-    width: 40%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .container__avatar {
-    border: 1px solid #000;
-    width: 100%;
+    min-width: 300px;
     min-height: 300px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
-.container--left img {
-    width: 100%;
-    object-fit: cover;
-}
-
 .container--right {
-    width: 60%;
+    width: 50%;
     position: relative;
 }
 
@@ -66,7 +62,7 @@
 
 @media only screen and (max-width: 850px) {
     .container--left {
-        width: 30%;
+        width: 40%;
     }
 
     .container--right {
@@ -81,6 +77,7 @@
 
     .container--left {
         width: 100%;
+        justify-content: center;
     }
 
     .container--right {
