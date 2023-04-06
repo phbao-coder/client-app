@@ -85,6 +85,12 @@
 .cart__column--name {
     display: flex;
     align-items: center;
+    gap: 20px;
+}
+
+.cart__column--name img {
+    height: 70px;
+    object-fit: contain;
 }
 
 .cart__column--name a {
