@@ -65,7 +65,9 @@
     font-size: 16px;
 }
 
+html,
 body {
+    scroll-behavior: smooth;
     background-color: var(--white);
 }
 
@@ -117,4 +119,22 @@ body {
 
 .btn-danger:hover {
     background-color: var(--crimson);
+}
+
+#totop {
+    background-color: #282828;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    z-index: 1;
+}
+
+#totop svg {
+    color: #fff;
+    font-size: 30px;
 }
