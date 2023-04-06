@@ -23,7 +23,7 @@ const menuCategory = [
 const menuPhone = [
     { value: 'Samsung', label: 'Samsung' },
     { value: 'Iphone', label: 'Iphone' },
-    { value: 'Oppo', label: 'Oppo' },
+    { value: 'OPPO', label: 'OPPO' },
     { value: 'Xiaomi', label: 'Xiaomi' },
 ];
 
