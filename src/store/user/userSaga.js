@@ -4,6 +4,7 @@ import {
     forgotPasswordRequest,
     loginUserRequest,
     registerUserRequest,
+    updateAvatarRequest,
     updateUserRequest,
 } from '~/request/user.request';
 import { clearCart } from '../cart/cartState';
@@ -21,6 +22,8 @@ import {
     getPasswordSuccess,
     getPasswordFailed,
     getPassword,
+    updateAvatarSuccess,
+    updateAvatar,
 } from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
@@ -87,6 +90,20 @@ function* workGetPassword({ payload }) {
     }
 }
 
+// update avatar chưa có state, chưa có saga
+function* workUpdateAvatar({ payload }) {
+    // payload includes id user and images
+    try {
+        const res = yield call(updateAvatarRequest, payload);
+        if (res.status === 200) {
+            yield put(updateAvatarSuccess(res.data));
+            Toast.fire({ ...configToast, text: 'Cập nhật avatar thành công!' });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function* workLogout() {
     try {
         yield put(clearCart());
@@ -100,6 +117,7 @@ function* userSaga() {
     yield takeLatest(userLogin.type, workUserLogin);
     yield takeLatest(registerUser.type, workUserRegister);
     yield takeLatest(updateUser.type, workUserUpdate);
+    yield takeLatest(updateAvatar.type, workUpdateAvatar);
     yield takeLatest(getPassword.type, workGetPassword);
     yield takeLatest(userLogout.type, workLogout);
 }

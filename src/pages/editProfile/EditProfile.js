@@ -97,12 +97,14 @@ function EditProfile() {
             </div>
             <div className={cx('container')}>
                 <div className={cx('container--left')}>
-                    <div
-                        className={cx('container__avatar')}
-                        style={{
-                            backgroundImage: `url('https://media.thieunien.vn/thumb//uploads/2021/11/18/han-sara-sinh-nhat-tuoi-21-viet-tam-thu-no-luc-de-truong-thanh-tu-nhung-dieu-chua-hoan-hao_48097.jpg')`,
-                        }}
-                    ></div>
+                    {user.avatar && (
+                        <div
+                            className={cx('container__avatar')}
+                            style={{
+                                backgroundImage: `url('${user.avatar}')`,
+                            }}
+                        ></div>
+                    )}
                 </div>
                 <div className={cx('container--right')}>
                     <div className={cx('container__information')}>

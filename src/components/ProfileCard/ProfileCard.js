@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateAvatar } from '~/store/user/userState';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,33 +11,56 @@ import routes from '~/config/routes';
 
 import classNames from 'classnames/bind';
 import style from './ProfileCard.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(style);
 
 function ProfileCard({ info, orders }) {
-    const navigate = useNavigate();
-    const user = useSelector((state) => state.user.user);
-
     const ordersNotCancelled = orders.filter((item) => item.orderStatus !== 'Cancelled');
     const arrCost = ordersNotCancelled?.map((item) => item.paymentIntent.amount);
     const sumCost = arrCost?.reduce((value, curr) => value + curr, 0);
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state.user.user);
     const { name, address, phone, username, email } = info;
+
+    const [avatar, setAvatar] = useState(user?.avatar);
+    const [images, setImages] = useState(null);
+
+    const handleChangeFiles = (e) => {
+        const file = e.target.files[0];
+        file.url = URL.createObjectURL(file);
+        setAvatar(file.url);
+        setImages(file);
+        console.log(images);
+    };
+
+    const handleUpdateAvatar = () => {
+        const id = user.id;
+        const formData = new FormData();
+        formData.append('images', images);
+        dispatch(updateAvatar({ id, formData }));
+    };
 
     const handleToEditPage = () => {
         navigate(routes.editProfile);
     };
 
+    useEffect(() => {
+        return () => {
+            URL.revokeObjectURL(images?.url);
+        };
+    }, [images]);
+
     return (
         <div className={cx('container')}>
             <div className={cx('container--left')}>
-                {user.avatar ? (
+                {avatar ? (
                     <div
                         className={cx('container__avatar')}
                         style={{
-                            backgroundImage: `url('${user.avatar}')`,
+                            backgroundImage: `url('${avatar}')`,
                         }}
                     ></div>
                 ) : (
@@ -43,6 +71,11 @@ function ProfileCard({ info, orders }) {
                         }}
                     ></div>
                 )}
+                <div className={cx('update')}>
+                    <label for="file">Chọn ảnh</label>
+                    <input type="file" id="file" onChange={handleChangeFiles} />
+                    <button onClick={handleUpdateAvatar}>Update</button>
+                </div>
             </div>
             <div className={cx('container--right')}>
                 <div className={cx('container__information')}>

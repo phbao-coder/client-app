@@ -7,7 +7,10 @@
 .container--left {
     width: 50%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-end;
+    gap: 20px 0;
 }
 
 .container__avatar {
@@ -16,6 +19,33 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+/* Input upload file */
+.update input[type='file'] {
+    display: none;
+}
+
+.update {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.update label,
+.update button {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #282828;
+    color: #fff;
+    border: 1px solid #282828;
+    outline: none;
+}
+
+.update label:hover,
+.update button:hover {
+    background-color: transparent;
+    color: #282828;
 }
 
 .container--right {
@@ -56,8 +86,13 @@
     padding: 10px;
     font-size: 14px;
     background-color: #282828;
-    border: none;
+    border: 1px solid #282828;
     color: #fff;
+}
+
+.container__edit--button:hover {
+    background-color: transparent;
+    color: #282828;
 }
 
 @media only screen and (max-width: 850px) {

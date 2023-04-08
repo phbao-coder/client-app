@@ -52,6 +52,16 @@ const userSlice = createSlice({
         updateUserFailed: (state) => {
             state.isLoading = false;
         },
+        updateAvatar: (state) => {
+            state.isLoading = true;
+        },
+        updateAvatarSuccess: (state, { payload }) => {
+            state.user.avatar = payload.avatar;
+            state.isLoading = false;
+        },
+        updateAvatarFailed: (state) => {
+            state.isLoading = false;
+        },
         getPassword: (state) => {
             state.isLoading = true;
         },
@@ -75,6 +85,9 @@ export const {
     updateUser,
     updateUserSuccess,
     updateUserFailed,
+    updateAvatar,
+    updateAvatarSuccess,
+    updateAvatarFailed,
     getPassword,
     getPasswordSuccess,
     getPasswordFailed,
