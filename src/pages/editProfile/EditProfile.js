@@ -4,13 +4,7 @@ import Select from 'react-select';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-    faEnvelope,
-    faLocationDot,
-    faPhone,
-    faUser,
-    faLock,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLocationDot, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { updateAvatar } from '~/store/user/userState';
 

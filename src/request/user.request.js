@@ -39,7 +39,9 @@ export const updateAvatarRequest = async (data) => {
     const { id, formData } = data;
     console.log(id, formData);
     try {
-        const res = await instance.put(`api/user/avatar/${id}`, formData);
+        const res = await instance.put(`api/user/avatar/${id}`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
         return res;
     } catch (error) {
         console.log(error);
