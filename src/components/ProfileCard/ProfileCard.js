@@ -72,7 +72,7 @@ function ProfileCard({ info, orders }) {
                     ></div>
                 )}
                 <div className={cx('update')}>
-                    <label for="file">Chọn ảnh</label>
+                    <label htmlFor="file">Chọn ảnh</label>
                     <input type="file" id="file" onChange={handleChangeFiles} />
                     <button onClick={handleUpdateAvatar}>Update</button>
                 </div>
