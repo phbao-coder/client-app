@@ -85,7 +85,7 @@ function* workGetPassword({ payload }) {
             yield put(getPasswordSuccess());
         }
     } catch (error) {
-        console.log(error);
+        ToastFailed.fire({ ...configToastFailed, text: 'Username hoặc email không đúng!' });
         yield put(getPasswordFailed());
     }
 }
