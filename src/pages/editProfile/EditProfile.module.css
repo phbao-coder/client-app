@@ -50,20 +50,8 @@
     justify-content: space-evenly;
 }
 
-.update label,
-.update button {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #282828;
-    color: #fff;
-    border: 1px solid #282828;
-    outline: none;
-}
-
-.update label:hover,
-.update button:hover {
-    background-color: transparent;
-    color: #282828;
+.button__change--password {
+    width: 100%;
 }
 
 .container--right {
@@ -72,7 +60,6 @@
 }
 
 /* FROM CSS */
-
 .row {
     margin: 10px 0;
     position: relative;
@@ -100,7 +87,10 @@
     color: var(--red);
 }
 
-.row button {
+.row button,
+.update label,
+.update button,
+.button__change--password {
     padding: 7px 10px;
     outline: none;
     color: #fff;
@@ -109,7 +99,10 @@
     cursor: pointer;
 }
 
-.row button:hover {
+.row button:hover,
+.update label:hover,
+.update button:hover,
+.button__change--password:hover {
     background-color: #fff;
     color: #282822;
 }

@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { configToast, configToastFailed, Toast, ToastFailed } from '~/minxin';
 import {
+    changePasswordRequest,
     forgotPasswordRequest,
     loginUserRequest,
     registerUserRequest,
@@ -25,6 +26,9 @@ import {
     updateAvatarSuccess,
     updateAvatar,
     updateAvatarFailed,
+    changePasswordSuccess,
+    changePasswordFailed,
+    changePassword,
 } from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
@@ -106,6 +110,22 @@ function* workUpdateAvatar({ payload }) {
     }
 }
 
+function* workChangePassword({ payload }) {
+    // payload is {idUser, currentPasswor, newPassword}
+    try {
+        console.log(payload);
+        const res = yield call(changePasswordRequest, payload);
+        if (res.status === 200) {
+            Toast.fire({ ...configToast, text: 'Thay đổi mật khẩu thành công!' });
+            yield put(changePasswordSuccess());
+        }
+    } catch (error) {
+        console.log(error);
+        ToastFailed.fire({ ...configToastFailed, text: 'Mật khẩu củ không đúng!' });
+        yield put(changePasswordFailed());
+    }
+}
+
 function* workLogout() {
     try {
         yield put(clearCart());
@@ -121,6 +141,7 @@ function* userSaga() {
     yield takeLatest(updateUser.type, workUserUpdate);
     yield takeLatest(updateAvatar.type, workUpdateAvatar);
     yield takeLatest(getPassword.type, workGetPassword);
+    yield takeLatest(changePassword.type, workChangePassword);
     yield takeLatest(userLogout.type, workLogout);
 }
 

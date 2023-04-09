@@ -71,6 +71,15 @@ const userSlice = createSlice({
         getPasswordFailed: (state) => {
             state.isLoading = false;
         },
+        changePassword: (state) => {
+            state.isLoading = true;
+        },
+        changePasswordSuccess: (state) => {
+            state.isLoading = false;
+        },
+        changePasswordFailed: (state) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -91,5 +100,8 @@ export const {
     getPassword,
     getPasswordSuccess,
     getPasswordFailed,
+    changePassword,
+    changePasswordSuccess,
+    changePasswordFailed,
 } = userSlice.actions;
 export default userSlice.reducer;

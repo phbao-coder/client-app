@@ -47,3 +47,15 @@ export const updateAvatarRequest = async (data) => {
         console.log(error);
     }
 };
+
+export const changePasswordRequest = async (data) => {
+    const { id, ...other } = data;
+    // other is {currentPassword, newPassword}
+    console.log(other);
+    try {
+        const res = await instance.put(`api/user/${id}/password`, other);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

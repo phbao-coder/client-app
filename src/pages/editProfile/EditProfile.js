@@ -22,6 +22,7 @@ import classNames from 'classnames/bind';
 import style from './EditProfile.module.css';
 import { updateUser } from '~/store/user/userState';
 import Loading from '~/components/Loading/Loading';
+import ChangePassword from '~/components/ChangePassword/ChangePassword';
 
 const options = [{ value: 'Cần Thơ', label: 'Cần Thơ' }];
 
@@ -44,6 +45,16 @@ function EditProfile() {
     const addressDetail = address.split(','); // [street, sub district, district, city]
 
     const dispatch = useDispatch();
+
+    const [isChangePassword, setIsChangePassword] = useState(false);
+
+    const handleChangePassword = () => {
+        if (isChangePassword) {
+            setIsChangePassword(false);
+        } else {
+            setIsChangePassword(true);
+        }
+    };
 
     const [city, setCity] = useState(addressDetail[3]);
     const [district, setDistrict] = useState(addressDetail[2]?.trim());
@@ -259,10 +270,19 @@ function EditProfile() {
                                     </div>
                                 </form>
                             </div>
+                            <div>
+                                <button
+                                    className={cx('button__change--password')}
+                                    onClick={handleChangePassword}
+                                >
+                                    Thay đổi mật khẩu
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {isChangePassword && <ChangePassword handleChangePassword={handleChangePassword} />}
         </>
     );
 }
