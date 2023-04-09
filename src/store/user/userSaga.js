@@ -24,6 +24,7 @@ import {
     getPassword,
     updateAvatarSuccess,
     updateAvatar,
+    updateAvatarFailed,
 } from './userState';
 
 // put tương tự như dispatch, call(fn, {type, action})
@@ -101,6 +102,7 @@ function* workUpdateAvatar({ payload }) {
         }
     } catch (error) {
         console.log(error);
+        yield put(updateAvatarFailed());
     }
 }
 

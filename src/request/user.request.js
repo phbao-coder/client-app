@@ -17,7 +17,7 @@ export const registerUserRequest = async (user) => {
 export const updateUserRequest = async (data) => {
     try {
         const { id, password, ...other } = data;
-        const res = await instance.put(`/api/user/${id}?password=${password}`, other);
+        const res = await instance.put(`/api/user/${id}`, other);
         return res;
     } catch (error) {
         console.log(error);

@@ -21,33 +21,6 @@
     background-position: center;
 }
 
-/* Input upload file */
-.update input[type='file'] {
-    display: none;
-}
-
-.update {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-}
-
-.update label,
-.update button {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #282828;
-    color: #fff;
-    border: 1px solid #282828;
-    outline: none;
-}
-
-.update label:hover,
-.update button:hover {
-    background-color: transparent;
-    color: #282828;
-}
-
 .container--right {
     width: 50%;
     position: relative;
