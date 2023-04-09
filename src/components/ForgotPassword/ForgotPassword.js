@@ -7,18 +7,16 @@ import * as yup from 'yup';
 
 import classNames from 'classnames/bind';
 import style from './ForgotPassword.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getPassword } from '~/store/user/userState';
 
 const cx = classNames.bind(style);
 
 function ForgotPassword({ handleForgotDisplay }) {
-    const user = useSelector((state) => state.user.user);
-    console.log(user);
     const dispatch = useDispatch();
 
     const handleGetPassword = (data) => {
-        dispatch(getPassword({ ...data, id: '642a9e1480e14f2278b04037' }));
+        dispatch(getPassword({ ...data }));
     };
 
     const schema = yup.object().shape({

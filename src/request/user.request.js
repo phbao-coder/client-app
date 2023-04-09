@@ -25,10 +25,10 @@ export const updateUserRequest = async (data) => {
 };
 
 export const forgotPasswordRequest = async (data) => {
-    const { id, username, email } = data;
+    const { username, email } = data;
     console.log(data);
     try {
-        const res = await instance.post(`api/user/forgot-password/${id}`, { username, email });
+        const res = await instance.post(`api/user/forgot-password`, { username, email });
         return res;
     } catch (error) {
         console.log(error);
