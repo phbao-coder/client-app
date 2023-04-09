@@ -7,12 +7,14 @@ import * as yup from 'yup';
 
 import classNames from 'classnames/bind';
 import style from './ForgotPassword.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPassword } from '~/store/user/userState';
+import Loading from '../Loading/Loading';
 
 const cx = classNames.bind(style);
 
 function ForgotPassword({ handleForgotDisplay }) {
+    const isLoading = useSelector((state) => state.user.isLoading);
     const dispatch = useDispatch();
 
     const handleGetPassword = (data) => {
@@ -31,39 +33,42 @@ function ForgotPassword({ handleForgotDisplay }) {
     } = useForm({ resolver: yupResolver(schema) });
 
     return (
-        <div className={cx('forgot--main')}>
-            <form onSubmit={handleSubmit(handleGetPassword)}>
-                <h1>Nhập Username và Email để khôi phục mật khẩu</h1>
-                <div className={cx('row')}>
-                    <div className={cx('icon')}>
-                        <FontAwesomeIcon icon={faUser} />
+        <>
+            <div className={cx('forgot--main')}>
+                <form onSubmit={handleSubmit(handleGetPassword)}>
+                    <h1>Nhập Username và Email để khôi phục mật khẩu</h1>
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Nhập tài khoản người dùng..."
+                            spellCheck={false}
+                            {...register('username')}
+                        />
+                        {errors.username && <span>{errors.username.message}</span>}
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Nhập tài khoản người dùng..."
-                        spellCheck={false}
-                        {...register('username')}
-                    />
-                    {errors.username && <span>{errors.username.message}</span>}
-                </div>
-                <div className={cx('row')}>
-                    <div className={cx('icon')}>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                    <div className={cx('row')}>
+                        <div className={cx('icon')}>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Gmail..."
+                            {...register('email')}
+                            spellCheck={false}
+                        />
+                        {errors.email && <span>{errors.email.message}</span>}
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Gmail..."
-                        {...register('email')}
-                        spellCheck={false}
-                    />
-                    {errors.email && <span>{errors.email.message}</span>}
-                </div>
-                <div className={cx('row')}>
-                    <button type="submit">Gửi</button>
-                </div>
-            </form>
-            <button onClick={() => handleForgotDisplay()}>Đóng</button>
-        </div>
+                    <div className={cx('row')}>
+                        <button type="submit">Gửi</button>
+                    </div>
+                </form>
+                <button onClick={() => handleForgotDisplay()}>Đóng</button>
+            </div>
+            <Loading isLoading={isLoading} />
+        </>
     );
 }
 

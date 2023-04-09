@@ -16,6 +16,7 @@ import routes from '~/config/routes';
 
 import classNames from 'classnames/bind';
 import style from './Login.module.css';
+import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(style);
 
@@ -30,6 +31,7 @@ function Login() {
     const dispatch = useDispatch();
 
     const isUser = useSelector((state) => state.user.isUser);
+    const isLoading = useSelector((state) => state.user.isLoading);
 
     const schema = yup.object().shape({
         username: yup.string().required('Vui lòng nhập tài khoản người dùng!'),
@@ -101,6 +103,7 @@ function Login() {
                     <ForgotPassword handleForgotDisplay={handleForgotDisplay} />
                 </div>
             )}
+            <Loading isLoading={isLoading} />
         </>
     );
 }
