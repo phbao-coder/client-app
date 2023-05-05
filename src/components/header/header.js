@@ -60,7 +60,7 @@ function Header() {
                         <div className={cx('menu__item--left')}>
                             <div className={cx('logo')}>
                                 <Link to={routes.home} className={cx('logo__item')}>
-                                    Garden's Phone
+                                    Phone's garden
                                 </Link>
                             </div>
                             <div className={cx('menu__item--cart')}>
