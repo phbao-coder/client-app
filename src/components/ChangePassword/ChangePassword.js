@@ -16,7 +16,7 @@ function ChangePassword({ handleChangePassword }) {
 
     const schema = yup.object().shape({
         currentPassword: yup.string().required('Chưa nhập mật khẩu'),
-        newPassword: yup.string().min(9, 'Mật khẩu ít nhất 9 ký tự').required('Chưa nhập mật khẩu'),
+        newPassword: yup.string().required('Chưa nhập mật khẩu').min(9, 'Mật khẩu ít nhất 9 ký tự'),
     });
 
     const {

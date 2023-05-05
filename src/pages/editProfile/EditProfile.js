@@ -87,12 +87,13 @@ function EditProfile() {
             .string()
             .min(12, 'Tên tài khoản ít nhất 12 ký tự')
             .required('Vui lòng nhập tài khoản người dùng!'),
-        email: yup.string().email('Định dạng Gmail không đúng!').required('Vui lòng nhập Gmail!'),
+        email: yup.string().email('Email không hợp lệ!').required('Vui lòng nhập email!'),
         name: yup.string().required('Vui lòng nhập tên!'),
         phone: yup
             .string()
             .matches(phoneRegExp, 'Định dạng số điện thoại không đúng!')
-            .min(10)
+            .max(10, 'Định dạng số điện thoại không đúng!')
+            .min(10, 'Định dạng số điện thoại không đúng!')
             .required('Vui lòng nhập số điện thoại!'),
         address: yup.string().required('Vui lòng nhập địa chỉ!'),
     });

@@ -61,7 +61,8 @@ function Order() {
         phone: yup
             .string()
             .matches(phoneRegExp, 'Định dạng số điện thoại không đúng!')
-            .min(10)
+            .max(10, 'Định dạng số điện thoại không đúng!')
+            .min(10, 'Định dạng số điện thoại không đúng!')
             .required('Vui lòng nhập số điện thoại!'),
         address: yup.string().required('Vui lòng nhập địa chỉ!'),
         note: yup.string(),

@@ -123,6 +123,8 @@ const status = (state) => {
             return 'Đơn hàng đang được vận chuyển';
         case 'Cancelled':
             return 'Đơn hàng đã bị hủy';
+        case 'Delivered':
+            return 'Đơn hàng đã được giao';
         default:
             return 'Đơn hàng đang được xử lý';
     }
@@ -325,7 +327,10 @@ function OrderCard({ order, user, index, coupons }) {
                         </span>
                         <button
                             onClick={() => handleCancelledOrder()}
-                            disabled={order.orderStatus === 'Cancelled'}
+                            disabled={
+                                order.orderStatus === 'Cancelled' ||
+                                order.orderStatus === 'Delivered'
+                            }
                         >
                             {order.orderStatus === 'Cancelled' ? 'Đã hủy' : 'Hủy đơn'}
                         </button>
