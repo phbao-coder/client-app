@@ -84,7 +84,7 @@ function Home() {
                     <div className={cx('product')}>
                         <h2 className={cx('product--heading')}>Điện thoại</h2>
                         <div className={cx('product--container')}>
-                            {productsMobileOfWeek?.slice(0, 3)?.map((product) => (
+                            {productsMobileOfWeek?.slice(0, 6)?.map((product) => (
                                 <div key={product._id} className={cx('product--item')}>
                                     <Product product={product} isDisplayButton={false} />
                                 </div>
@@ -94,7 +94,7 @@ function Home() {
                     <div className={cx('product')}>
                         <h2 className={cx('product--heading')}>Phụ kiện</h2>
                         <div className={cx('product--container')}>
-                            {productsAccessoriesOfWeek?.slice(0, 3)?.map((product) => (
+                            {productsAccessoriesOfWeek?.slice(0, 6)?.map((product) => (
                                 <div key={product._id} className={cx('product--item')}>
                                     <Product product={product} isDisplayButton={false} />
                                 </div>

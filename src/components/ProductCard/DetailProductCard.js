@@ -1,28 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addProductToCart, updateIncreaProductInCart } from '~/store/cart/cartState';
+import { useDispatch } from 'react-redux';
+import { addProductToCart } from '~/store/cart/cartState';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 import vnd from '~/utils/vnd';
-import addToCart from '~/utils/addToCart';
 import colorVietnamese from '~/utils/color';
 
 import classNames from 'classnames/bind';
 import style from './DetailProductCard.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 function DetailProductCard({ product }) {
-    const cart = useSelector((state) => state.cart.cart);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleAddToCart = (product) => {
-        const action = {
-            addProductToCart,
-            updateIncreaProductInCart,
-        };
-        addToCart(cart, product, dispatch, action);
+        dispatch(addProductToCart({ product, navigate }));
     };
     const {
         images,
