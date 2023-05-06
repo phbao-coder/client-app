@@ -29,15 +29,15 @@ function Product({ product, isDisplayButton = true }) {
                 <Link to={`/product/${_id}`} className={cx('product__header--link')}>
                     <img className={cx('product__header--link--image')} src={images} alt={name} />
                 </Link>
-                {sale.isOnSale && (
-                    <span className={cx('product__header--sale')}>- {sale.salePercentage}%</span>
+                {sale?.isOnSale && (
+                    <span className={cx('product__header--sale')}>- {sale?.salePercentage}%</span>
                 )}
             </div>
             <div className={cx('product__body')}>
                 <Link to={`/product/${_id}`} className={cx('product__body--link')}>
                     {name}
                 </Link>
-                <span>{vnd(price - (price / 100) * sale.salePercentage)}</span>
+                <span>{vnd(price - (price / 100) * sale?.salePercentage)}</span>
                 <span className={cx('product__body--sale')}>{vnd(price)}</span>
                 {isDisplayButton && (
                     <button className={cx('product__body--button')} onClick={handleAddToCart}>

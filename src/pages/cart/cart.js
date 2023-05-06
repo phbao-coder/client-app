@@ -92,7 +92,8 @@ function Cart() {
                                                     {vnd(
                                                         product.product.price -
                                                             (product.product.price / 100) *
-                                                                product.product.sale.salePercentage,
+                                                                product.product?.sale
+                                                                    ?.salePercentage,
                                                     )}
                                                 </p>
                                             </span>
@@ -114,8 +115,8 @@ function Cart() {
                                                     product.count *
                                                         (product.product.price -
                                                             (product.product.price / 100) *
-                                                                product.product.sale
-                                                                    .salePercentage),
+                                                                product.product?.sale
+                                                                    ?.salePercentage),
                                                 )}
                                             </span>
                                         </th>
