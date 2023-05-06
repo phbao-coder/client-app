@@ -24,7 +24,7 @@ function DetailProduct() {
 
     useEffect(() => {
         dispatch(getProductId(productID));
-        if (product.category === 'mobile') {
+        if (product?.category === 'mobile') {
             // lọc lấy các sản phẩm mobile cùng thương hiệu
             const name = product.name.split(' ')[0];
             const products = productsFeature.filter(
@@ -37,7 +37,7 @@ function DetailProduct() {
             );
         }
 
-        if (product.category === 'accessories') {
+        if (product?.category === 'accessories') {
             // lọc lấy một ít các sản phẩm mobile nổi bật
             const products = productsFeature.filter((product) => product.category === 'mobile');
             setProductsMobile(products.slice(0, 9));
