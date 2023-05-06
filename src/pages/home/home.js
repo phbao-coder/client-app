@@ -29,7 +29,7 @@ function Home() {
     const productsMobileOfWeek = productsFeature.filter(
         (product) => product.sold >= 50 && product.category === 'mobile',
     );
-    const productsOfSale = productsFeature.filter((product) => product.sale.salePercentage >= 15);
+    const productsOfSale = productsFeature.filter((product) => product?.sale?.salePercentage >= 15);
 
     useEffect(() => {
         dispatch(getProductsFeature());
