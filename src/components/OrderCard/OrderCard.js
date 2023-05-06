@@ -251,25 +251,25 @@ function OrderCard({ order, user, index, coupons }) {
                         <tbody>
                             {productsDisplay.map((product, index) => (
                                 <tr key={index}>
-                                    <th>{product.product.name}</th>
+                                    <th>{product.product?.name}</th>
                                     <th>
                                         <p className={cx('price__original')}>
-                                            {vnd(product.product.price)}
+                                            {vnd(product.product?.price)}
                                         </p>
                                         <p className={cx('price__sale')}>
                                             {vnd(
-                                                product.product.price -
-                                                    (product.product.price / 100) *
-                                                        product.product.sale.salePercentage,
+                                                product.product?.price -
+                                                    (product.product?.price / 100) *
+                                                        product.product?.sale?.salePercentage,
                                             )}
                                         </p>
                                     </th>
                                     <th>{product.count}</th>
                                     <th>
                                         {vnd(
-                                            (product.product.price -
-                                                (product.product.price / 100) *
-                                                    product.product.sale.salePercentage) *
+                                            (product.product?.price -
+                                                (product.product?.price / 100) *
+                                                    product.product?.sale?.salePercentage) *
                                                 product.count,
                                         )}
                                     </th>
